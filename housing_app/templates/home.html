@@ -1,3 +1,5 @@
+
+<body>
 {% extends 'base.html' %}
 
 	{% load static %}
@@ -5,10 +7,14 @@
 	{% block content %}
 
 
-	<div class="home_container">
+	<div class="form group, home_container">
 		<img class="img-responsive" src="{% static "images/apartments.jpg" %}" height="70%" width="100%" id="home_image">
 		<h1 class="text"> Welcome to UVA Housing Search </h1>
+		<input class="form-control" type="text" placeholder="Search">
+		<button type="button" class="centered, btn btn-secondary">Sign Up</button>
+		<button type="button" class="centered, btn btn-secondary">Login</button>
+
 	</div>
-
-
 	{% endblock content %}
+
+	</body>
