@@ -1,0 +1,23 @@
+
+
+{% extends 'base.html' %}
+
+	{% load static %}
+
+	{% block content %}
+<body>
+
+	<div class="home_container">
+		<img class="img-responsive" src="{% static "images/apartments.jpg" %}" height="70%" width="100%" id="home_image">
+		<h1 class="text"> Welcome to UVA Housing Search </h1>
+		<input class="form-control" type="text" placeholder="Search">
+
+		<a href="#" class="btn-secondary btn btn-primary stretched-link">Sign Up</a>
+		<a href="/login/" class="btn-secondary btn btn-primary stretched-link">Login</a>
+
+
+	</div>
+
+	{% endblock content %}
+
+	</body>
