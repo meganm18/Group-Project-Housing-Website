@@ -46,6 +46,15 @@
 		        		<a class="nav-link" href="{% url 'apartments' %}"> Apartments </a>
 		      		</li>
 		      	{% endif %}
+				{% if favorites_path == request.path %}
+		      		<li class="nav-item active">
+		        		<a class="nav-link" href="{% url 'favorites' %}"> Saved Listings </a>
+		      		</li>
+		      	{% else %}
+		      		<li class="nav-item">
+		        		<a class="nav-link" href="{% url 'favorites' %}"> Saved Listings </a>
+		      		</li>
+		      	{% endif %}
 		    	</ul>
 		  	</div>
 		  	{% if login_path != request.path %}

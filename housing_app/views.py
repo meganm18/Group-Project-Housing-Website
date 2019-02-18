@@ -26,3 +26,6 @@ def apartment_detail(request, id):
 
 def login(request):
 	return render(request, 'login.html')
+
+def favorites(request):
+	return render(request, 'favorites.html')

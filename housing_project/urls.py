@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^apartments/$', views.apartments, name='apartments'),
     url(r'^apartments/(\d+)/', views.apartment_detail, name='apartment_detail'),
     url(r'^login/', views.login, name='login'),
+    url(r'^favorites/', views.favorites, name='favorites')
 ]
 
 urlpatterns += staticfiles_urlpatterns()
