@@ -2,6 +2,8 @@
 
 <!doctype html>
 
+
+
 <html>
 
 	<head>
@@ -11,9 +13,52 @@
 	</head>
 
 	<body>
+		<!-- Define the variables for which URL path app is currently on -->
+		{% url 'home' as home_path %}
+		{% url 'apartments' as apartments_path %}
+		{% url 'apartment_detail' as apartment_detail_path %}
+		{% url 'login' as login_path %}
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="">Housing Search</a>
+		  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+		    		<span class="navbar-toggler-icon"></span>
+		  		</button>
+		  	<div class="collapse navbar-collapse" id="navbarText">
+		    	<ul class="navbar-nav mr-auto">
+		    	{% if home_path == request.path %}
+		    		<li class="nav-item active">
+		    			<a class="nav-link" href="{% url 'home' %}"> Home <span class="sr-only">(current)</span></a>
+		      		</li>
+		      	{% else %}
+		    		<li class="nav-item">
+		    			<a class="nav-link" href="{% url 'home' %}"> Home <span class="sr-only">(current)</span></a>
+		      		</li>
+		      	{% endif %}
+		      	{% if apartments_path == request.path %}
+		      		<li class="nav-item active">
+		        		<a class="nav-link" href="{% url 'apartments' %}"> Apartments </a>
+		      		</li>
+		      	{% else %}
+		      		<li class="nav-item">
+		        		<a class="nav-link" href="{% url 'apartments' %}"> Apartments </a>
+		      		</li>
+		      	{% endif %}
+		    	</ul>
+		  	</div>
+		  	{% if login_path != request.path %}
+		  	<div class="navbar-nav mr-auto">
+		    	<a class="nav-link" href="{% url 'login' %}"> Login <span class="sr-only">(current)</span></a>
+		    </div>
+		    {% endif %}
+		</nav>
 
 		{% block content %}
 		{% endblock content %}
+
+
+
 	</body>
 
 </html>
