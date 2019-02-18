@@ -1,19 +1,33 @@
+
 {% extends 'base.html' %}
 
 	{% block content %}
 
+
+<style>
+
+div.absolute {
+  position: absolute;
+  top: 200px;
+  right: 70;
+
+
+}
+</style>
+
 		{% for apartment in apartments %}
 
-			<div class='apartmentname'>
+				<div class='apartmentname' align="center" >
 
-				<a href="{% url 'apartment_detail' apartment.id %}">
-					<h3> {{ apartment.name|capfirst }} </h3>
-				</a>
-				<p>${{ apartment.price }}</p>
-				<p>{{ apartment.company }}</p>
-
+					<a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+					</a>
+					<p>${{ apartment.price }}</p>
 			</div>
+
+
 		{% endfor %}
-
-
+<div class='absolute'>
+<img src="http://www.charlottesville.org/Home/ShowImage?id=8737&t=635748349560400000" alt="map of cville" width="500" height="300">
+	</div>
 	{% endblock content %}
