@@ -5,7 +5,6 @@
 		
 		<div class="fav_div">
 			<h3> These are your saved listings. </h3>
-
 		</div>
 
 		{% for apartment in favorites %}
@@ -16,6 +15,7 @@
 						<h3> {{ apartment.name|capfirst }} </h3>
 					</a>
 					<p>${{ apartment.price }}</p>
+
 					{% if user and not user.is_anonymous %}
 						<form action="{% url 'delete_favorite' apartment.id %}" method="post">
 						{% csrf_token %}
@@ -24,10 +24,6 @@
 					{% endif %}
 			</div>
 
-
 		{% endfor %}
-
-
-
 
 	{% endblock content %}	
