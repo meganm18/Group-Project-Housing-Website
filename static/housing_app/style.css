@@ -111,8 +111,6 @@ html, body {
 }
 
 .delete-button, .btn-default {
-	padding-top: 0px;
-	margin-top: 0px;
 	color: gray;
 }
 
