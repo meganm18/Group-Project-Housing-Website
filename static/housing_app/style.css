@@ -15,6 +15,22 @@ h1.text {
 	color: white;
 }
 
+h4.text {
+	position: absolute;
+	top: 48%;
+	left: 48%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
+h2.text {
+	position: absolute;
+	top: 19%;
+	left: 48%;
+	transform: translate(-50%, -50%);
+	color: white;
+}
+
 
 #home_image {
 	filter: brightness(50%);
@@ -84,13 +100,20 @@ html, body {
 	background-color: white;
 }
 
-#home_login_button {
+#home_login_button, .btn-link {
 	position: absolute;
-	top: 45%;
-	left: 45%;
+	top: 48.1%;
+	left: 59.4%;
 	transform: translate(-50%, -50%);
+	font-size: 22px;
+	color: white;
+	background-color: transparent;
+}
+
+.delete-button, .btn-default {
+	padding-top: 0px;
+	margin-top: 0px;
 	color: gray;
-	background-color: white;
 }
 
 .login_container {
@@ -100,6 +123,8 @@ html, body {
 	max-width: 100%;
 	margin: 0px;
 	padding: 0px;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 #google_login_button {
