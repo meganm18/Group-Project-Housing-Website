@@ -4,16 +4,13 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import redirect
-
 from django.http import Http404
-
 from social_django.models import UserSocialAuth
-
 from .models import Apartment, Profile
+
 
 def home(request):
 	return render(request, 'home.html')
-
 
 
 def apartments(request):
@@ -49,10 +46,6 @@ def favorites(request):
 
 	favorites = user_profile.favorites.all()
 
-	# context = {	
-	# 	'favorites' : current_user.favorites.all()
-	# 	if request.user.is_authenticated else []
-	# }
 	return render(request, 'favorites.html', {'favorites': favorites})
 
 @login_required()
@@ -63,22 +56,11 @@ def loginsuccess(request):
 
 @login_required()
 def account(request):
-	# user = request.user
-
-	# try:
-	# 	google_login = user.social_auth.get(provider='google')
-	# except UserSocialAuth.DoesNotExist:
-	# 	google_login = None
-	# 	print( "user is logged in using the django default authentication")
-	# else:
-	# 	current_user = UserProfile.objects.get(username=request.user.username)
-	# 	context = {	
-	# 		'favorites' : current_user.favorites.all()
-	# 		if request.user.is_authenticated else []
-	# 	}
 	return render(request, 'account.html')
 
 
+# The following code saves the user profile data in combination with the receivers in models.py
+# code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 @login_required
 @transaction.atomic
 def update_profile(request):
