@@ -30,7 +30,10 @@ urlpatterns = [
     url(r'^apartments/(\d+)/', views.apartment_detail, name='apartment_detail'),
     url(r'^login/', views.login, name='login'),
     url(r'^favorites/', views.favorites, name='favorites'),
-    url(r'^login-success/', views.loginsuccess, name='login-success')
+    url(r'^login-success/', views.loginsuccess, name='login-success'),
+    url(r'^account/', views.account, name='account'),
+    url(r'^save_favorite/(\d+)/', views.save_favorite, name='save_favorite'),
+    url(r'^delete_favorite/(\d+)/', views.delete_favorite, name='delete_favorite'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

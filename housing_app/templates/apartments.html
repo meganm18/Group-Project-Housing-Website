@@ -17,13 +17,22 @@ div.absolute {
 
 		{% for apartment in apartments %}
 
-			<div class='apartmentname' align="center" >
+			<div class='apartmentname' align="center" style="padding-bottom: 20px">
 
 				<a href="{% url 'apartment_detail' apartment.id %}">
 					<h3> {{ apartment.name|capfirst }} </h3>
 				</a>
 				<p>${{ apartment.price }}</p>
+				{% if user and not user.is_anonymous %}
+				<form action="{% url 'save_favorite' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
+				</form>
+					
+				{% endif %}
+				
 			</div>
+			<div></div>
 
 
 		{% endfor %}

@@ -98,12 +98,12 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='535339961837-l9ngaeh17ug9v113taq3mi53sddh21bl.apps.googleusercontent.com'  
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dpN6_6aOyOXk1Zn831u9zPHt' 
 
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = '535339961837-r6tcfcts3n2vt4gmqlkfnbo4jvomkulq.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '5qaHv1fV7jf0xUBO0Vkbjt17'
+# SOCIAL_AUTH_GOOGLE_PLUS_KEY = '535339961837-r6tcfcts3n2vt4gmqlkfnbo4jvomkulq.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '5qaHv1fV7jf0xUBO0Vkbjt17'
 
-SOCIAL_AUTH_GOOGLE_PLUS_AUTH_EXTRA_ARGUMENTS = {
-      'access_type': 'offline'
-}
+# SOCIAL_AUTH_GOOGLE_PLUS_AUTH_EXTRA_ARGUMENTS = {
+#       'access_type': 'offline'
+# }
 
 #SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
@@ -117,6 +117,15 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+)
+
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = 'apartments'
+
+
+SOCIAL_AUTH_DISCONNECT_PIPELINE = (
+    'social_core.pipeline.disconnect.get_entries',
+    'social_core.pipeline.disconnect.revoke_tokens',
+    'social_core.pipeline.disconnect.disconnect'
 )
 
 # Database
