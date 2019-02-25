@@ -9,6 +9,12 @@
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="{% static 'housing_app/style.css' %}">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="MiracleWorkersHousingSearch.apps.googleusercontent.com">
+
 
 	</head>
 
@@ -20,14 +26,15 @@
 		{% url 'apartment_detail' as apartment_detail_path %}
 		{% url 'login' as login_path %}
 		{% url 'favorites' as favorites_path %}
+		{% url 'logout' as logout_path %}
 
 
 		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 			<a class="navbar-brand" href="">Housing Search</a>
-		  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-		    		<span class="navbar-toggler-icon"></span>
-		  		</button>
-		  	<div class="collapse navbar-collapse" id="navbarText">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+		  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    	<ul class="navbar-nav mr-auto">
 		    	{% if home_path == request.path %}
 		    		<li class="nav-item active">
@@ -56,13 +63,37 @@
 		        		<a class="nav-link" href="{% url 'favorites' %}"> Saved Listings </a>
 		      		</li>
 		      	{% endif %}
+
+
+
 		    	</ul>
+
+		    	<ul class="navbar-nav navbar-right">
+				{% if user and not user.is_anonymous %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Profile</a>
+							<a class="dropdown-item" href="{% url 'favorites' %}">Favorites</a>
+						<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
+						</div>
+					</li>
+					
+				{% else %}
+					{% if login_path != request.path %}
+						<div class="navbar-nav mr-auto">
+							<a class="nav-link" href="{% url 'login' %}"> Login <span class="sr-only">(current)</span></a>
+						</div>
+					{% endif %}
+				{% endif %}
+
+		    	</ul>
+
+
 		  	</div>
-		  	{% if login_path != request.path %}
-		  	<div class="navbar-nav mr-auto">
-		    	<a class="nav-link" href="{% url 'login' %}"> Login <span class="sr-only">(current)</span></a>
-		    </div>
-		    {% endif %}
+	
+
 		</nav>
 
 		{% block content %}

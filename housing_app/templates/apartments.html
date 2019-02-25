@@ -17,12 +17,12 @@ div.absolute {
 
 		{% for apartment in apartments %}
 
-				<div class='apartmentname' align="center" >
+			<div class='apartmentname' align="center" >
 
-					<a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-					</a>
-					<p>${{ apartment.price }}</p>
+				<a href="{% url 'apartment_detail' apartment.id %}">
+					<h3> {{ apartment.name|capfirst }} </h3>
+				</a>
+				<p>${{ apartment.price }}</p>
 			</div>
 
 

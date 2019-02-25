@@ -3,6 +3,19 @@
 
 	{% block content %}
 
+
+		{% for apartment in favorites %}
+
+				<div class='apartmentname' align="center" >
+
+					<a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+					</a>
+					<p>${{ apartment.price }}</p>
+			</div>
+
+
+		{% endfor %}
 		<div class="fav_div">
 			<h3> These are your saved listings. </h3>
 
