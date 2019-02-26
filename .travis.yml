@@ -3,6 +3,7 @@ python:
 - "3.6.7"
 
 # services: postgresql
+sudo: true
 
 addons:
   postgresql: "10"
