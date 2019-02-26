@@ -27,7 +27,7 @@ env:
 install:
   - pip install -q -r requirements.txt
   - pip install -q Django==$DJANGO --quiet
-  - pip install -q psycopg2-binary
+  - pip install -q psycopg2
 
 before_script:
   - psql -c 'create database travis_ci_db;' -U postgres
