@@ -139,7 +139,7 @@ if os.getenv('BUILD_ON_TRAVIS', None):
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'travis_ci_db',
             'USER': 'travis',
-            'PASSWORD': 'travis_db',
+            'PASSWORD': '',
             'HOST': '127.0.0.1',
         }
     }
