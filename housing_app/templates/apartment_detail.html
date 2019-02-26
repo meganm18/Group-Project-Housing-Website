@@ -112,7 +112,7 @@
 			{% load static %}
 			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
 			<p><strong>Description of Property:</strong></p>
-			<p>This beautiful condo is perfect for the energetic college student or the studious type.</p>
+			<p>{{ apartment.description}}</p>
 			</div>
 		</div>
 		<div class="rightcolumn">

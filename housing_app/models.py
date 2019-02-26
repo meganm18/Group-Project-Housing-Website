@@ -9,3 +9,4 @@ class Apartment(models.Model):
 	bedrooms = models.IntegerField()
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
+	description = models.TextField(default="No description")
