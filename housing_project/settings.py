@@ -164,23 +164,23 @@ if os.getenv('BUILD_ON_TRAVIS', None):
             'PORT': os.getenv('PGPORT'),
         }
     }
-else:
+else: 
+    DATABASES = {
+        'default': {
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'apartment_database',
+        'USER': 'miracle_worker',
+        'PASSWORD': 'miracleworkers',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        }
+    }
     DATABASES['default'] = dj_database_url.config(default='postgres://usdczwzpqgyqbb:c1f02655a959155db474e6057b713e113a3ba63efbbee6e61e183759f251ab62@ec2-107-20-185-27.compute-1.amazonaws.com:5432/da8eubmr4a4ge9')
-    # DATABASES = {
-    #     'default': {
-    #     #     'ENGINE': 'django.db.backends.sqlite3',
-    #     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'apartment_database',
-    #     'USER': 'miracle_worker',
-    #     'PASSWORD': 'miracleworkers',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    #     }
-    # }
 
 
-# Password validation
+# Password validations
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
