@@ -32,6 +32,8 @@ install:
   - pip install -q psycopg2
 
 before_script:
+  - sudo -u postgres psql -c "CREATE USER testuser WITH PASSWORD 'password'"
+  - sudo -u postgres psql -c "ALTER ROLE testuser SUPERUSER"
   - psql -c 'create database travis_ci_db;' -U postgres
 
 #command to run the test suite
