@@ -21,9 +21,9 @@ install:
   - pip install -q -r requirements.txt
 
 before_script:
+  - psql -c 'create database travis_ci_db;' -U postgres
   - python manage.py makemigrations
   - python manage.py migrate
-  - python manage.py load_apartment_data
 
 #command to run the test suite
 script:
