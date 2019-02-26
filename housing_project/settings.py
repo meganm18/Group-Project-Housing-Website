@@ -145,6 +145,7 @@ if os.getenv('BUILD_ON_TRAVIS', None):
     }
 else:
 
+
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 'nb-ca=7ye7+1czyslwf88k4b!cdnk4&tn%(p)yu=eg_v2sb#tm'
 
@@ -154,8 +155,14 @@ else:
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'apartment_database',
+        'USER': 'miracle_worker',
+        'PASSWORD': 'miracleworkers',
+        'HOST': 'localhost',
+        'PORT': '5432',
         }
     }
 
