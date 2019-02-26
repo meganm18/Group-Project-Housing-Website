@@ -9,7 +9,7 @@ class ApartmentTestCase(TestCase):
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000, bedrooms=2, furnished="no", pets="no")
 
     def test_apartments_created(self):
-        apartment_1 = Animal.objects.get(name="Apartment 1")
-        apartment_2 = Animal.objects.get(name="Apartment 2")
+        apartment_1 = Apartment.objects.get(name="Apartment 1")
+        apartment_2 = Apartment.objects.get(name="Apartment 2")
         self.assertEqual(apartment_1.company, 'company 1')
         self.assertEqual(apartment_2.company, 'company 2')
