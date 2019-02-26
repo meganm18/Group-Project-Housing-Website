@@ -1,7 +1,3 @@
-deploy:
-  provider: heroku
-  api_key:
-    secure: Eddm8tESonO/ArS4140pX9IbGkF7gX/OMzQxaQdicWnuTr2rsQEJqH2lFjjt8DM4yxkxL0+w8A1dBIKcDO04aipZiDG7yuVR2Vp6iz/KqQ3THfc19Hn1l8Q1HIQgYNoUcDOH6ga0h3J2lpWoCnqqCz/n7dd7n/wrmWwF//pfgYM86GL1DImra5LNCful86rud8JVtZqsOfvOjnC/VuKrtdjKUc+MGDrpzKt0XA2zJQKxKCoKdbs9wo9wEtZus4IIesoijOP2kVvUie4cC4GMS3x2HZcllgIGbArA0fyLhP9cL2ezNhO8X3rv6pIy4WiDs80DrTiqF/4VLRW02LR/zli+valHCt90McpI0by+zXu2GBUhDvmU5F3wcJndwolacyvPlHihv/4uEdfr6XOUlU3Yb/RGhQHS05yYacjWeqP9gkzuxUBjkvvehKiW6pu7+FoAXlLUeoHySKXGygapCl4g25sGHcnECJauXEVyfTk/ppRqJm24KrameylM0XXYK/0jMzJylgBfcYk+7opm0S+AvDfOas146sN0tf7o4r4pl2Es4vueJKJdfOJ3D5rsTcquFv8mzS82yO9wYugJc8Gwnrm2H/xNfKS3d7N1i87Xyw7jQIquQ9A9pt3x1ciXk2gUqR35LqfPcPGurSzfYxDjVZ1Y3NELma43GjwE5Eo=
-  app: miracle-workers-housing-app
-  on:
-    repo: UVA-CS3240-S19/project-103-miracle-workers
+language: python
+python:
+- "3.6.7"
