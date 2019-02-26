@@ -223,4 +223,4 @@ django_heroku.settings(locals())
 
 
 import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(default='postgres://usdczwzpqgyqbb:c1f02655a959155db474e6057b713e113a3ba63efbbee6e61e183759f251ab62@ec2-107-20-185-27.compute-1.amazonaws.com:5432/da8eubmr4a4ge9')
