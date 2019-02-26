@@ -10,22 +10,22 @@ addons:
     - postgresql-client-10
 env:
   global:
-  - PGPORT=5433
+  # - PGPORT=5433
   - DJANGO_SETTINGS_MODULE="housing_project.settings"
   - PYTHONPATH="/home/travis/build/sgmedlin/project-103-miracle-workers"
   - PIP_USE_MIRRORS=true
-  - BUILD_ON_TRAVIS=true
+  # - BUILD_ON_TRAVIS=true
   matrix:
   - DJANGO=2.1.7 DB=postgres
 install:
 - pip install -q -r requirements.txt
 - pip install -q Django==$DJANGO --quiet
 - pip install -q psycopg2
-before_script:
-- sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
-- sudo service postgresql restart
-- sleep 1
-- psql -c 'create database travis_ci_db;' -U postgres
+# before_script:
+# - sudo sed -i -e '/local.*peer/s/postgres/all/' -e 's/peer\|md5/trust/g' /etc/postgresql/*/main/pg_hba.conf
+# - sudo service postgresql restart
+# - sleep 1
+# - psql -c 'create database travis_ci_db;' -U postgres
 script:
 - python manage.py makemigrations
 - python manage.py migrate
