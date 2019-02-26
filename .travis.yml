@@ -1,3 +1,28 @@
 language: python
 python:
 - "3.6.7"
+
+services: sqlite
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE="housing_project.settings"
+    - PYTHONPATH="/home/travis/build/sgmedlin/project-103-miracle-workers"
+    - PIP_USE_MIRRORS=true
+    - BUILD_ON_TRAVIS=true
+  matrix:
+    - DJANGO=2.1.7 DB=sqlite
+
+#commands to install dependencies
+install:
+  - pip install -q Django==$DJANGO
+  - pip install -q -r requirements.txt
+
+before_script:
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - python manage.py load_apartment_data
+
+#command to run the test suite
+script:
+  - python manage.py test
