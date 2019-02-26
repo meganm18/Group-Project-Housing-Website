@@ -16,21 +16,21 @@ env:
     - DJANGO_SETTINGS_MODULE="housing_project.settings"
     - PYTHONPATH="/home/travis/build/sgmedlin/project-103-miracle-workers"
     - PIP_USE_MIRRORS=true
-    # - BUILD_ON_TRAVIS=true
-    - PGPORT=5433
+    - BUILD_ON_TRAVIS=true
+    # - PGPORT=5433
   matrix:
     - DJANGO=2.1.7 DB=postgres
-  secure: "vXd06OqF+f6vybaiGljYpTqnD0Xl6Yjs4mlO7SwcAOVKzPtJ9A3nx5jBF2RZyNq+E0Nk4e1Wioh5cl2x3jv1UQ2sCmyDEqY6n4s54sc0J2CQGnEI1hnuE9V90kCzptRzI+hmNHljUFxwMraQqZZFho5i/mOtLu3u6XrTajhyP4fLiwwLGUGBWUwI7Xia6AHVgEAba1Y5h7HVw49hnejL/vEu4uLY7c+2XKQfz170mwNi9Gs5MdZ54+olKVWUWRD/AuLixISIrljfsWva1gmwpcAFy4rGz639CJ2FheUV7Ruc7yLybJ+AEKdH6t5HUStjhHvLht+8UjomdpdlX5VyjcasKXLeOkgpIw0ToyAZtAx54mV+H2a0BYWcjzYevlwFFqJe3+7OZvyJpfqRTEpCXmYXV0I0pL6CAVF5dqMhaiO0AFOLjjyJoyYl4xeZwmczS8/plW2SxF9t4nvVR1YlqwFtdyRkj88e/swoT3faXT+7Jqh8D0HDdXdOql7oBtgPP3wgMksvK02Ewfr32aZZFNGHzJHKCbarp+GqWci8zU08QAysk4u9hlqqOhm828b4zcyttt6OkC3bEMkCtnz3XYAOyhp1MDkG63yRvO+OJg6YPuO8GNfY9SJc4hiMqoTQCPFNh7ir0iV7p1OhJdojopsU+DEOqYTIXwS/1VFgweY="
+  # secure: "vXd06OqF+f6vybaiGljYpTqnD0Xl6Yjs4mlO7SwcAOVKzPtJ9A3nx5jBF2RZyNq+E0Nk4e1Wioh5cl2x3jv1UQ2sCmyDEqY6n4s54sc0J2CQGnEI1hnuE9V90kCzptRzI+hmNHljUFxwMraQqZZFho5i/mOtLu3u6XrTajhyP4fLiwwLGUGBWUwI7Xia6AHVgEAba1Y5h7HVw49hnejL/vEu4uLY7c+2XKQfz170mwNi9Gs5MdZ54+olKVWUWRD/AuLixISIrljfsWva1gmwpcAFy4rGz639CJ2FheUV7Ruc7yLybJ+AEKdH6t5HUStjhHvLht+8UjomdpdlX5VyjcasKXLeOkgpIw0ToyAZtAx54mV+H2a0BYWcjzYevlwFFqJe3+7OZvyJpfqRTEpCXmYXV0I0pL6CAVF5dqMhaiO0AFOLjjyJoyYl4xeZwmczS8/plW2SxF9t4nvVR1YlqwFtdyRkj88e/swoT3faXT+7Jqh8D0HDdXdOql7oBtgPP3wgMksvK02Ewfr32aZZFNGHzJHKCbarp+GqWci8zU08QAysk4u9hlqqOhm828b4zcyttt6OkC3bEMkCtnz3XYAOyhp1MDkG63yRvO+OJg6YPuO8GNfY9SJc4hiMqoTQCPFNh7ir0iV7p1OhJdojopsU+DEOqYTIXwS/1VFgweY="
 
 
 #commands to install dependencies
 install:
-  - if [[ $DB == postgres ]]; then pip install -q psycopg2-binary; fi
-  - pip install -q Django==$DJANGO
   - pip install -q -r requirements.txt
+  - pip install -q Django==$DJANGO --quiet
+  - pip install -q psycopg2-binary
 
-# before_script:
-#   - psql -c 'create database travis_ci_db;' -U postgres
+before_script:
+  - psql -c 'create database travis_ci_db;' -U postgres
 
 #command to run the test suite
 script:

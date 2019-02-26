@@ -125,6 +125,12 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
     'social_core.pipeline.disconnect.disconnect'
 )
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'nb-ca=7ye7+1czyslwf88k4b!cdnk4&tn%(p)yu=eg_v2sb#tm'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -145,26 +151,30 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
 #     }
 # else:
 
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'nb-ca=7ye7+1czyslwf88k4b!cdnk4&tn%(p)yu=eg_v2sb#tm'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-
-DATABASES = {
-    'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'apartment_database',
-    'USER': 'miracle_worker',
-    'PASSWORD': 'miracleworkers',
-    'HOST': 'localhost',
-    'PORT': '5432',
+if os.getenv('BUILD_ON_TRAVIS', None):
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travis_ci_db',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+        #     'ENGINE': 'django.db.backends.sqlite3',
+        #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'apartment_database',
+        'USER': 'miracle_worker',
+        'PASSWORD': 'miracleworkers',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        }
+    }
 
 
 # Password validation
