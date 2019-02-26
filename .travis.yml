@@ -4,6 +4,9 @@ python:
 
 services: postgresql
 
+addons:
+  postgresql: "10.6"
+  
 env:
   global:
     - DJANGO_SETTINGS_MODULE="housing_project.settings"
