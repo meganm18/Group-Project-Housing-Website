@@ -25,6 +25,7 @@ env:
 
 #commands to install dependencies
 install:
+  - if [[ $DB == postgres ]]; then pip install -q psycopg2-binary; fi
   - pip install -q Django==$DJANGO
   - pip install -q -r requirements.txt
 
