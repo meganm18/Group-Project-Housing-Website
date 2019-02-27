@@ -15,10 +15,16 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 
+	def __str__(self):
+		return self.name
+
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
+
+	def __str__(self):
+		return self.user.username
 
 
 # The following receivers save data to the user profile whenever changes are made
