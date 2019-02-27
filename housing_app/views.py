@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 from social_django.models import UserSocialAuth
 from .models import Apartment, Profile
-
+from django.contrib.auth.models import User
 
 def home(request):
 	return render(request, 'home.html')
@@ -52,12 +52,13 @@ def favorites(request):
 def loginsuccess(request):
 	return render(request, 'login-success.html')
 
+def get_user_profile(request, username):
+    try:
+        user_for_page = User.objects.get(username=username)
+    except:
+        raise Http404
 
-
-@login_required()
-def account(request):
-	return render(request, 'account.html')
-
+    return render(request, 'profile.html', {"user_for_page":user_for_page})
 
 # The following code saves the user profile data in combination with the receivers in models.py
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
