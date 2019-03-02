@@ -15,7 +15,7 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE) #one to many
 	def __str__(self):
 		return self.name
 
@@ -23,9 +23,17 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
-
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE) #one to many
 	def __str__(self):
 		return self.user.username
+
+class Rating(models.Model):
+	text = models.TextField(default = "No Written Review")
+	score = models.IntegerField(default=0)
+	apartmentID = models.IntegerField(default=0) #attach to apartment
+	userName = models.TextField(default="No User") #attach to profile and user
+	def __str__(self):
+		return self.score
 
 
 # The following receivers save data to the user profile whenever changes are made
