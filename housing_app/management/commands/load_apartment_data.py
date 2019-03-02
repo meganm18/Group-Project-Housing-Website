@@ -35,4 +35,5 @@ class Command(BaseCommand):
             apartment.bedrooms = row['Bedrooms']
             apartment.furnished = row['Furnished']
             apartment.pets = row['Pets']
+            apartment.description = row['Description']
             apartment.save()
