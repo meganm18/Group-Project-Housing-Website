@@ -29,7 +29,10 @@ class SavedListTestCase(TestCase):
     def test_favorites(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
         apartment_2 = Apartment.objects.get(name="Apartment 2")
-        profile_1 = Profile.objects.get(bio="hello")
+        try:
+            profile_1 = Profile.objects.get(bio="hello")
+        except:
+            profile_1 = Profile.objects.get(user_id=1)
         profile_1.favorites.clear()
         profile_1.favorites.add(apartment_1)
         self.assertEqual(profile_1.favorites.name.all(), "Apartment 1")
