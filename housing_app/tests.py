@@ -1,8 +1,8 @@
 from django.test import TestCase, RequestFactory
 from .models import Apartment, Profile
 from django.contrib.auth.models import User
+from .views import home
 
-# Create your tests here.
 
 class ApartmentTestCase(TestCase):
     def setUp(self):
@@ -17,7 +17,6 @@ class ApartmentTestCase(TestCase):
 
 
 class SavedListTestCase(TestCase):
-    # help from https://docs.djangoproject.com/en/2.1/topics/testing/advanced/
     def setUp(self):
         Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
                                  bedrooms=1, furnished="yes", pets="yes")
@@ -41,3 +40,14 @@ class SavedListTestCase(TestCase):
         self.profile_1.favorites.add(apartment_2)
         self.profile_1.save()
         self.assertEqual(self.profile_1.favorites.all()[1].name, "Apartment 2")
+
+
+class ViewPagesTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user1 = User.objects.create_user(username="example user 1")
+    def test_home(self):
+        request = self.factory.get(r'^$')
+        request.user = self.user1
+        response = home(request)
+        self.assertEqual(response.status_code, 200)
