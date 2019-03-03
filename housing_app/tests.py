@@ -21,7 +21,7 @@ class SavedListTestCase(TestCase):
                                  bedrooms=1, furnished="yes", pets="yes")
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
                                  bedrooms=2, furnished="no", pets="no")
-        self.user1 = User.objects.get_or_create_user(username="user 1")
+        self.user1 = User.objects.create_user(username="user 1")
         Profile.objects.create(user = self.user1, bio="hello")
     def test_favorites(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
