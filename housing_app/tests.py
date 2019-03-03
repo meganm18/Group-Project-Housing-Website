@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import Apartment, Profile
+from django.contrib.auth.models import User
 
 # Create your tests here.
 
@@ -20,7 +21,8 @@ class SavedListTestCase(TestCase):
                                  bedrooms=1, furnished="yes", pets="yes")
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
                                  bedrooms=2, furnished="no", pets="no")
-        Profile.objects.create(user="user 1", bio="hello")
+        user1 = User.objects.create_user(username = 'user 1')
+        Profile.objects.create(user=user1, bio="hello")
     def test_favorites(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
         apartment_2 = Apartment.objects.get(name="Apartment 2")
