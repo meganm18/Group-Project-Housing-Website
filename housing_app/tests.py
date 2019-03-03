@@ -36,7 +36,7 @@ class SavedListTestCase(TestCase):
         self.profile_1.favorites.set = Apartment.objects
         self.profile_1.favorites.add(apartment_1)
         self.profile_1.save()
-        self.assertEqual(self.profile_1.favorites.name, "Apartment 1")
+        self.assertEqual(self.profile_1.favorites.all().name, "Apartment 1")
         self.profile_1.favorites.add(apartment_2)
         self.profile_1.save()
-        self.assertEqual(self.profile_1.favorites.name, ["Apartment 1", "Apartment 2"])
+        self.assertEqual(self.profile_1.favorites.all().name, ["Apartment 1", "Apartment 2"])
