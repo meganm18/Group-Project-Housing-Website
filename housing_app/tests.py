@@ -29,10 +29,10 @@ class SavedListTestCase(TestCase):
         apartment_2 = Apartment.objects.get(name="Apartment 2")
         ex_user1 = User.objects.get(username="example user 1")
         try:
+            profile_1 = Profile.objects.get(user_id=1)
+        except:
             Profile.objects.create(user=ex_user1, bio="hello")
             profile_1 = Profile.objects.get(bio="hello")
-        except:
-            profile_1 = Profile.objects.get(user_id=1)
         profile_1.favorites.clear()
         profile_1.favorites.add(apartment_1)
         self.assertEqual(profile_1.favorites.name.all(), "Apartment 1")
