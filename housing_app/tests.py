@@ -33,7 +33,7 @@ class SavedListTestCase(TestCase):
         except:
             Profile.objects.create(user=ex_user1, bio="hello")
             self.profile_1 = Profile.objects.get(bio="hello")
-        self.profile_1.favorites = Apartment.objects()
+        self.profile_1.favorites = Apartment.objects
         self.profile_1.favorites.add(apartment_1)
         self.profile_1.save()
         self.assertEqual(self.profile_1.favorites.name, "Apartment 1")
