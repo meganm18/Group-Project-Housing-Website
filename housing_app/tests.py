@@ -44,8 +44,8 @@ class SavedListTestCase(TestCase):
 class ViewPagesTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        User.objects.create_user(username="example user 1")
-        self.user1 = User.objects.get(username="example user 1")
+        User.objects.create_user(username="user1")
+        self.user1 = User.objects.get(username="user1")
     def test_home(self):
         request = self.factory.get(r'^$')
         request.user = self.user1
