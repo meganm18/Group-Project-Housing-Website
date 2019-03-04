@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from .models import Apartment, Profile
 from django.contrib.auth.models import User
-from .views import home, apartments, apartment_detail
+from .views import home, apartments, apartment_detail, login
 
 
 class ApartmentTestCase(TestCase):
@@ -72,3 +72,9 @@ class ViewPagesTestCase(TestCase):
         request2.user = self.user1
         response2 = apartment_detail(request2, self.apartment1.id)
         self.assertEqual(response2.status_code, 200)
+
+    def test_login_page(self):
+        request3 = self.factory.get(r'^login/')
+        request3.user = self.user1
+        response3 = login(request3)
+        self.assertEqual(response3.status_code, 200)
