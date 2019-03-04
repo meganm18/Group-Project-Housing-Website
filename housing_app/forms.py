@@ -23,4 +23,4 @@ class ProfileForm(forms.ModelForm):
 class RatingForm(forms.ModelForm):
     class Meta:
         model = Rating
-        fields =['score','text']
+        fields = ['score','text']
