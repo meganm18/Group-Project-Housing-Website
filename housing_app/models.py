@@ -4,14 +4,16 @@ from social_django.models import UserSocialAuth
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from django.utils.deconstruct import deconstructible
 
+@deconstructible
 class Rating(models.Model):
-	text = models.TextField()
-	score = models.IntegerField()
-	username = models.CharField(max_length =100)
-	apartmentID = models.IntegerField()
+	text = models.TextField(default="No Review")
+	score = models.IntegerField(default=0)
+	username = models.CharField(max_length =100, default= "noUser")
+	apartmentID = models.IntegerField(default=0)
 	def __str__(self):
-		return self.score
+		return self.text
 
 class Apartment(models.Model):
 	name = models.CharField(max_length=100)
@@ -23,7 +25,7 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE)
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE, default=Rating())
 	def __str__(self):
 		return self.name
 
@@ -33,7 +35,7 @@ class Profile(models.Model):
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
 	#avator = models.ImageField(blank=True)
-	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE)
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE, default=Rating)
 	def __str__(self):
 		return self.user.username
 
