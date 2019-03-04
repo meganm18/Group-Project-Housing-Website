@@ -51,3 +51,13 @@ class ViewPagesTestCase(TestCase):
         request.user = self.user1
         response = home(request)
         self.assertEqual(response.status_code, 200)
+    def test_apartments(self):
+        request1 = self.factory.get(r'^apartments/$')
+        request1.user = self.user1
+        response1 = apartments(request1)
+        self.assertEqual(response1.status_code, 200)
+    def test_apartment_detail(self):
+        request2 = self.factory.get(r'^apartments/1/')
+        request2.user = self.user1
+        response2 = apartment_detail(request, 1)
+        self.assertEqual(response2.status_code, 200)
