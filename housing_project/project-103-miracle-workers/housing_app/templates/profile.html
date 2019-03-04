@@ -1,0 +1,80 @@
+<!-- User Profile code From: https://bootsnipp.com/snippets/8dMr -->
+{% extends "base.html" %}
+
+	{% load static %}
+
+	{% block content %}
+
+	<div class="outer_container" id="outer_container">
+		<img class="img-responsive" src="{% static "images/home.jpg" %}" height="70%" width="100%" id="background_image">
+
+
+		<div class="container, profile_div">
+			<div class="row" id="top_row">
+				<div class="col top-corners">
+	
+				</div>
+				<div class="col-6">
+					<img src="{{ user_for_page.profile.avatar }}" alt="{% static "images/blank_profile.png" %}" id="profile_image" class="rounded-circle">
+				</div>
+				<div class="col top-corners">
+		
+				</div>
+			</div>
+			<div class="row justify-content-md-center" id="middle_row">
+				<div class="col">
+		
+				</div>
+				<div class="col-md-auto" id="main_col">
+					<!-- Checks to see if user accessing profile is the user logged in -->
+					{% if user_for_page == user %}
+						<h1>{{user_for_page.get_full_name}}</h1>
+						<button class="btn btn-default" name="edit_profile"> Edit Profile </button>
+					{% else %}
+						<h1>{{user_for_page.get_full_name}}</h1>
+					{% endif %}
+					<div>
+						<div class="row" id="inner_row_top">
+							<div class="col left-profile-col">
+								<h4>Email: {{user_for_page.email}}</h4>
+							</div>
+							<div class="col right-profile-col">
+
+							</div>
+						</div>
+						<div class="row" id="inner_row_bottom">
+							<div class="col left-profile-col">
+								<h4>Bio:   {{user_for_page.profile.bio}}</h4>
+							</div>
+							<div class="col right-profile-col">
+								
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="col">
+		
+				</div>
+			</div>
+			<div class="row" id="bottom_row">
+				<div class="col">
+				
+				</div>
+				<div class="col-5">
+				
+				</div>
+				<div class="col">
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+	{% endblock content %}

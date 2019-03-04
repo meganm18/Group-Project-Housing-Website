@@ -21,7 +21,7 @@ class Apartment(models.Model):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(default="static/images/blank_profile.png")
+	avatar = models.ImageField(default="static/images/home.jpg")
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
 	#avator = models.ImageField(blank=True)
