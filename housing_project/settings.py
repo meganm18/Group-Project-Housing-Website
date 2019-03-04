@@ -116,6 +116,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'housing_app.pipeline.get_avatar'
 )
 
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = 'apartments'
@@ -131,7 +132,7 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
 SECRET_KEY = 'nb-ca=7ye7+1czyslwf88k4b!cdnk4&tn%(p)yu=eg_v2sb#tm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -220,7 +221,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 

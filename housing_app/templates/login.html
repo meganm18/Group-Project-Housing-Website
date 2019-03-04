@@ -4,12 +4,16 @@
 
 	{% block content %}
 
-		<div class= "login_container">
-			<img class="img-responsive" src="{% static "images/apartment_interior.jpg" %}" height="70%" width="100%" id="login_image">
+		<div class="login_background_image"></div>
+
+		<div class= "login_content_container">
 			
+			<div class="login_text_div">
+				<h1 class="login_text"> Please log in using your Google Account </h1>
+			</div>
+
 			<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-default" id="google_login_button">Google Log In</a>
 
-			<h1 class="text"> Please log in using your Google Account </h1>
 		</div>
   
 
