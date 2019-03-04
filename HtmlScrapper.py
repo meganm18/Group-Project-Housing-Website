@@ -135,8 +135,8 @@ def getinfo(webpage):
 def writecsv(first, second):
     with open('apartment_data.csv', 'w') as csvfile:
         # Titles of the the csv
-        fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'Size', 'Bedrooms', 'Furnished', 'Pets',
-                      'Bathrooms', 'Description', 'Number', 'Distance to Grounds']
+        fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'Size', 'Bedrooms', 'Furnished', 'Pets', 'Description',
+                      'Bathrooms', 'Number', 'Distance to Grounds']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         # Accomadations need to made later to take in account for the units. For now I just took the first unit size, price, beds and baths
@@ -147,8 +147,9 @@ def writecsv(first, second):
                  'Price': appt['Units'][(list(appt['Units'])[0])]['Price'],
                  'Size': appt['Units'][(list(appt['Units'])[0])]['Size'],
                  'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
+                 'Description': appt['Description'],
                  'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
-                 'Description': appt['Description'], 'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
+                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
         # second is the second dict of info on the page
         for appt in second.values():
             writer.writerow(
@@ -156,8 +157,9 @@ def writecsv(first, second):
                  'Price': appt['Units'][(list(appt['Units'])[0])]['Price'],
                  'Size': appt['Units'][(list(appt['Units'])[0])]['Size'],
                  'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
+                 'Description': appt['Description'],
                  'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
-                 'Description': appt['Description'], 'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
+                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
     return None
 
 # Get all the links and appt titles from both pages from this website
