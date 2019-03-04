@@ -50,10 +50,10 @@ class ViewPagesTestCase(TestCase):
         self.user1 = User.objects.get(username="user1")
         Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
                                  bedrooms=1, furnished="yes", pets="yes")
-        self.apartment1 = Apartment.get(name="Apartment 1")
+        self.apartment1 = Apartment.objects.get(name="Apartment 1")
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
                                  bedrooms=2, furnished="yes", pets="yes")
-        self.apartment2 = Apartment.get(name="Apartment 2")
+        self.apartment2 = Apartment.objects.get(name="Apartment 2")
 
     def test_home(self):
         request = self.factory.get(r'^$')
