@@ -70,5 +70,5 @@ class ViewPagesTestCase(TestCase):
     def test_apartment_detail(self):
         request2 = self.factory.get(r'^apartments/1/')
         request2.user = self.user1
-        response2 = apartment_detail(request2, 1)
+        response2 = apartment_detail(request2, self.apartment1.id)
         self.assertEqual(response2.status_code, 200)
