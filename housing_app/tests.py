@@ -40,7 +40,7 @@ class SavedListTestCase(TestCase):
         self.profile_1.favorites.add(apartment_2)
         self.profile_1.save()
         self.assertEqual(self.profile_1.favorites.all()[1].name, "Apartment 2")
-'''
+
 class ViewPagesTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -50,4 +50,3 @@ class ViewPagesTestCase(TestCase):
         request.user = self.user1
         response = home(request)
         self.assertEqual(response.status_code, 200)
-'''
