@@ -1,0 +1,369 @@
+
+body, html {
+	height: 100%;
+	padding-top: 28px;
+}
+
+/* CSS For the Home.html Page*/
+
+.home_background_image {
+	position: fixed;
+	background-image: url('../images/apartments.jpg');
+	background-size: cover;
+	filter: brightness(50%);
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.home_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+
+}
+
+#home_text {
+	position: relative;
+	top: 40%;
+	min-width: 300px;
+	color: gray;
+	width: 30%;
+}
+
+
+.home_login_div {
+	position: absolute;
+	top: 48%;
+	width: 400px;
+	display: inline-block;
+	height: 100px;
+}
+
+.home_search_listings {
+	margin-bottom: 0px;
+}
+
+#home_login_button, .btn-link {
+	font-size: 22px;
+	color: white;
+	background-color: transparent;
+}
+
+.welcome_text {
+	position: relative;
+	top: 25%;
+	color: white;
+	min-width: 300px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.greeting_div{
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	
+}
+
+.greeting_text{
+	margin-bottom: 50px;
+}
+
+/* CSS for Login.html Page */
+
+.login_background_image {
+	position: fixed;
+	background-image: url('../images/apartment_interior.jpg');
+	background-size: cover;
+	filter: brightness(50%);
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.login_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+}
+
+#google_login_button {
+	position: relative;
+	color: gray;
+	background-color: white;
+	top: 38%;
+	height: 35px;
+}
+
+.login_text_div{
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	min-width: 300px;
+	padding-bottom: 40px;
+}
+
+.login_text {
+	color: white;
+	max-height: 800px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+/* Beginning of CSS for Profile.html page */
+
+
+.profile_background_image {
+	position: fixed;
+	background-image: url('../images/home.jpg');
+	background-size: cover;
+	filter: brightness(50%);
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.profile_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+}
+
+
+
+#profile_image{
+	height: 100px;
+	width: 100px;
+	top: 0%;
+	position:relative;	
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border: 5px solid #ffffff;
+    z-index: 2;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.login_div {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: black;
+	text-align: center;
+}
+
+@media (min-width: 0px) {
+    .profile_div {
+		position: fixed;
+		top: 65%;
+		left: 50%;
+		width: 100%;
+		transform: translate(-50%, -50%);
+		color: black;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#main_col {
+		background-color: white;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#middle_row {
+		width: 100%;
+		height: 650px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.profile_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:8%;
+	}
+
+	#edit_profile{
+		position: relative;
+		top: -6%;
+		float: right;
+	}
+}
+
+@media (min-width: 576px) {
+    .profile_div {
+		position: fixed;
+		top: 55%;
+		left: 50%;
+		width: 80%;
+		transform: translate(-50%, -50%);
+		color: black;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#main_col {
+		width: 100%;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#middle_row {
+		width: 100%;
+		height: 500px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.profile_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:11%;
+	}
+
+	#edit_profile{
+		position: relative;
+		top: -9%;
+		float: right;
+	}
+
+}
+
+.inner_content_div{
+	position: relative;
+	top: 15%;
+	float: left;
+	padding-left: 20px;
+	text-align: left;
+
+}
+
+
+.profile_image_div{
+	display: flex;
+	justify-content: center;
+}
+
+
+#top_row {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#bottom_row {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+}
+
+
+#inner_row_top{
+	position: relative;
+	top: 50%;
+	height: 100px
+	margin: 0px;
+	padding: 0px;
+}
+
+#email_text{
+	padding-bottom: 15px;
+}
+
+#bio_text{
+	padding-bottom: 15px;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+#inner_row_bottom{
+	height: 200px
+	margin: 0px;
+	padding: 0px;
+
+}
+
+
+/*#left_outer_col{
+	width: 0px;
+	padding: 0px;
+	margin: 0px;
+	height: 110%;
+	background-color: white;
+}
+
+#right_outer_col{
+	width: 0px;
+	padding: 0px;
+	margin: 0px;
+	height: 110%;
+	background-color: white;
+}
+*/
+.left-profile-col{
+	position: relative;
+	padding-right: 0px;
+}
+
+.right-profile-col{
+	padding-left: 0px;
+}
+
+
+
+.delete-button, .btn-default {
+	color: gray;
+}
