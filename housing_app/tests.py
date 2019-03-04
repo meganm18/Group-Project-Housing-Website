@@ -23,6 +23,7 @@ class SavedListTestCase(TestCase):
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
                                  bedrooms=2, furnished="no", pets="no")
         User.objects.create_user(username="example user 1")
+
     def test_favorites(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
         apartment_2 = Apartment.objects.get(name="Apartment 2")
@@ -47,16 +48,25 @@ class ViewPagesTestCase(TestCase):
         self.factory = RequestFactory()
         User.objects.create_user(username="user1")
         self.user1 = User.objects.get(username="user1")
+        Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
+                                 bedrooms=1, furnished="yes", pets="yes")
+        self.apartment1 = Apartment.get(name="Apartment 1")
+        Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
+                                 bedrooms=2, furnished="yes", pets="yes")
+        self.apartment2 = Apartment.get(name="Apartment 2")
+
     def test_home(self):
         request = self.factory.get(r'^$')
         request.user = self.user1
         response = home(request)
         self.assertEqual(response.status_code, 200)
+
     def test_apartments(self):
         request1 = self.factory.get(r'^apartments/$')
         request1.user = self.user1
         response1 = apartments(request1)
         self.assertEqual(response1.status_code, 200)
+
     def test_apartment_detail(self):
         request2 = self.factory.get(r'^apartments/1/')
         request2.user = self.user1
