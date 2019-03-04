@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+	{% load static %}
+
+
+	{% block content %}
+
+	<div class="outer_container">
+		<img class="img-responsive" src="{% static "images/apartments.jpg" %}" height="70%" width="100%" id="home_image">
+
+		<input class="form-control" type="text" placeholder="Search" id="home_text">
+
+	
+		{% if user and not user.is_anonymous %}
+
+			<h2 class="text"> Hello {{user.get_short_name}}!</h2>
+			<h1 class="text"> Welcome to UVA Housing Search </h1>
+
+		{% else %}
+
+			<h1 class="text"> Welcome to UVA Housing Search </h1>
+
+			<h4 class="text"> Search listings above or</h4>
+			<a href="{% url 'login' %}" role="button" class="btn btn-link" id="home_login_button">Log In</a>
+
+		{% endif %}
+
+		<!-- Use this only for "removing" your account, will be used for testing purposes only -->
+			<form action="{% url 'social:disconnect' 'google-oauth2' %}" method="post">	
+    			{% csrf_token %}
+    			<button class="btn btn-warning btn-xs">
+        			Disconnect
+    			</button>
+			</form>
+
+	</div>
+	
+	{% endblock content %}
