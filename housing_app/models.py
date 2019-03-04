@@ -5,6 +5,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+class Rating(models.Model):
+	text = models.TextField()
+	score = models.IntegerField()
+	username = models.CharField(max_length =100)
+	apartmentID = models.IntegerField()
+	def __str__(self):
+		return self.score
+
 class Apartment(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.CharField(max_length=100)
@@ -15,7 +23,7 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.name
 
@@ -25,6 +33,7 @@ class Profile(models.Model):
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
 	#avator = models.ImageField(blank=True)
+	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.user.username
 
