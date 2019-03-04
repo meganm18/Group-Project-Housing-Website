@@ -15,7 +15,13 @@
 	
 				</div> -->
 				<div class="col" id="profile_image_div">
-					<img src="{{ user_for_page.profile.avatar }}" alt="{% static "images/blank_profile.png" %}" id="profile_image" class="rounded-circle">
+					{% if user_for_page.profile.avatar %}
+
+						<img src="{{ user_for_page.profile.avatar }}" id="profile_image" class="rounded-circle">
+					{% else %}
+						<img src="{% static "images/blank_profile.png"%}" id="profile_image" class="rounded-circle">
+					{% endif %}
+					
 				</div>
 <!-- 				<div class="col top-corners">
 		
