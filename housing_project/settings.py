@@ -132,7 +132,7 @@ SOCIAL_AUTH_DISCONNECT_PIPELINE = (
 SECRET_KEY = 'nb-ca=7ye7+1czyslwf88k4b!cdnk4&tn%(p)yu=eg_v2sb#tm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -221,7 +221,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
