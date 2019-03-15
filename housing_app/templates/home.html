@@ -22,8 +22,12 @@
 			</div>
 
 		{% endif %}
-
-			<input class="form-control" type="text" height="100%" placeholder="Search" id="home_text">
+		<div class="search_bar">
+			<form action="/apartments" method="get">
+				<input type="text" name="search" placeholder="Search" >
+			  	<input type="submit" value="Search">
+			</form>
+		</div>
 
 		{% if user and user.is_anonymous %}
 			<div class="home_login_div">
@@ -32,12 +36,13 @@
 			</div>
 
 		{% endif %}
-		
 
-	</div>
+
+	</>
 
 			<!-- Use this only for "removing" your account, will be used for testing purposes only -->
 			<form action="{% url 'social:disconnect' 'google-oauth2' %}" method="post">	
 	
 	{% endblock content %}
+
 
