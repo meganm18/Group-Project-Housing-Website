@@ -1,46 +1,27 @@
+
+<body>
 {% extends 'base.html' %}
 
 	{% load static %}
 
-
 	{% block content %}
 
-	<div class="home_background_image"></div>
+	<div class="form group, home_container">
+		<!-- <img src="{% static "images/apartments.jpg" %}" height="70%" width="100%" id="home_image"> -->
 
-	<div class="home_content_container">
-
-		{% if user and not user.is_anonymous %}
-			<div class="greeting_div">
-				<h2 class="greeting_text"> Hello {{user.get_short_name}}!</h2>
-				<h1 class="welcome_text"> Welcome to UVA Housing Search </h1>	
-			</div>
+		<input class="form-control" type="text" placeholder="Search" id="home_text">
 
 
-		{% else %}
-			<div class="greeting_div">
-				<h1 class="welcome_text"> Welcome to UVA Housing Search </h1>
-			</div>
-
-		{% endif %}
-		<div class="search_bar">
-			<form action="/apartments" method="get">
-				<input type="text" name="search" placeholder="Search" >
-			  	<input type="submit" value="Search">
-			</form>
-		</div>
-
-		{% if user and user.is_anonymous %}
-			<div class="home_login_div">
-				<h4 class="home_search_listings"> Search listings above or</h4>
-				<a href="{% url 'login' %}" role="button" class="btn btn-link" id="home_login_button">Log In</a>
-			</div>
-
-		{% endif %}
+		
 
 
-	</>
+		<a href="/login/" class="btn-secondary btn btn-primary stretched-link" id="home_login_button">Login</a>
+		<a href="#" class="btn-secondary btn btn-secondary stretched-link" id="home_signup_button">Sign Up</a>
 
-			<!-- Use this only for "removing" your account, will be used for testing purposes only -->
-			<form action="{% url 'social:disconnect' 'google-oauth2' %}" method="post">	
-	
+		<h1 class="text"> Welcome to UVA Housing Search </h1>
+
+
+	</div>
 	{% endblock content %}
+
+	</body>
