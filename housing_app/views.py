@@ -14,8 +14,12 @@ def home(request):
 
 
 def apartments(request):
+	search_term=''
 	apartments = Apartment.objects.all()
-	return render(request, 'apartments.html', {'apartments': apartments})
+	if 'search' in request.GET:
+		search_term= request.GET['search']
+		apartments= apartments.filter(name__icontains=search_term)
+	return render(request, 'apartments.html', {'apartments': apartments , 'search_term': search_term})
 
 
 def apartment_detail(request, id):
