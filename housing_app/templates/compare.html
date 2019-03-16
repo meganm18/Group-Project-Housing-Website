@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+	{% block content %}
+	<div class="wrap">
+    	<div class="category">
+			<h3>Name</h3>
+			<h3>Company</h3>
+			<h3>Location</h3>
+			<h3>Price</h3>
+			<h3>Bedrooms</h3>
+			<h3>Description</h3>
+		</div>
+
+    	<div class="floatleft">
+		{% if compareSize >= 1 %}
+			apartment = compare[0]
+			<a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+					</a>
+					<p>${{ aparment.company }}</p>
+					<p>${{ apartment.location }}</p>
+				<p>${{ apartment.price }}</p>
+				<p>${{ apartment.bedrooms }}</p>
+				<p>${{ apartment.description }}</p>
+			{%endif %}
+		</div>
+    	<div class="floatcenter">
+			{% if compareSize >= 2 %}
+			apartment = compare[1]
+			<a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+					</a>
+					<p>${{ aparment.company }}</p>
+					<p>${{ apartment.location }}</p>
+				<p>${{ apartment.price }}</p>
+				<p>${{ apartment.bedrooms }}</p>
+				<p>${{ apartment.description }}</p>
+			{%endif %}
+
+		</div>
+		<div class="floatright">
+			{% if compareSize >= 3 %}
+			apartment = compare[2]
+			<a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+					</a>
+					<p>${{ aparment.company }}</p>
+					<p>${{ apartment.location }}</p>
+				<p>${{ apartment.price }}</p>
+				<p>${{ apartment.bedrooms }}</p>
+				<p>${{ apartment.description }}</p>
+			{%endif %}
+		</div>
+	</div>
+	{% endblock content %}

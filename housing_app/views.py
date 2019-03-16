@@ -29,6 +29,8 @@ def apartment_detail(request, id):
 		raise Http404("Apartment not found")
 	return render(request, 'apartment_detail.html', {'apartment': apartment})
 
+def compare(request):
+	return render(request, 'compare.html')
 
 def login(request):
 	return render(request, 'login.html') 
