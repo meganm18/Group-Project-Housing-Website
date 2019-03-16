@@ -15,7 +15,6 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	
 	def __str__(self):
 		return self.name
 
@@ -23,10 +22,16 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	avatar = models.ImageField(default="static/images/blank_profile.png")
 	bio = models.TextField(max_length=500, blank=True)
-	favorites = models.ManyToManyField(Apartment)
+	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
+	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
 	#avator = models.ImageField(blank=True)
 	def __str__(self):
 		return self.user.username
+	def compareSize(self):
+		ct = 0
+		for apartment in self.favorites:
+			ct +=1
+		return ct
 
 
 # The following receivers save data to the user profile whenever changes are made
