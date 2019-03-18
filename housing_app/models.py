@@ -6,8 +6,8 @@ from django.dispatch import receiver
 
 
 class Apartment(models.Model):
-	name = models.CharField(max_length=100)
-	company = models.CharField(max_length=100)
+	name = models.CharField(max_length=150)
+	company = models.CharField(max_length=150)
 	location = models.CharField(max_length=150)
 	price = models.IntegerField()
 	size = models.IntegerField()
@@ -24,6 +24,8 @@ class Profile(models.Model):
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
+	## This is the line giving the login error. We might be able to remove this from the database but I thought it was
+	## easier to just try to get it to work
 	avator = models.ImageField(default="static/images/blank_profile.png")
 	def __str__(self):
 		return self.user.username
