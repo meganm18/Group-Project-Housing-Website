@@ -24,7 +24,7 @@ class Profile(models.Model):
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
-	#avator = models.ImageField(blank=True)
+	avator = models.ImageField(default="static/images/blank_profile.png")
 	def __str__(self):
 		return self.user.username
 	def compareSize(self):
