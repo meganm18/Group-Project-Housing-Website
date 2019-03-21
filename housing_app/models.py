@@ -5,13 +5,14 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
 class Apartment(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.CharField(max_length=100)
 	location = models.CharField(max_length=150)
-	price = models.IntegerField()
-	size = models.IntegerField()
-	bedrooms = models.IntegerField()
+	price = models.CharField(max_length=100)
+	size = models.CharField(max_length=100)
+	bedrooms = models.CharField(max_length=100)
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
