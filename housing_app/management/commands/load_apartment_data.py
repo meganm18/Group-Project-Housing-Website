@@ -30,10 +30,13 @@ class Command(BaseCommand):
             apartment.name = row['Apartment Name']
             apartment.company = row['Company']
             apartment.location = row['Location']
-            apartment.price = row['Price']
+            apartment.price = row['Price'].replace("$","")
             apartment.size = row['Size']
             apartment.bedrooms = row['Bedrooms']
             apartment.furnished = row['Furnished']
             apartment.pets = row['Pets']
             apartment.description = row['Description']
+            apartment.distance = row['Distance to Grounds']
+            apartment.number = row['Number']
+            apartment.bathrooms = row['Bathrooms']
             apartment.save()

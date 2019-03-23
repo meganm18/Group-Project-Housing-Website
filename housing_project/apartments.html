@@ -1,23 +1,37 @@
 
+
 {% extends 'base.html' %}
 
 	{% block content %}
+
+
 
 
 <style>
 
 div.absolute {
   position: absolute;
-  top: 200px;
+  top: 100px;
   right: 70;
 
 
 }
-</style>
+div.right_side {
+  position: absolute;
+  top: 100px;
+  right: 200;
 
+
+}
+center{
+  font-size: 32px;
+  color:Grey;
+}
+
+</style>
 		{% for apartment in apartments %}
 
-			<div class='apartmentname' align="center" style="padding-bottom: 20px">
+			<div class='apartmentname'align="center" style="padding-bottom: 20px">
 
 				<a href="{% url 'apartment_detail' apartment.id %}">
 					<h3> {{ apartment.name|capfirst }} </h3>
@@ -30,13 +44,23 @@ div.absolute {
 				</form>
 					
 				{% endif %}
-				
+
 			</div>
+
 			<div></div>
 
 
 		{% endfor %}
+
+{% if not apartments %}
+			<div>
+				<center>No Results.</center>
+			</div>
+
+		{% endif %}
 <div class='absolute'>
-<<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50278.94399600599!2d-78.51896345980462!3d38.03697265807535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b3862dea50a48f%3A0x9086f096c38b74fc!2sCharlottesville%2C+VA!5e0!3m2!1sen!2sus!4v1551677046396" width="400" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+	<!--<div class =card>-->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13800.82908370232!2d-78.51414512813471!3d38.03403409246005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b38648b749c4dd%3A0x405108c2cc8b5846!2sUniversity+of+Virginia!5e0!3m2!1sen!2sus!4v1551680228778" width="450" height="550" frameborder="2" style="border:0" allowfullscreen></iframe>
 	</div>
+	<div>
 	{% endblock content %}
