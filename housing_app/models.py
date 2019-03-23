@@ -22,15 +22,14 @@ class Apartment(models.Model):
 	def __str__(self):
 		return self.name
 
-class Profile(models.Model):
+## We need to change the database and I was having trouble doing that so I was hoping this would work
+class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
-	## This is the line giving the login error. We might be able to remove this from the database but I thought it was
-	## easier to just try to get it to work
-	avator = models.ImageField(default="static/images/blank_profile.png", max_length=500)
+	#avator = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	def __str__(self):
 		return self.user.username
 	def compareSize(self):
@@ -45,7 +44,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

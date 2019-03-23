@@ -1,5 +1,5 @@
 from django.test import TestCase, RequestFactory
-from .models import Apartment, Profile
+from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
 from .views import home, apartments, apartment_detail, login
 
@@ -29,10 +29,10 @@ class SavedListTestCase(TestCase):
         apartment_2 = Apartment.objects.get(name="Apartment 2")
         ex_user1 = User.objects.get(username="example user 1")
         try:
-            self.profile_1 = Profile.objects.get(user_id=1)
+            self.profile_1 = UserProfile.objects.get(user_id=1)
         except:
-            Profile.objects.create(user=ex_user1, bio="hello")
-            self.profile_1 = Profile.objects.get(bio="hello")
+            UserProfile.objects.create(user=ex_user1, bio="hello")
+            self.profile_1 = UserProfile.objects.get(bio="hello")
         self.profile_1.favorites.set = Apartment.objects
         self.profile_1.favorites.clear()
         self.profile_1.favorites.add(apartment_1)

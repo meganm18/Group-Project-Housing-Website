@@ -6,7 +6,7 @@ from django.db import transaction
 from django.shortcuts import redirect
 from django.http import Http404
 from social_django.models import UserSocialAuth
-from .models import Apartment, Profile
+from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
 
 def home(request):
