@@ -6,15 +6,6 @@ from django.dispatch import receiver
 
 from django.utils.deconstruct import deconstructible
 
-@deconstructible
-class Rating(models.Model):
-	text = models.TextField(default="No Review")
-	score = models.IntegerField(default=0)
-	username = models.CharField(max_length =100, default= "noUser")
-	apartmentID = models.IntegerField(default=0)
-	def __str__(self):
-		return self.text
-
 class Apartment(models.Model):
 	name = models.CharField(max_length=100)
 	company = models.CharField(max_length=100)
@@ -25,7 +16,6 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE, default=Rating())
 	def __str__(self):
 		return self.name
 
@@ -34,11 +24,18 @@ class Profile(models.Model):
 	avatar = models.ImageField(default="static/images/blank_profile.png")
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment)
-	#avator = models.ImageField(blank=True)
-	ratings = models.ForeignKey(Rating, on_delete=models.CASCADE, default=Rating)
 	def __str__(self):
 		return self.user.username
 
+class Rating(models.Model):
+	text = models.TextField(default="No Review")
+	score = models.IntegerField(default=0)
+	username = models.CharField(max_length =100, default= "noUser")
+	apartmentID = models.IntegerField(default=0)
+	apartment = models.ForeignKey(Apartment, on_delete = models.CASCADE)
+	profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
+	def __str__(self):
+		return self.text
 
 # The following receivers save data to the user profile whenever changes are made
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone

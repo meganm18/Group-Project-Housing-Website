@@ -9,6 +9,7 @@ from social_django.models import UserSocialAuth
 from .models import Apartment, Profile, Rating
 from django.contrib.auth.models import User
 from .forms import UserForm, ProfileForm, RatingForm
+from django.contrib import messages
 
 def home(request):
 	return render(request, 'home.html')
@@ -49,6 +50,16 @@ def favorites(request):
 
 	return render(request, 'favorites.html', {'favorites': favorites})
 
+@login_required
+def myRatings(request):
+	user = request.user
+
+	user_profile = user.profile
+
+	ratings = user_profile.ratings.all()
+
+	return render(request, 'ratings.html', {'ratings' : ratings})
+
 @login_required()
 def loginsuccess(request):
 	return render(request, 'login-success.html')
@@ -72,10 +83,10 @@ def update_profile(request):
 		if user_form.is_valid() and profile_form.is_valid():
 			user_form.save()
 			profile_form.save()
-			messages.success(request, _('Your profile was successfully updated!'))
+			messages.success(request, ('Your profile was successfully updated!'))
 			return redirect('home')
 		else:
-			messages.error(request, _('Please correct the error below.'))
+			messages.error(request, ('Please correct the error below.'))
 	else:
 		user_form = UserForm(instance=request.user)
 		profile_form = ProfileForm(instance=request.user.profile)
@@ -112,3 +123,24 @@ def delete_favorite(request, apartment_id):
 		user.save()
 
 	return redirect('favorites')
+
+@login_required
+@transaction.atomic
+def create_rating(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.profile
+
+	#how do i add the apartment they are rating  and their user data to the RatingModel automatically
+	if request.method == 'POST':
+		rating_form = RatingForm(request.POST, instance=request.rating)
+		
+		if rating_form.is_valid():
+			rating_form.save()
+			messages.success(request, ('Rating successfully created'))
+			return redirect('myRatings')
+		else:
+			messages.error(request, ('Please correct error.'))
+	else:
+		rating_form = Rating(instance=request.rating)
+	return render(request, 'ratings.html', {'rating_form':rating_form})
