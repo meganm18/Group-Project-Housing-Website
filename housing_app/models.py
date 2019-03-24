@@ -22,7 +22,8 @@ class Apartment(models.Model):
 	def __str__(self):
 		return self.name
 
-## We need to change the database and I was having trouble doing that so I was hoping this would work
+## We needed to change the database to fix the login problem. I was having trouble doing that and there was probably
+## a more elegant solution but this seems to work.
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=500)
@@ -48,4 +49,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    instance.userprofile.save()
