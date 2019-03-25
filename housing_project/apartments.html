@@ -42,7 +42,11 @@ center{
 					{% csrf_token %}
 					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
 				</form>
-					
+				{% if user and not user.is_anonymous %}
+				<form action="{% url 'save_compare' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Compare </button>
+				</form>
 				{% endif %}
 
 			</div>
