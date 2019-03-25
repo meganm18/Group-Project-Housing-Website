@@ -9,6 +9,8 @@ def get_avatar(backend, strategy, details, response,
         # .get('url')
         ext = url.split('.')[-1]
     if url:
+        if (User==None):
+            User = User.objects.get(username = kwargs['username'])
         UserProfile.objects.get(user=User).avator = url
         UserProfile.objects.get(user = User).save()
 
