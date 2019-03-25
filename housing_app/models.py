@@ -44,10 +44,8 @@ class UserProfile(models.Model):
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-	if kwargs.get('created', False):
-		UserProfile.objects.create(user=kwargs['instance'])
-	# if created:
-	#    UserProfile.objects.create(user=instance)
+    if created:
+        UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
