@@ -1,5 +1,5 @@
 from django.test import TestCase, RequestFactory
-from .models import Apartment, Profile
+from .models import Apartment, Profile, Rating
 from django.contrib.auth.models import User
 from .views import home, apartments, apartment_detail, login
 
@@ -82,5 +82,9 @@ class ViewPagesTestCase(TestCase):
 class RatingTestCase(TestCase):
     def setUp(self):
         #create rating object
-    def testRatingCreated(self):
+        Apartment.objects.create(name = 'Apartment 1')
+        apartment_1 = Apartment.objects.get("Apartment 1")
+        Rating.objects.create(text = "nice", score = "5", apartment=apartment_1)
+    def testApartmetRatingCreated(self):
         #assert true that rating is accessible
+        self.assertTrue(True)
