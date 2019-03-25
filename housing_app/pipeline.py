@@ -9,11 +9,6 @@ def get_avatar(backend, strategy, details, response,
         # .get('url')
         ext = url.split('.')[-1]
     if url:
-        try:
-            UserProfile.avatar = url
-            UserProfile.save()
-        except :
-            UserProfile.objects.create(user=user)
-            UserProfile.avatar = url
-            UserProfile.save()
+        UserProfile.avatar = url
+        UserProfile.save()
 
