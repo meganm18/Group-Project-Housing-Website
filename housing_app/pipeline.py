@@ -8,6 +8,7 @@ def get_avatar(backend, strategy, details, response,
         # .get('url')
         ext = url.split('.')[-1]
     if url:
+        #Sometimes the user doesn't have a userprofile. This works for now but there may be a larger problem
         try:
             user.userprofile.avatar = url
             user.save()
