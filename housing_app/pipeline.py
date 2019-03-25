@@ -1,3 +1,4 @@
+from .models import UserProfile
 # code retrieved from https://stackoverflow.com/questions/29575713/retrieving-profile-picture-from-google-and-facebook-in-python-social-auth/29576422
 def get_avatar(backend, strategy, details, response,
         user=None, *args, **kwargs):
@@ -7,5 +8,10 @@ def get_avatar(backend, strategy, details, response,
         # .get('url')
         ext = url.split('.')[-1]
     if url:
-        user.userprofile.avatar = url
-        user.save()
+        try:
+            user.userprofile.avatar = url
+            user.save()
+        except:
+            UserProfile.objects.create(user=user)
+            user.userprofile.avatar = url
+            user.save()
