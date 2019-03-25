@@ -78,3 +78,9 @@ class ViewPagesTestCase(TestCase):
         request3.user = self.user1
         response3 = login(request3)
         self.assertEqual(response3.status_code, 200)
+
+class RatingTestCase(TestCase):
+    def setUp(self):
+        #create rating object
+    def testRatingCreated(self):
+        #assert true that rating is accessible
