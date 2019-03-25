@@ -29,9 +29,6 @@ def apartment_detail(request, id):
 		raise Http404("Apartment not found")
 	return render(request, 'apartment_detail.html', {'apartment': apartment})
 
-def compare(request):
-	return render(request, 'compare.html')
-
 def login(request):
 	return render(request, 'login.html') 
 
@@ -53,6 +50,13 @@ def favorites(request):
 	favorites = user_profile.favorites.all()
 
 	return render(request, 'favorites.html', {'favorites': favorites})
+
+@login_required()
+def compare(request):
+	user = request.user
+	user_profile = user.userprofile
+	compare = user_profile.compare.all()
+	return render(request, 'compare.html',{'compare':compare})
 
 @login_required()
 def loginsuccess(request):
@@ -103,6 +107,17 @@ def save_favorite(request, apartment_id):
 
 	return redirect('apartments')
 
+@login_required
+def save_compare(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare.add(apartment)
+		user_profile.save()
+		user.save()
+	return redirect('apartments')
+
 
 @login_required
 def delete_favorite(request, apartment_id):
@@ -117,3 +132,16 @@ def delete_favorite(request, apartment_id):
 		user.save()
 
 	return redirect('favorites')
+
+@login_required
+def delete_compare(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+
+	if request.method == 'POST':
+		user_profile.compare.remove(apartment)
+		user_profile.save()
+		user.save()
+
+	return redirect('compare')
