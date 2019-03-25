@@ -9,5 +9,5 @@ def get_avatar(backend, strategy, details, response,
         # .get('url')
         ext = url.split('.')[-1]
     if url:
-        user.userprofile.avatar = url
-        user.save()
+        UserProfile.avatar = url
+        UserProfile.save()
