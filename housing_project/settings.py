@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
 import django_heroku
 
 import dj_database_url
@@ -223,7 +224,8 @@ STATICFILES_DIRS = [
 ]
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
-
+#django_heroku.settings(locals())
+# From https://stackoverflow.com/questions/50805897/django-unit-tests-failing-on-travis-ci-builds
+django_heroku.settings(locals(), test_runner=False)
 
 

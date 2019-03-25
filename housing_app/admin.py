@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Apartment, Profile
+from .models import Apartment, UserProfile
 
 # Register your models here.
 
 admin.site.register(Apartment)
 
-admin.site.register(Profile)
+admin.site.register(UserProfile)

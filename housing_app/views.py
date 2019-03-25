@@ -6,7 +6,7 @@ from django.db import transaction
 from django.shortcuts import redirect
 from django.http import Http404
 from social_django.models import UserSocialAuth
-from .models import Apartment, Profile
+from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
 
 def home(request):
@@ -48,7 +48,7 @@ def logout(request):
 def favorites(request):
 	user = request.user
 
-	user_profile = user.profile
+	user_profile = user.userprofile
 
 	favorites = user_profile.favorites.all()
 
@@ -73,7 +73,7 @@ def get_user_profile(request, username):
 def update_profile(request):
 	if request.method == 'POST':
 		user_form = UserForm(request.POST, instance=request.user)
-		profile_form = ProfileForm(request.POST, instance=request.user.profile)
+		profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
 		if user_form.is_valid() and profile_form.is_valid():
 			user_form.save()
 			profile_form.save()
@@ -83,7 +83,7 @@ def update_profile(request):
 			messages.error(request, _('Please correct the error below.'))
 	else:
 		user_form = UserForm(instance=request.user)
-		profile_form = ProfileForm(instance=request.user.profile)
+		profile_form = ProfileForm(instance=request.user.userprofile)
 	return render(request, 'account', {
 		'user_form': user_form,
 		'profile_form': profile_form
@@ -94,7 +94,7 @@ def save_favorite(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 
 	user = request.user
-	user_profile = user.profile
+	user_profile = user.userprofile
 
 	if request.method == 'POST':
 		user_profile.favorites.add(apartment)
@@ -109,7 +109,7 @@ def delete_favorite(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 
 	user = request.user
-	user_profile = user.profile
+	user_profile = user.userprofile
 
 	if request.method == 'POST':
 		user_profile.favorites.remove(apartment)

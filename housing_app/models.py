@@ -7,8 +7,8 @@ from django.dispatch import receiver
 
 
 class Apartment(models.Model):
-	name = models.CharField(max_length=100)
-	company = models.CharField(max_length=100)
+	name = models.CharField(max_length=150)
+	company = models.CharField(max_length=150)
 	location = models.CharField(max_length=150)
 	price = models.CharField(max_length=100)
 	size = models.CharField(max_length=100)
@@ -22,13 +22,15 @@ class Apartment(models.Model):
 	def __str__(self):
 		return self.name
 
-class Profile(models.Model):
+## We needed to change the database to fix the login problem. I was having trouble doing that and there was probably
+## a more elegant solution but this seems to work.
+class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(default="static/images/blank_profile.png")
+	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
-	#avator = models.ImageField(blank=True)
+	#avator = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	def __str__(self):
 		return self.user.username
 	def compareSize(self):
@@ -43,8 +45,8 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    instance.userprofile.save()
