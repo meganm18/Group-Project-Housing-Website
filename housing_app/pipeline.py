@@ -13,3 +13,4 @@ def get_avatar(backend, strategy, details, response,
             UserProfile.objects.create(user = user)
         UserProfile.avatar = url
         UserProfile.save()
+        
