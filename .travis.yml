@@ -18,7 +18,7 @@ env:
   matrix:
   - DJANGO=2.1.7 DB=postgres
 install:
-- pip install -q -r requirements-build.txt #got from https://stackoverflow.com/questions/50805897/django-unit-tests-failing-on-travis-ci-builds
+- pip install -q -r requirements.txt
 - pip install -q Django==$DJANGO --quiet
 - pip install -q psycopg2
 before_script:
