@@ -29,6 +29,12 @@ center{
 }
 
 </style>
+		<div class='gotocompare'align="right" style="...">
+			<form action="{% url 'compare' %}">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="compare" id="gotocompare"> Go to Compare Page </button>
+			</form>
+		</div>
 		{% for apartment in apartments %}
 
 			<div class='apartmentname'align="center" style="padding-bottom: 20px">
@@ -40,14 +46,13 @@ center{
 				{% if user and not user.is_anonymous %}
 				<form action="{% url 'save_favorite' apartment.id %}" method="post">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
+					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites!!!! </button>
 				</form>
 				<form action="{% url 'save_compare' apartment.id %}" method="post">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Compare </button>
+					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
 				</form>
 				{% endif %}
-
 
 			</div>
 
