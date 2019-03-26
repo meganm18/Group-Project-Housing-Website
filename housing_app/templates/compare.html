@@ -2,55 +2,30 @@
 
 
 	{% block content %}
-	<div class="wrap">
-    	<div class="category">
-			<h4>Name</h4>
-			<h4>Company</h4>
-			<h4>Location</h4>
-			<h4>Price</h4>
-			<h4>Bedrooms</h4>
-			<h4>Description</h4>
-		</div>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Location</th>
+				<th>Price</th>
+				<th>Size</th>
+			</tr>
+			{% for apartment in compare %}
+			<tr>
+				<td><a href="{% url 'apartment_detail' apartment.id %}">
+						<h3> {{ apartment.name|capfirst }} </h3>
+				</a></td>
+				<td>{{ apartment.location|capfirst }}</td>
+				<td>${{ apartment.price }}</td>
+				<td>{{ apartment.size }}</td>
+				<td>
+					<form action="{% url 'delete_compare' apartment.id %}" method="post">
+						{% csrf_token %}
+							<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Remove From Compare </button>
+				</form>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
 
-    	<div class="floatleft">
-		{% if compareSize >= 1 %}
-			apartment = compare[0]
-			<a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-					</a>
-					<p>${{ aparment.company }}</p>
-					<p>${{ apartment.location }}</p>
-				<p>${{ apartment.price }}</p>
-				<p>${{ apartment.bedrooms }}</p>
-				<p>${{ apartment.description }}</p>
-			{%endif %}
-		</div>
-    	<div class="floatcenter">
-			{% if compareSize >= 2 %}
-			apartment = compare[1]
-			<a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-					</a>
-					<p>${{ aparment.company }}</p>
-					<p>${{ apartment.location }}</p>
-				<p>${{ apartment.price }}</p>
-				<p>${{ apartment.bedrooms }}</p>
-				<p>${{ apartment.description }}</p>
-			{%endif %}
 
-		</div>
-		<div class="floatright">
-			{% if compareSize >= 3 %}
-			apartment = compare[2]
-			<a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-					</a>
-					<p>${{ aparment.company }}</p>
-					<p>${{ apartment.location }}</p>
-				<p>${{ apartment.price }}</p>
-				<p>${{ apartment.bedrooms }}</p>
-				<p>${{ apartment.description }}</p>
-			{%endif %}
-		</div>
-	</div>
 	{% endblock content %}
