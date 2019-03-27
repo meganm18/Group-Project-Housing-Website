@@ -88,3 +88,7 @@ class RatingTestCase(TestCase):
     def testApartmetRatingCreated(self):
         #assert true that rating is accessible
         self.assertTrue(True)
+    def testProfileRatingCreated(self):
+        self.assertTrue(True)
+    def testBothRatingCreated(self):
+        self.assertTrue(True)

@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^save_favorite/(\d+)/', views.save_favorite, name='save_favorite'),
     url(r'^delete_favorite/(\d+)/', views.delete_favorite, name='delete_favorite'),
     url(r'profile/(?P<username>[a-zA-Z0-9]+)$', views.get_user_profile, name='profile'),
+    url(r'^rate_apartment/(\d+)/', views.create_rating, name='create_rating')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

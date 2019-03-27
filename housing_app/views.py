@@ -127,20 +127,17 @@ def delete_favorite(request, apartment_id):
 @login_required
 @transaction.atomic
 def create_rating(request, apartment_id):
+	
+	#pulls apartment based on which page your on
 	apartment = Apartment.objects.get(pk=apartment_id)
+
+	#pulls user based on request
 	user = request.user
 	user_profile = user.profile
 
-	#how do i add the apartment they are rating  and their user data to the RatingModel automatically
+	rating = Rating.objects.create(apartment='apartment', profile='user_profile')
+	
 	if request.method == 'POST':
-		rating_form = RatingForm(request.POST, instance=request.rating)
-		
-		if rating_form.is_valid():
-			rating_form.save()
-			messages.success(request, ('Rating successfully created'))
-			return redirect('myRatings')
-		else:
-			messages.error(request, ('Please correct error.'))
-	else:
-		rating_form = Rating(instance=request.rating)
-	return render(request, 'ratings.html', {'rating_form':rating_form})
+		rating_form = RatingForm(request.POST, instance=rating)
+		rating_form.save()
+	return render(request, 'apartment_detail.html', {'apartment': apartment})
