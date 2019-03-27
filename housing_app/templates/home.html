@@ -4,7 +4,14 @@
 
 
 	{% block content %}
+<style>
 
+div.search_box{
+position: relative;
+	top: 35%;
+}
+
+</style>
 	<div class="home_background_image"></div>
 
 	<div class="home_content_container">
@@ -22,12 +29,14 @@
 			</div>
 
 		{% endif %}
-		<div class="search_bar">
+		<div class="search_box">
 			<form action="/apartments" method="get">
 				<input type="text" name="search" placeholder="Search" >
 			  	<input type="submit" value="Search">
 			</form>
 		</div>
+
+
 
 		{% if user and user.is_anonymous %}
 			<div class="home_login_div">
