@@ -50,15 +50,6 @@ def favorites(request):
 
 	return render(request, 'favorites.html', {'favorites': favorites})
 
-@login_required
-def myRatings(request):
-	user = request.user
-
-	user_profile = user.profile
-
-	ratings = user_profile.ratings.all()
-
-	return render(request, 'ratings.html', {'ratings' : ratings})
 
 @login_required()
 def loginsuccess(request):

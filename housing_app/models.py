@@ -27,6 +27,7 @@ class Profile(models.Model):
 	def __str__(self):
 		return self.user.username
 
+
 class Rating(models.Model):
 	text = models.TextField(default="No Review")
 	score = models.IntegerField(default=0)
@@ -34,8 +35,6 @@ class Rating(models.Model):
 	apartmentID = models.IntegerField(default=0)
 	apartment = models.ForeignKey(Apartment, on_delete = models.CASCADE)
 	profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
-	def __str__(self):
-		return self.text
 
 # The following receivers save data to the user profile whenever changes are made
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
