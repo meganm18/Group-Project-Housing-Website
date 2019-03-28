@@ -4,21 +4,84 @@ body, html {
 	padding-top: 28px;
 }
 
+.nav-link{
+	font-family: 'Nunito', sans-serif;
+
+}
+
+.dropdown-item{
+	font-family: 'Nunito', sans-serif;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff;
+    background-color: #67bb96;
+}
+
+/* CSS for Navbar */
+
+.navbar .navbar-expand-lg {    
+  background: #ffffff;
+  .navbar-nav li a {
+    color: #000000;
+    &:hover, &:focus, &:active {
+      color: #000000;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+
 /* CSS For the Home.html Page*/
 
+#search_button{
+	color: #ffffff;
+	background-color: #ffb0b8;
+	outline-color: transparent;
+	border-color: #dc858e;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+}
+
+.search_bar {
+	/*display: inline;*/
+	flex-wrap: nowrap;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.search_bar .input-group{
+	flex-wrap: nowrap;
+}
+
+/*#search_bar_id{
+	max-width: 300px;
+	min-width: 200px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}*/
+
 .home_background_image {
-	position: fixed;
-	background-image: url('../images/apartments.jpg');
+	margin-top: -100px; 
+	position: relative;
+	background-image: url('../images/front-page-background.png');
 	background-size: cover;
-	filter: brightness(50%);
-	height: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 800px;
 	left: 0;
 	right: 0;
 	z-index: 1;
 }
 
 .home_content_container {
-	position: fixed;
+	position: absolute;
 	text-align: center;
 	color: white;
 	max-width: 100%;
@@ -43,24 +106,28 @@ body, html {
 
 
 .home_login_div {
+	margin-top: 20px;
 	position: absolute;
-	top: 48%;
+	top: 50%;
 	width: 400px;
 	display: inline-block;
 	height: 100px;
 }
 
 .home_search_listings {
+	font-family: 'Nunito', sans-serif;
 	margin-bottom: 0px;
 }
 
 #home_login_button, .btn-link {
+	font-family: 'Nunito', sans-serif;
 	font-size: 22px;
 	color: white;
 	background-color: transparent;
 }
 
 .welcome_text {
+	font-family: 'Nunito', sans-serif;
 	position: relative;
 	top: 25%;
 	color: white;
@@ -71,7 +138,7 @@ body, html {
 
 .greeting_div{
 	position: absolute;
-	top: 20%;
+	top: 25%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	display: inline-block;
@@ -79,16 +146,17 @@ body, html {
 }
 
 .greeting_text{
-	margin-bottom: 50px;
+	font-family: 'Nunito', sans-serif;
+	margin-top: 35px;
+	margin-bottom: 20px;
 }
 
 /* CSS for Login.html Page */
 
 .login_background_image {
 	position: fixed;
-	background-image: url('../images/apartment_interior.jpg');
+	background-image: url('../images/plain-background.png');
 	background-size: cover;
-	filter: brightness(50%);
 	height: 100%;
 	left: 0;
 	right: 0;
@@ -129,6 +197,7 @@ body, html {
 }
 
 .login_text {
+	font-family: 'Nunito', sans-serif;
 	color: white;
 	max-height: 800px;
 	margin: 0px;
@@ -141,9 +210,9 @@ body, html {
 
 .profile_background_image {
 	position: fixed;
-	background-image: url('../images/home.jpg');
+	background-image: url('../images/plain-background.png');
 	background-size: cover;
-	filter: brightness(50%);
+	filter: brightness(90%);
 	height: 100%;
 	left: 0;
 	right: 0;
@@ -210,6 +279,7 @@ body, html {
 		margin: 0px;
 		padding: 0px;
 		color: gray;
+		font-family: 'Nunito', sans-serif;
 	}
 
 	#middle_row {
@@ -231,6 +301,12 @@ body, html {
 		position: relative;
 		top: -6%;
 		float: right;
+	}
+
+	#search_bar_id{
+		width: 200px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 	}
 }
 
@@ -274,6 +350,12 @@ body, html {
 		position: relative;
 		top: -9%;
 		float: right;
+	}
+
+	#search_bar_id{
+		width: 300px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 	}
 
 }
