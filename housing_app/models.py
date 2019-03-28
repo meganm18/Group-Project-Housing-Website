@@ -26,7 +26,7 @@ class Apartment(models.Model):
 ## a more elegant solution but this seems to work.
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=500)
+	avatar = models.ImageField(default="static/images/blank_profile.png")
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")

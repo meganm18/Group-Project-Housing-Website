@@ -15,9 +15,9 @@
 	
 				</div> -->
 				<div class="col" id="profile_image_div">
-					{% if user_for_page.profile.avatar %}
+					{% if user_for_page.userprofile.avatar %}
 
-						<img src="{{ user_for_page.profile.avatar }}" id="profile_image" class="rounded-circle">
+						<img src="{{ user_for_page.userprofile.avatar }}" id="profile_image" class="rounded-circle">
 					{% else %}
 						<img src="{% static "images/blank_profile.png"%}" id="profile_image" class="rounded-circle">
 					{% endif %}
@@ -43,7 +43,7 @@
 					<div class="inner_content_div">
 						<h4 id="email_text">Email: {{user_for_page.email}}</h4>
 							
-						<h4 id="bio_text">Bio: {{user_for_page.profile.bio}}</h4>
+						<h4 id="bio_text">Bio: {{user_for_page.userprofile.bio}}</h4>
 					</div>
 
 							
