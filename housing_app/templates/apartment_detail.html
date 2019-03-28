@@ -128,6 +128,10 @@
 				<span>Rating</span>
 				<span class="checked">&#9733; &#9733; &#9733;</span>
 				<span class="unchecked">&#9733; &#9733;</span>
+				<form action="{% url 'create_rating' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="rate_apartment" id="apartment.id"> New Rating </button>
+				</form>
 			</div>
 			<div class="card">
 				<h2>Residence Living</h2>
