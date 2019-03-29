@@ -29,7 +29,7 @@ class SavedFavTestCase(TestCase):
         apartment_2 = Apartment.objects.get(name="Apartment 2")
         ex_user1 = User.objects.get(username="example user 1")
         try:
-            self.profile_1 = UserProfile.objects.get(user_id=1)
+            self.profile_1 = UserProfile.objects.get(user_id=2)
         except:
             UserProfile.objects.create(user=ex_user1, bio="hello")
             self.profile_1 = UserProfile.objects.get(bio="hello")
