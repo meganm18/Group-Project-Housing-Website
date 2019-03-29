@@ -22,14 +22,14 @@ class SavedFavTestCase(TestCase):
                                  bedrooms=1, furnished="yes", pets="yes")
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
                                  bedrooms=2, furnished="no", pets="no")
-        User.objects.create_user(username="example user 1", user_id=1)
+        User.objects.create_user(username="example user 1")
 
     def test_favorites(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
         apartment_2 = Apartment.objects.get(name="Apartment 2")
         ex_user1 = User.objects.get(username="example user 1")
         try:
-            self.profile_1 = UserProfile.objects.get(user_id=1)
+            self.profile_1 = UserProfile.objects.get(username="example user 1")
         except:
             UserProfile.objects.create(user=ex_user1, bio="hello")
             self.profile_1 = UserProfile.objects.get(bio="hello")
