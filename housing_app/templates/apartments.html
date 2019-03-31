@@ -50,9 +50,13 @@ center{
 				</form>
 				{% endif %}
 				{% if user and not user.is_anonymous %}
-				<form action="{% url 'save_compare' apartment.id %}" method="post">
+				<form action="{% url 'save_compare0' apartment.id %}" method="post">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
+					<button type="submit" class="btn btn-default" name="compare_apartment0"> Select to Compare </button>
+				</form>
+				<form action="{% url 'save_compare1' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="compare_apartment1"> Select to Compare </button>
 				</form>
 				{% endif %}
 			</div>

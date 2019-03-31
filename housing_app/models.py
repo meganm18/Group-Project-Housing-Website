@@ -29,15 +29,11 @@ class UserProfile(models.Model):
 	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
-	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
-	#avator = models.ImageField(default="static/images/blank_profile.png", max_length=500)
+	#compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
+	compare0 = models.ForeignKey(Apartment, blank = True, default = 0, on_delete='SET_DEFAULT', related_name="compare0")
+	compare1 = models.ForeignKey(Apartment, blank = True, default = 0, on_delete='SET_DEFAULT', related_name="compare1")
 	def __str__(self):
 		return self.user.username
-	def compareSize(self):
-		ct = 0
-		for apartment in self.favorites:
-			ct +=1
-		return ct
 
 
 # The following receivers save data to the user profile whenever changes are made

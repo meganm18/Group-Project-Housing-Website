@@ -35,8 +35,10 @@ urlpatterns = [
     url(r'^delete_favorite/(\d+)/', views.delete_favorite, name='delete_favorite'),
     url(r'profile/(?P<username>[a-zA-Z0-9]+)$', views.get_user_profile, name='profile'),
     url(r'^compare/', views.compare, name='compare'),
-    url(r'^save_compare/(\d+)/', views.save_compare, name='save_compare'),
-    url(r'^delete_compare/(\d+)/', views.delete_compare, name='delete_compare'),
+    url(r'^save_compare0/(\d+)/', views.save_compare0, name='save_compare0'),
+   # url(r'^delete_compare0/(\d+)/', views.delete_compare0, name='delete_compare0'),
+    url(r'^save_compare1/(\d+)/', views.save_compare1, name='save_compare1'),
+   # url(r'^delete_compare1/(\d+)/', views.delete_compare1, name='delete_compare1'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
