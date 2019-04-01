@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.http import Http404
 from social_django.models import UserSocialAuth
 from .models import Apartment, UserProfile
+from .forms import UserForm, ProfileForm
 from django.contrib.auth.models import User
 
 def home(request):
