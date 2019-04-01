@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^compare/', views.compare, name='compare'),
     url(r'^save_compare/(\d+)/', views.save_compare, name='save_compare'),
     url(r'^delete_compare/(\d+)/', views.delete_compare, name='delete_compare'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

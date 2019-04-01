@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 	{% block content %}
-
+	{% load ratings %}
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -131,9 +131,10 @@
 
 			</div>
 			<div class="card2">
-				<span>Rating</span>
-				<span class="checked">&#9733; &#9733; &#9733;</span>
-				<span class="unchecked">&#9733; &#9733;</span>
+				<h2>Rating</h2>
+				<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+				<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+				{% ratings apartment %}
 			</div>
 			<div class="card">
 				<h2>Residence Living</h2>
