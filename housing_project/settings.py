@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'housing_app',
     'social_django',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.core.context_processors.request',
 ]
 
 WSGI_APPLICATION = 'housing_project.wsgi.application'
@@ -155,31 +160,31 @@ DEBUG = True
 #     }
 # else:
 
-# if os.getenv('BUILD_ON_TRAVIS', None):
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'travis_ci_db',
-#             'USER': 'postgres',
-#             'PASSWORD': '',
-#             'HOST': 'localhost',
-#             'PORT': os.getenv('PGPORT'),
-#         }
-#     }
-# else:
-DATABASES = {
+if os.getenv('BUILD_ON_TRAVIS', None):
+    DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'apartment_database',
-        # 'USER': 'miracle_worker',
-        # 'PASSWORD': 'miracleworkers',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'travis_ci_db',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': os.getenv('PGPORT'),
         }
     }
-    # DATABASES['default'] = dj_database_url.config(default='postgres://usdczwzpqgyqbb:c1f02655a959155db474e6057b713e113a3ba63efbbee6e61e183759f251ab62@ec2-107-20-185-27.compute-1.amazonaws.com:5432/da8eubmr4a4ge9')
+else:
+    DATABASES = {
+        'default': {
+                # 'ENGINE': 'django.db.backends.sqlite3',
+                # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'apartment_database',
+            'USER': 'miracle_worker',
+            'PASSWORD': 'miracleworkers',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
+    DATABASES['default'] = dj_database_url.config(default='postgres://usdczwzpqgyqbb:c1f02655a959155db474e6057b713e113a3ba63efbbee6e61e183759f251ab62@ec2-107-20-185-27.compute-1.amazonaws.com:5432/da8eubmr4a4ge9')
 
 
 # Password validations

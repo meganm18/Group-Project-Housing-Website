@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load ratings %}
 <!doctype html>
 
 
@@ -7,6 +7,8 @@
 <html>
 
 	<head>
+
+		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="{% static 'housing_app/style.css' %}">
@@ -33,8 +35,11 @@
 		{% url 'logout' as logout_path %}
 		{% url 'compare' as compare_path %}
 
-		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-			<a class="navbar-brand" href="">Housing Search</a>
+		<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffffff;">
+			<a class="navbar-brand" href="{% url 'home' %}">
+    			<img src="{% static "images/mw-logo.png" %}" width="30" height="30" alt="">
+    			<img src="{% static "images/mw-title.png" %}" width="mr-auto" height="20" alt="">
+  			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 			</button>
