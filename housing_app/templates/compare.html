@@ -142,33 +142,34 @@
 <div id="compareheading">
 	<h2>Compare Apartments</h2>
 </div>
-{% for apartment in compare %}
+
 <div id="content">
+
 	<div id="left">
 		<div class="header">
-	<h1><strong>{{ apartment.name|capfirst }}</strong></h1>
+	<h1><strong>{{ compare0.name|capfirst }}</strong></h1>
 	</div>
 
 	<div class="row">
 		<div class="leftcolumn">
 			<div class="card">
-			<h3><strong>{{ apartment.location }}</strong> </h3>
-			<h5><strong>Company:</strong> {{ apartment.company }}</h5>
+			<h3><strong>{{ compare0.location }}</strong> </h3>
+			<h5><strong>Company:</strong> {{ compare0.company }}</h5>
 			{% load static %}
 			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
 			<p><strong>Description of Property:</strong></p>
-			<p>{{ apartment.description}}</p>
+			<p>{{ compare0.description}}</p>
 			</div>
 		</div>
 		<div class="rightcolumn">
 			<div class="card">
 			<h2>Property Statistics</h2>
-			<p> <strong>Price:</strong> ${{ .price }} </p>
-			<p> <strong>Distance to Grounds:</strong> {{ .distance }} </p>
-			<p> <strong>Size:</strong> {{ .size }} sq ft </p>
-			<p> <strong>Furnished:</strong> {{ .furnished }} </p>
-			<p> <strong>Pets Allowed:</strong> {{ .pets }} </p>
-			<p> <strong>Number:</strong> {{ .number }} </p>
+			<p> <strong>Price:</strong> ${{ compare0.price }} </p>
+			<p> <strong>Distance to Grounds:</strong> {{ compare0.distance }} </p>
+			<p> <strong>Size:</strong> {{ compare0.size }} sq ft </p>
+			<p> <strong>Furnished:</strong> {{ compare0.furnished }} </p>
+			<p> <strong>Pets Allowed:</strong> {{ compare0.pets }} </p>
+			<p> <strong>Number:</strong> {{ compare0.number }} </p>
 
 			</div>
 			<div class="card2">
@@ -188,31 +189,32 @@
 	</div>
 	</div>
 	</div>
+
 	<div id="right">
 		<div class="header">
-	<h1><strong>{{ apartment.name|capfirst }}</strong></h1>
+	<h1><strong>{{ compare1.name|capfirst }}</strong></h1>
 	</div>
 
 	<div class="row">
 		<div class="leftcolumn">
 			<div class="card">
-			<h3><strong>{{ apartment.location }}</strong> </h3>
-			<h5><strong>Company:</strong> {{ apartment.company }}</h5>
+			<h3><strong>{{ compare1.location }}</strong> </h3>
+			<h5><strong>Company:</strong> {{ compare1.company }}</h5>
 			{% load static %}
 			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
 			<p><strong>Description of Property:</strong></p>
-			<p>{{ apartment.description}}</p>
+			<p>{{ compare1.description}}</p>
 			</div>
 		</div>
 		<div class="rightcolumn">
 			<div class="card">
 			<h2>Property Statistics</h2>
-			<p> <strong>Price:</strong> ${{ apartment.price }} </p>
-			<p> <strong>Distance to Grounds:</strong> {{ apartment.distance }} </p>
-			<p> <strong>Size:</strong> {{ apartment.size }} sq ft </p>
-			<p> <strong>Furnished:</strong> {{ apartment.furnished }} </p>
-			<p> <strong>Pets Allowed:</strong> {{ apartment.pets }} </p>
-			<p> <strong>Number:</strong> {{ apartment.number }} </p>
+			<p> <strong>Price:</strong> ${{ compare1.price }} </p>
+			<p> <strong>Distance to Grounds:</strong> {{ compare1.distance }} </p>
+			<p> <strong>Size:</strong> {{ compare1.size }} sq ft </p>
+			<p> <strong>Furnished:</strong> {{ compare1.furnished }} </p>
+			<p> <strong>Pets Allowed:</strong> {{ compare1.pets }} </p>
+			<p> <strong>Number:</strong> {{ compare1.number }} </p>
 
 			</div>
 			<div class="card2">
@@ -235,6 +237,5 @@
 	</div>
 	</div>
 </div>
-{% endfor %}
 {% endblock content %}
 </html>
