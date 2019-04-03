@@ -4,36 +4,136 @@
 
 	{% block content %}
 
+  {% load staticfiles %}
 
-
-
-<style>
-
-div.absolute {
-  position: absolute;
-  top: 100px;
-  right: 70;
-
-
-}
-div.right_side {
-  position: absolute;
-  top: 100px;
-  right: 200;
-
-
-}
-center{
-  font-size: 32px;
-  color:Grey;
-  }
-#map {
-  height: 400px;
-  width: 450px;
- }
-}
+  <style>
 
 </style>
+
+  <div class="apartments_background_image"></div>
+
+  <div class="apartments_content_container" id="outer_container_apartments">
+
+
+    <div class="container, apartments_div">
+
+      <div class="row" id="top_row_apartments">
+
+
+        <!-- <div class="col"> -->
+          
+        <!-- </div> -->
+        <div class="col" id="apartments_image_div">
+          <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
+
+          <div id="search_bar_div">
+
+            <form action="/apartments" id="search_bar_apartments" method="get">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                <div class="input-group-append">
+                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="row justify-content-md-center" id="middle_row_apartments">
+
+
+
+        <div class="col-md-auto" id="main_col_left_apartments">
+
+          <!--Adding Maps-->
+
+             <div id="map"></div>
+             <!-- Meg, the map script is now in static/javascript for readability sake -->
+             <script src="{% static "javascript/map.js"%}"></script>
+
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
+                </script>
+
+        </div>
+        <div class="col-md-auto" id="main_col_right_apartments">
+
+          <div class="container, apartments_div_detail">
+
+          {% for apartment in apartments %}
+
+                <div class="row apartmentname">
+
+                  <div class="col-md-auto" id="left_display" align="center">
+                    <a href="{% url 'apartment_detail' apartment.id %}">
+                      <img src="{{ apartment.image }}" id="apartment_thumbnail">
+                    </a>
+                  </div>
+
+                  <div class="col-md-auto" id="right_display" align="center">
+
+                    
+                    <a href="{% url 'apartment_detail' apartment.id %}">
+                      <h4 id="apartment_link"> {{ apartment.name|capfirst }} </h4>
+                    </a>
+
+                    <h5 id="apartment_price">{{ apartment.price }}</h5>
+
+                    {% if user and not user.is_anonymous %}
+                    <form action="{% url 'save_favorite' apartment.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
+                    </form>
+                    {% endif %}
+                    {% if user and not user.is_anonymous %}
+                    <form action="{% url 'save_compare' apartment.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
+                    </form>
+                  </div>
+
+                </div>
+
+
+              {% endif %}
+
+          {% endfor %}
+
+          </div>
+
+      {% if not apartments %}
+            <div>
+              <center>No Results.</center>
+            </div>
+
+          {% endif %}
+
+
+
+          <div class="inner_content_div_apartments">
+
+          </div>
+
+              
+
+          
+
+        </div>
+<!--        <div class="col" id="right_outer_col">
+    
+        </div> -->
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- OLD CODE STUFF -->
+
 
 		<div class='gotocompare'align="right" style="...">
 			<form action="{% url 'compare' %}">
@@ -41,118 +141,7 @@ center{
 					<button type="submit" class="btn btn-default" name="compare" id="gotocompare"> Go to Compare Page </button>
 			</form>
 		</div>
-		{% for apartment in apartments %}
-
-			<div class='apartmentname'align="center" style="padding-bottom: 20px">
-				<a href="{% url 'apartment_detail' apartment.id %}">
-					<h3> {{ apartment.name|capfirst }} </h3>
-				</a>
-				<p>${{ apartment.price }}</p>
-
-				{% if user and not user.is_anonymous %}
-				<form action="{% url 'save_favorite' apartment.id %}" method="post">
-					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
-				</form>
-				{% endif %}
-				{% if user and not user.is_anonymous %}
-				<form action="{% url 'save_compare' apartment.id %}" method="post">
-					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
-				</form>
-				{% endif %}
-			</div>
-		{% endfor %}
-
-{% if not apartments %}
-			<div>
-				<center>No Results.</center>
-			</div>
-
-		{% endif %}
-<!--Adding Maps-->
-<div class="absolute">
- <div id="map"></div>
-    <script>
-
-function initMap() {
 
 
-  var apt_coordinates = {lat: 38.0325982, lng: -78.4955055};
-  var apt_coor_2 = {lat:38.0327987, lng: -78.4952891};
-  var apt_coor_3 ={lat:38.037524 , lng:-78.4989593 }; 
-  var apt_coor_4 ={lat:38.0372172, lng:-78.5015677}; 
-  var apt_coor_5 ={lat:38.0286472 , lng:-78.5112196 }; 
-
-  var map = new google.maps.Map(document.getElementById('map'), { center: apt_coordinates,
-  zoom: 14,
-  styles: [
-            {elementType: 'geometry', stylers: [{color: '#5b5a5a'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#ffbebc'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#b7ffc7'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#b7ffc7'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#b7ffc7'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#b7ffc7'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#ffbebc'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#ffbebc'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-             {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#b7ffc7'}]
-            },
-            ]
-
-  });
-
-
-
-
-
-
-  var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats'});
-
-  var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable'}); 
- //var marker3 = new google.maps.Marker({position: apt_coor_3, map: map},label: 'The Standard'}); 
-  var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc'}); 
-  var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA'}); 
-
-}
-    </script>
-
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
-    </script>
-
-	</div>
 
 	{% endblock content %}

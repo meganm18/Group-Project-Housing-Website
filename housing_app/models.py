@@ -16,9 +16,10 @@ class Apartment(models.Model):
 	furnished = models.CharField(max_length=5)
 	pets = models.CharField(max_length=5)
 	description = models.TextField(default="No description")
-	distance = models.CharField(max_length=100,default="--")
-	number = models.CharField(max_length=100,default="--")
 	bathrooms = models.CharField(max_length=100,default="--")
+	number = models.CharField(max_length=100,default="--")
+	distance = models.CharField(max_length=100,default="--")
+	image = models.ImageField(default="static/images/blank_profile.png", max_length=255)
 	def __str__(self):
 		return self.name
 
