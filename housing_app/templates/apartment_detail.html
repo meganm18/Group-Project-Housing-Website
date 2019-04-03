@@ -114,7 +114,7 @@
 			<h2><strong>{{ apartment.location }}</strong> </h2>
 			<h5><strong>Company:</strong> {{ apartment.company }}</h5>
 			{% load static %}
-			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
+			<img src="{{ apartment.image }}" alt = "Apartment Preview">
 			<p><strong>Description of Property:</strong></p>
 			<p>{{ apartment.description}}</p>
 			</div>
