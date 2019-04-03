@@ -70,7 +70,7 @@ body, html {
 .home_background_image {
 	margin-top: -100px; 
 	position: relative;
-	background-image: url('../images/front-page-background.png');
+	background-image: url("../images/front-page-background.c35f59285363.png");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -163,7 +163,7 @@ body, html {
 
 .login_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	height: 100%;
 	left: 0;
@@ -218,7 +218,7 @@ body, html {
 
 .profile_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	filter: brightness(90%);
 	height: 100%;
@@ -477,7 +477,7 @@ body, html {
 
 .apartments_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	filter: brightness(90%);
 	height: 100%;
