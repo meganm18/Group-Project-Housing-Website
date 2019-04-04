@@ -70,13 +70,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+                
             ],
         },
     },
-]
-
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'django.core.context_processors.request',
 ]
 
 WSGI_APPLICATION = 'housing_project.wsgi.application'

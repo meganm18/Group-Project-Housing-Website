@@ -490,11 +490,8 @@ body.popup .submit-row {
 .inline-group ul.tools a.add,
 .inline-group div.add-row a,
 .inline-group .tabular tr.add-row td a {
-    background: url("../img/icon-addlink.d519b3bab011.svg") 0 1px no-repeat;
     padding-left: 16px;
-    font-size: 12px;
 }
-
 .empty-form {
     display: none;
 }
