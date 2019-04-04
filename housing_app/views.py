@@ -26,6 +26,7 @@ def apartments(request):
 def apartment_detail(request, id):
 	try:
 		apartment = Apartment.objects.get(id=id)
+
 		if request.method == "POST":
 			form = ReviewForm(request.POST)
 			if form.is_valid():
@@ -39,8 +40,7 @@ def apartment_detail(request, id):
 			return render(request, 'apartment_detail.html', {'apartment': apartment, 'form': form,})
 		else:
 			form = ReviewForm()
-			reviews = Review.objects.all()
-			
+			reviews = Review.objects.all().filter(apartment=apartment)		
 			return render(request, 'apartment_detail.html', {'apartment': apartment, 'form': form, 'reviews':reviews})
 	except Apartment.DoesNotExist:
 		raise Http404("Apartment not found")
@@ -68,12 +68,12 @@ def favorites(request):
 	return render(request, 'favorites.html', {'favorites': favorites})
 
 ## page like favorites that will list your ratings
-@login_required()
-def myReviews(request):
-	user = request.user
-	user_profile=user.userprofile
-	ratings = user.ratings.all()
-	return render(request, 'ratings.html', {'ratings': ratings})
+##@login_required()
+##def myReviews(request):
+##	user = request.user
+##	user_profile=user.userprofile
+##
+##	return render(request, 'ratings.html', {'ratings': ratings})
 
 @login_required()
 def compare(request):
