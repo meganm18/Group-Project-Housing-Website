@@ -21,7 +21,7 @@ class ProfileForm(forms.ModelForm):
         fields = ['bio', 'favorites']
 
 class ReviewForm(forms.ModelForm):
-    review = forms.CharField()
+    review = forms.Textarea()
     
     class Meta:
         model = Review
