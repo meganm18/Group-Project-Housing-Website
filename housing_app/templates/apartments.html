@@ -80,20 +80,7 @@
         <!-- </div> -->
         <div class="col" id="apartments_image_div">
           <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
-
-          <div id="search_bar_div">
-
-            <form action="/apartments" id="search_bar_apartments" method="get">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
-                <div class="input-group-append">
-                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div id="filtering">
+        <div id="filtering">
               <button class="open-button" onclick="openForm()">Open Form</button>
               <div class="form-popup" id="myForm">
                 <form action="/action_page.php" class="form-container">
@@ -103,7 +90,6 @@
                     <label for="bedrooms-filtering"><b>Bedrooms</b></label>
                   <input type="password" placeholder="Enter Password" name="psw" required>
                  <button type="submit" class="btn">Login</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
 
@@ -118,6 +104,19 @@ function closeForm() {
 </script>
 
           </div>
+          <div id="search_bar_div">
+
+            <form action="/apartments" id="search_bar_apartments" method="get">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                <div class="input-group-append">
+                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                </div>
+              </div>
+            </form>
+          </div>
+
+
 
         </div>
 
