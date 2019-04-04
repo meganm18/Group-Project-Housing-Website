@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.forms import fields, CheckboxInput
 
-from .models import UserProfile
+from .models import UserProfile, Review
 
 
 class UserForm(forms.ModelForm):
@@ -19,3 +19,10 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['bio', 'favorites']
+
+class ReviewForm(forms.ModelForm):
+    review = forms.CharField()
+    
+    class Meta:
+        model = Review
+        fields = ['review',]

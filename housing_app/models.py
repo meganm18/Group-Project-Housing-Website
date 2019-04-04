@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from social_django.models import UserSocialAuth
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from star_ratings.models import Rating
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class Apartment(models.Model):
@@ -19,6 +20,7 @@ class Apartment(models.Model):
 	distance = models.CharField(max_length=100,default="--")
 	number = models.CharField(max_length=100,default="--")
 	bathrooms = models.CharField(max_length=100,default="--")
+	ratings = GenericRelation(Rating, related_query_name = 'apartments')
 	def __str__(self):
 		return self.name
 
@@ -39,7 +41,13 @@ class UserProfile(models.Model):
 			ct +=1
 		return ct
 
-
+class Review(models.Model):
+	review = models.TextField(max_length=500, blank=True)
+	##usefulCheck = 
+	apartment= models.ForeignKey(Apartment, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now=True)
+	
 # The following receivers save data to the user profile whenever changes are made
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 @receiver(post_save, sender=User)
