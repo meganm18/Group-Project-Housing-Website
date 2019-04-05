@@ -5,7 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
 class Apartment(models.Model):
 	name = models.CharField(max_length=150)
 	company = models.CharField(max_length=150)

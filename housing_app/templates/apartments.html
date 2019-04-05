@@ -109,7 +109,7 @@
         <div class="col" id="apartments_image_div">
           <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
         <div id="filtering">
-              <button class="open-advanced" onclick="openForm()">Filter</button>
+              <button class="open-advanced" onclick="openForm()">Advanced Search</button>
               <div class="form-advanced" id="myForm">
 
                     <h1>Filter</h1>
@@ -132,6 +132,14 @@
                       <option value="6">6</option>
                     </select>
 
+                  <h1>Sort</h1>
+
+                    <label for="sorting"><b>Sort</b></label>
+                    <select name="sortInput">
+                      <option value="No Sort">No Sort</option>
+                      <option value="Sort by Price (low to high)">Sort by Price (low to high)</option>
+                      <!--<option value="Sort by Price (low to high)">Sort by Price (high to low)</option>-->
+                    </select>
                  <input type="submit" name="filtering" class="btn btn-primary">
                     </form>
 
