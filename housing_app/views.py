@@ -9,6 +9,7 @@ from social_django.models import UserSocialAuth
 from .models import Apartment, UserProfile, Review
 from .forms import UserForm, ProfileForm, ReviewForm
 from django.contrib.auth.models import User
+from django.db.models import F
 
 def home(request):
 	return render(request, 'home.html')
@@ -20,7 +21,18 @@ def apartments(request):
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments= apartments.filter(name__icontains=search_term)
-	return render(request, 'apartments.html', {'apartments': apartments , 'search_term': search_term})
+	if 'max_price_input' in request.GET:
+		maxPriceInput = request.GET['max_price_input']
+		apartments = apartments.filter(price__lt=maxPriceInput)
+	else:
+		maxPriceInput = 3000;
+	if 'bedroomInput' in request.GET:
+		bedroomInput = request.GET['bedroomInput']
+		if bedroomInput != "No Filter":
+			apartments = apartments.filter(bedrooms__icontains=bedroomInput)
+	else:
+		bedroomInput = "No Filter"
+	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput})
 
 
 def apartment_detail(request, id):
