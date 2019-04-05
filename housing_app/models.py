@@ -6,7 +6,6 @@ from django.dispatch import receiver
 from star_ratings.models import Rating
 from django.contrib.contenttypes.fields import GenericRelation
 
-
 class Apartment(models.Model):
 	name = models.CharField(max_length=150)
 	company = models.CharField(max_length=150)

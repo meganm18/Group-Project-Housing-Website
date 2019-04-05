@@ -9,15 +9,19 @@ from social_django.models import UserSocialAuth
 from .models import Apartment, UserProfile, Review
 from .forms import UserForm, ProfileForm, ReviewForm
 from django.contrib.auth.models import User
-from django.db.models import F
+# found how to sort here: https://stackoverflow.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
 
 def home(request):
 	return render(request, 'home.html')
 
-
 def apartments(request):
 	search_term=''
 	apartments = Apartment.objects.all()
+	if 'sortInput' in request.GET:
+		if "Sort by Price (low to high)"==request.GET['sortInput']:
+			apartments = Apartment.objects.order_by('price')
+		elif "Sort by Price (high to low)"==request.GET['sortInput']:
+			apartments = Apartment.objects.order_by('-price')
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments= apartments.filter(name__icontains=search_term)
