@@ -20,8 +20,8 @@ def apartments(request):
 	if 'sortInput' in request.GET:
 		if "Sort by Price (low to high)"==request.GET['sortInput']:
 			apartments = Apartment.objects.order_by('price')
-		#elif "Sort by Price (high to low)"==request.GET['sortInput']:
-		#	apartments = reversed(Apartment.objects.order_by('price'))
+		elif "Sort by Price (high to low)"==request.GET['sortInput']:
+			apartments = Apartment.objects.order_by('-price')
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments= apartments.filter(name__icontains=search_term)
