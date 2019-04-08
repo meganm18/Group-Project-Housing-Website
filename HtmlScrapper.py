@@ -40,7 +40,6 @@ def getinfo(webpage):
     for link in getwebsites(webpage):
         # take html from each link, which are the sites individual pages
         info = (ScrapHtmlCode(link))
-
         # get title
         pattern = re.compile('title>([^|]*) UVA')
         match = pattern.search(info)
@@ -71,12 +70,18 @@ def getinfo(webpage):
 
         # Description of appt
         try:
-            pattern = re.compile('og:description" content="([^"]*)')
+            pattern = re.compile('itemprop="description">([^<]*)')
             match = pattern.search(info)
             apptinfo[title]["Description"]=match.group(1)
         except:
             apptinfo[title]["Description"] = "---"
-
+        #     Get image of appt
+        try:
+            pattern = re.compile('og:image" content="([^"]*)')
+            match = pattern.search(info)
+            apptinfo[title]["Image"]=match.group(1)
+        except:
+            apptinfo[title]["Image"] = "---"
         #This is gonna be pretty difficult to follow
         #gonna basically put another dict of dicts in the dict :(
         # Units{untit name{Title:X,beds:Y,:Size:Z, Prince:W}}
@@ -88,15 +93,15 @@ def getinfo(webpage):
                 # Get the unit name and put in front of dict and in the title spot
                 pattern = re.compile('name.{0,11}>([^<]*)')
                 Umatch = pattern.search(unit)
-                apptinfo[title]["Units"] = {Umatch.group(1):{"Title":Umatch.group(1)}}
-                Unit=Umatch.group(1)
+                apptinfo[title]["Units"] = {title+": "+Umatch.group(1):{"Title":Umatch.group(1)}}
+                Unit=title+": "+Umatch.group(1)
                 if Unit=='':
-                    apptinfo[title]["Units"] = {"Untitled": {"Title": "Untitled"}}
-                    Unit = "Untitled"
+                    apptinfo[title]["Units"] = {title+": "+"Untitled": {"Title": "Untitled"}}
+                    Unit = title+": "+"Untitled"
             except:
                 # If cant find unit name put untitled
-                apptinfo[title]["Units"] = {"Untitled": {"Title": "Untitled"}}
-                Unit="Untitled"
+                apptinfo[title]["Units"] = {title+": "+"Untitled": {"Title": "Untitled"}}
+                Unit=title+": "+"Untitled"
             try:
                 # Find number of beds
                 pattern = re.compile('beds.*longText">(\d)')
@@ -136,7 +141,7 @@ def writecsv(first, second):
     with open('apartment_data.csv', 'w') as csvfile:
         # Titles of the the csv
         fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'Size', 'Bedrooms', 'Furnished', 'Pets', 'Description',
-                      'Bathrooms', 'Number', 'Distance to Grounds']
+                      'Bathrooms', 'Number', 'Distance to Grounds','Image']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         # Accomadations need to made later to take in account for the units. For now I just took the first unit size, price, beds and baths
@@ -149,7 +154,7 @@ def writecsv(first, second):
                  'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
                  'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
-                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
+                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image':appt['Image']})
         # second is the second dict of info on the page
         for appt in second.values():
             writer.writerow(
@@ -159,14 +164,15 @@ def writecsv(first, second):
                  'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
                  'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
-                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance']})
+                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'],'Image':appt['Image']})
     return None
 
 # Get all the links and appt titles from both pages from this website
 firstpage=(ScrapHtmlCode('https://www.collegestudentapartments.com/college/university-of-virginia-charlottesville-virginia/apartments/'))
 secondpage=(ScrapHtmlCode('https://www.collegestudentapartments.com/college/university-of-virginia-charlottesville-virginia/apartments/?page=2'))
 # Get a dict of all info from the html links from the first and second page
-first_page_appt_info= (getinfo(firstpage))
+# first_page_appt_info= (getinfo(firstpage))
 second_page_appt_info= (getinfo(secondpage))
 # Write CSV from the info in the first and second page
-writecsv(first_page_appt_info,second_page_appt_info)
+# writecsv(first_page_appt_info,second_page_appt_info)
+print(second_page_appt_info)
