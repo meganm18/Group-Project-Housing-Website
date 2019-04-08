@@ -164,12 +164,12 @@
 
 function initMap() {
 
-  var apt_coordinates = {lat: 38.0325982, lng: -78.4955055};
+  var apt_coordinates = {lat:38.0316282, lng: -78.4842689};
 
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 15, center: apt_coordinates});
-  geocoder = new google.maps.Geocoder();
-  var address= apartment.location;
+ /* geocoder = new google.maps.Geocoder();
+  var address= apartment.location; //not sure how to do this
   geocoder.geocode( { 'address': address}, function(results, status) {
   if (status == 'OK') {
         map.setCenter(results[0].geometry.location);
@@ -182,7 +182,7 @@ function initMap() {
       }
     });
 
-  //var marker = new google.maps.Marker({position: apt_coordinates, map: map});
+  */var marker = new google.maps.Marker({position: apt_coordinates, map: map});
 }
     </script>
 
