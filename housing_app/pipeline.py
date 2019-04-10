@@ -5,6 +5,7 @@ def get_avatar(backend, strategy, details, response,
     url = None
     if backend.name == 'google-oauth2':
         url = response['picture']
+
         # .get('url')
         ext = url.split('.')[-1]
     if url:
@@ -13,6 +14,8 @@ def get_avatar(backend, strategy, details, response,
             user.userprofile.avatar = url
             user.save()
         except:
-            UserProfile.objects.create(user=user)
-            user.userprofile.avatar = url
             user.save()
+        # user.userprofile.avatar = "static/images/blank_profile.png"
+        #     UserProfile.objects.create(user=user)
+        #     user.userprofile.avatar = url
+        #     user.save()
