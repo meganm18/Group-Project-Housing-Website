@@ -26,15 +26,18 @@
 }
 
 .form-advanced{
+  font-family: 'Nunito', sans-serif;
+  color: #666666;
   display: none;
-  position: fixed;
-  top: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  /*border: 3px solid #f1f1f1;*/
   background-color: white;
   opacity: 1;
-  z-index: 9;
-  width=28 0px;
+  z-index: 100;
+  width: 55%;
+  height: 500px;
 }
 
 .form-container {
@@ -134,37 +137,44 @@ div.table {
 
                   <div id="filtering">
               <button class="open-advanced btn btn-default" onclick="openForm()">Advanced Search</button>
-              <div class="form-advanced" id="myForm">
-
-                    <h1>Filter</h1>
+              <div class="form-advanced form-group" id="myForm">
+                <button class="btn btn-default" onclick="closeForm()" style="float: left;"> Cancel</button>
+                  <h1 >Filter</h1>
                  <form action="/filter" name=filtering">
 
-                 <div class="slidecontainer">
+                 <div class="slidecontainer" style="float: left;">
                      <label for="price-filtering"><b>Max Price</b></label>
                         <input type="range" name="max_price_input" id="max_price_inputId" value="3500" min="0" max="3500"
                             oninput="max_price_outputId.value = max_price_inputId.value">
                         <output name="max_price_output" id="max_price_outputId">3500</output>
                  </div>
-                    <label for="bedrooms-filtering"><b>Bedrooms</b></label>
-                    <select name="bedroomInput">
-                      <option value="No Filter">No Filter</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
+                    <div class="input-group mb-3 selector_advanced">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="bedrooms-filtering">Bedrooms</label>
+                      </div>
+                      <select name="bedroomInput" class="custom-select">
+                        <option value="No Filter">No Filter</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </div>
 
                   <h1>Sort</h1>
-
-                    <label for="sorting"><b>Sort</b></label>
-                    <select name="sortInput">
+                    <div class="input-group mb-3 selector_advanced">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="sorting">Price: </label>
+                      </div>
+                    <select name="sortInput" class="custom-select">
                       <option value="No Sort">No Sort</option>
-                      <option value="Sort by Price (low to high)">Sort by Price (low to high)</option>
-                      <option value="Sort by Price (high to low)">Sort by Price (high to low)</option>
+                      <option value="Sort by Price (low to high)"> Low to High </option>
+                      <option value="Sort by Price (high to low)"> High to Low</option>
                     </select>
-                  <input type="submit" name="filtering" class="btn btn-primary">
+                  </div>
+                  <input type="submit" name="filtering" class="btn btn-primary" style="background-color: #7eebbc; border-color: #67bb96;">   
                     </form>
 
 </div>
