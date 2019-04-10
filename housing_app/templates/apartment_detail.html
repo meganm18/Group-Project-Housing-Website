@@ -108,7 +108,7 @@
 	<h1><strong>{{ apartment.name|capfirst }}</strong></h1>
 	</div>
 
-	<div class="row">
+	<div class="row apartment_detail_background">
 		<div class="leftcolumn">
 			<div class="card">
 			<h2><strong>{{ apartment.location }}</strong> </h2>
@@ -118,6 +118,22 @@
 			<p><strong>Description of Property:</strong></p>
 			<p>{{ apartment.description}}</p>
 			</div>
+
+			<div class="card">
+					<h2>Reviews</h2>
+					{% for review in reviews %}
+							<p>-----------------------------------</p>
+							<p>{{review.review}}</p>
+							<p>{{ review.user}} -- {{review.date}}</p>
+							<p>-----------------------------------</p>
+					{% endfor %}
+					<h3> Write a New Review</h3>
+					<form method="POST">
+						{% csrf_token %}
+						{{ form.as_p}}
+						<button type="submit">Submit</button>
+					</form>
+				</div>
 		</div>
 		<div class="rightcolumn">
 			<div class="card">
@@ -131,14 +147,11 @@
 
 			</div>
 			<div class="card2">
-				<h2>Rating</h2>
+				<h2>Apartment Rating</h2>
 				<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 				<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 				{% ratings apartment %}
-			</div>
-			<div class="card">
-				<h2>Residence Living</h2>
-				<p>Read about the reality overall, landlords, amenities, noise, safety, laundry, and more</p>
+				</form>
 			</div>
 
 			<!--Maps-->
@@ -148,18 +161,28 @@
 // Initialize and add the map
 
 
-//function geocode(){
-	//var address = "852 W Main St" + " Charlottesville VA";
-
 
 function initMap() {
 
-  var apt_coordinates = {lat: 38.0325982, lng: -78.4955055};
+  var apt_coordinates = {lat:38.0316282, lng: -78.4842689};
 
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 15, center: apt_coordinates});
+ /* geocoder = new google.maps.Geocoder();
+  var address= apartment.location; //not sure how to do this
+  geocoder.geocode( { 'address': address}, function(results, status) {
+  if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
 
-  var marker = new google.maps.Marker({position: apt_coordinates, map: map});
+  */var marker = new google.maps.Marker({position: apt_coordinates, map: map});
 }
     </script>
 
