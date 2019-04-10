@@ -80,18 +80,6 @@ body, html {
 	z-index: 1;
 }
 
-.apartment_detail_background {
-	margin-top: -100px; 
-	position: relative;
-	background-image: url('../images/front-page-background.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	height: 800px;
-	left: 0;
-	right: 0;
-	z-index: 1;
-}
 
 .home_content_container {
 	position: absolute;
