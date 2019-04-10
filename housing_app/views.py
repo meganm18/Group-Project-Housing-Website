@@ -75,13 +75,14 @@ def logout(request):
 
 @login_required()
 def favorites(request):
+	user_for_page = request.user
 	user = request.user
 
 	user_profile = user.userprofile
 
 	favorites = user_profile.favorites.all()
 
-	return render(request, 'favorites.html', {'favorites': favorites})
+	return render(request, 'favorites.html', {'user_for_page': user_for_page,'favorites': favorites})
 
 ## page like favorites that will list your ratings
 ##@login_required()
@@ -109,6 +110,15 @@ def get_user_profile(request, username):
         raise Http404
 
     return render(request, 'profile.html', {"user_for_page":user_for_page})
+
+def get_user_reviews(request, username):
+	try:
+		user_for_page = User.objects.get(username=username)
+		reviews = Review.objects.all().filter(user=user_for_page)	
+	except:
+		raise Http404
+
+	return render(request, 'reviews.html', {"user_for_page":user_for_page,"reviews":reviews})
 
 # The following code saves the user profile data in combination with the receivers in models.py
 # code retrieved from : https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone

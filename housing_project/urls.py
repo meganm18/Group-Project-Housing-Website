@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^save_favorite/(\d+)/', views.save_favorite, name='save_favorite'),
     url(r'^delete_favorite/(\d+)/', views.delete_favorite, name='delete_favorite'),
     url(r'profile/(?P<username>[a-zA-Z0-9]+)$', views.get_user_profile, name='profile'),
+    url(r'profile/(?P<username>[a-zA-Z0-9]+)/reviews/', views.get_user_reviews, name='reviews'),
     url(r'^compare/', views.compare, name='compare'),
     url(r'^save_compare/(\d+)/', views.save_compare, name='save_compare'),
     url(r'^delete_compare/(\d+)/', views.delete_compare, name='delete_compare'),

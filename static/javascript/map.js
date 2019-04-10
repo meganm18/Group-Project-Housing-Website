@@ -8,7 +8,6 @@ function initMap() {
               var map = new google.maps.Map(document.getElementById('map'), { center: apt_coordinates,
               zoom: 14,
               styles: [
-                        // {elementType: 'marker', stylers: [{color: '#333333'}]}
                         {elementType: 'geometry', stylers: [{color: '#bbbbbb'}]},
                         {elementType: 'labels.text.stroke', stylers: [{color: '#4f4f4f'}]},
                         {elementType: 'labels.text.fill', stylers: [{color: '#ffbebc'}]},
@@ -54,12 +53,12 @@ function initMap() {
                         },
                         ]
               });
-             /* var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats'});
-              var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable'}); 
-             //var marker3 = new google.maps.Marker({position: apt_coor_3, map: map},label: 'The Standard'}); 
-              var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc'}); 
-              var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA'}); 
-              */
+             //  var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats'});
+             //  var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable'}); 
+             // //var marker3 = new google.maps.Marker({position: apt_coor_3, map: map},label: 'The Standard'}); 
+             //  var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc'}); 
+             //  var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA'}); 
+              
               // Loop through our array of markers & place each one on the map
 
 
@@ -82,3 +81,5 @@ function initMap() {
 
 
 }
+
+initMap();
