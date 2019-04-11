@@ -10,34 +10,34 @@
 <!-- and had help here: https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
 <!-- drop down filtering: https://www.w3schools.com/html/html_form_elements.asp-->
   <style>
-  #map {
-        height: 600px;
-        width: 600px;
-       }
+
 .open-advanced{
-  background-color: #555;
+/*  background-color: transparent;*/
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
+/*  opacity: 0.8;*/
   position: fixed;
-  top: 1%;
-  right: 5%;
-  width: 280px;
-  height: 40px;
+  top: 0%;
+  right: 10%;
+ /* width: 280px;
+  height: 40px;*/
 }
 
 .form-advanced{
+  font-family: 'Nunito', sans-serif;
+  color: #666666;
   display: none;
-  position: fixed;
-  top: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 70px;
+  right: 0px;
+  /*border: 3px solid #f1f1f1;*/
   background-color: white;
   opacity: 1;
-  z-index: 9;
-  width=28 0px;
+  z-index: 100;
+  width: 55%;
+  height: 500px;
 }
 
 .form-container {
@@ -98,7 +98,7 @@
 
 
 div.table {
-  background-color: #F5EDF7 ;
+  background-color: #FDFDFD;
   width:100%;
   height: 580px;
   overflow: auto;
@@ -120,39 +120,61 @@ div.table {
         <!-- </div> -->
         <div class="col" id="apartments_image_div">
           <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
-        <div id="filtering">
-              <button class="open-advanced" onclick="openForm()">Advanced Search</button>
-              <div class="form-advanced" id="myForm">
 
-                    <h1>Filter</h1>
-                    <form action="/filter" name=filtering">
 
-                 <div class="slidecontainer">
+
+          <div id="search_bar_div">
+
+            <form action="/apartments" id="search_bar_apartments" method="get">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                <div class="input-group-append">
+                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                </div>
+              </div>
+            </form>
+          </div>
+
+                  <div id="filtering">
+              <button class="open-advanced btn btn-default" onclick="openForm()">Advanced Search</button>
+              <div class="form-advanced form-group" id="myForm">
+                <button class="btn btn-default" onclick="closeForm()" style="float: left;"> Cancel</button>
+                  <h1 >Filter</h1>
+                 <form action="/filter" name=filtering">
+
+                 <div class="slidecontainer" style="float: left;">
                      <label for="price-filtering"><b>Max Price</b></label>
                         <input type="range" name="max_price_input" id="max_price_inputId" value="3500" min="0" max="3500"
                             oninput="max_price_outputId.value = max_price_inputId.value">
                         <output name="max_price_output" id="max_price_outputId">3500</output>
                  </div>
-                    <label for="bedrooms-filtering"><b>Bedrooms</b></label>
-                    <select name="bedroomInput">
-                      <option value="No Filter">No Filter</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
+                    <div class="input-group mb-3 selector_advanced">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="bedrooms-filtering">Bedrooms</label>
+                      </div>
+                      <select name="bedroomInput" class="custom-select">
+                        <option value="No Filter">No Filter</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </div>
 
                   <h1>Sort</h1>
-
-                    <label for="sorting"><b>Sort</b></label>
-                    <select name="sortInput">
+                    <div class="input-group mb-3 selector_advanced">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="sorting">Price: </label>
+                      </div>
+                    <select name="sortInput" class="custom-select">
                       <option value="No Sort">No Sort</option>
-                      <option value="Sort by Price (low to high)">Sort by Price (low to high)</option>
-                      <option value="Sort by Price (high to low)">Sort by Price (high to low)</option>
+                      <option value="Sort by Price (low to high)"> Low to High </option>
+                      <option value="Sort by Price (high to low)"> High to Low</option>
                     </select>
-                 <input type="submit" name="filtering" class="btn btn-primary">
+                  </div>
+                  <input type="submit" name="filtering" class="btn btn-primary" style="background-color: #7eebbc; border-color: #67bb96;">   
                     </form>
 
 </div>
@@ -167,17 +189,6 @@ function closeForm() {
 }
 </script>
 
-          </div>
-          <div id="search_bar_div">
-
-            <form action="/apartments" id="search_bar_apartments" method="get">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
-                <div class="input-group-append">
-                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
-                </div>
-              </div>
-            </form>
           </div>
 
 
@@ -194,8 +205,259 @@ function closeForm() {
           <!--Adding Maps-->
 
              <div id="map"></div>
-             <!-- Meg, the map script is now in static/javascript for readability sake -->
-             <script src="{% static "javascript/map.js"%}"></script>
+             
+             <script>
+               
+              function initMap() {
+              var apt_coordinates = {lat: 38.0325982, lng: -78.4955055};
+              var apt_coor_2 = {lat:38.0327987, lng: -78.4952891};
+              var apt_coor_3 ={lat:38.037524, lng:-78.4989593}; 
+              var apt_coor_4 ={lat:38.0372172, lng:-78.5015677}; 
+              var apt_coor_5 ={lat:38.0286472 , lng:-78.5112196 }; 
+              var apt_coor_6 ={lat:38.0316282, lng: -78.4842689};
+
+               var apt_coor_7 ={lat:38.0350752, lng:-78.4981588};
+              var apt_coor_8 ={lat:38.0416242, lng:-78.503709};
+              //var apt_coor_9a ={lat:38.0698574, lng:-78.4659562;
+              var apt_coor_10 ={lat:38.0286541, lng:-78.4816677};
+              var apt_coor_11 ={lat:38.0423332, lng:-78.5114287};
+              var apt_coor_12 ={lat:38.0410028, lng:-78.50382};
+              var apt_coor_13 ={lat:38.0698574, lng:78.4659562};
+              // var geocoder;
+              var map = new google.maps.Map(document.getElementById('map'), { center: apt_coordinates,
+              zoom: 14,
+              styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "weight": 1.5
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "weight": 1.5
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ffb0b8"
+      },
+      {
+        "weight": 2
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#dc858e"
+      },
+      {
+        "weight": 1
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "weight": 1.5
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "weight": 3
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
+              });
+
+              var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats'});
+              var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable'}); 
+             //var marker3 = new google.maps.Marker({position: apt_coor_3, map: map},label: 'The Standard'}); 
+              var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc'}); 
+              var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA'}); 
+             var marker6 = new google.maps.Marker({position: apt_coor_6, map: map, label: '112 West Market St.'});
+              var marker7 = new google.maps.Marker({position: apt_coor_7, map: map, label: '1115 Wertland St.'});
+              var marker8 = new google.maps.Marker({position: apt_coor_8, map: map, label: '64 University Way'});
+
+               var marker10 = new google.maps.Marker({position: apt_coor_10, map: map, label: '300 4th St. SE'});
+              var marker11 = new google.maps.Marker({position: apt_coor_11, map: map, label: '2021 Ivy Rd'});
+              var marker12 = new google.maps.Marker({position: apt_coor_12, map: map, label: '1801 Lambeth Lane'});
+              var marker13 = new google.maps.Marker({position: apt_coor_13, map: map, label: 'Reserve at Belvedere'});
+
+
+              
+                
+                }
+             </script>
 
                 <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
@@ -211,9 +473,9 @@ function closeForm() {
        <tr>
          <td>
          <div>
-     	<img style="vertical-align:middle" width="150" height="150" src={{apartment.image}}>
+     	<img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
      				<div class='apartmentname'align="center" style="padding-bottom: 20px">
-				<a href="{% url 'apartment_detail' apartment.id %}">
+				<a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
 					<h3> {{ apartment.name|capfirst }} </h3>
 				</a>
                     <h5 id="apartment_price">{{ apartment.price }}</h5>

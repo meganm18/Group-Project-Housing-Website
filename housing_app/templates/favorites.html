@@ -1,29 +1,125 @@
-{% extends 'base.html' %}
+<!-- User Profile code From: https://bootsnipp.com/snippets/8dMr -->
+{% extends "base.html" %}
 
+
+	{% load static %}
 
 	{% block content %}
-		
-		<div class="fav_div">
-			<h3> These are your saved listings. </h3>
-		</div>
 
-		{% for apartment in favorites %}
+	<!-- drop down filtering: https://www.w3schools.com/html/html_form_elements.asp-->
+  <style>
 
-			<div class='apartmentname' align="center" >
+div.table {
+  background-color: #FDFDFD;
+  width:100%;
+  height: 400px;
+  overflow: auto;
+}
+</style>
 
-					<a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-					</a>
-					<p>${{ apartment.price }}</p>
+	<div class="profile_background_image"></div>
 
-					{% if user and not user.is_anonymous %}
-						<form action="{% url 'delete_favorite' apartment.id %}" method="post">
-						{% csrf_token %}
-							<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Remove From Favorites </button>
-						</form>
+	<div class="profile_content_container" id="outer_container">
+
+		<div class="container, profile_div">
+			<div class="row" id="top_row">
+<!-- 				<div class="col top-corners">
+				
+				</div> -->
+				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Favorites</h1>
+<!-- 				<div class="col" id="profile_image_div">
+					{% if user_for_page.userprofile.avatar %}
+
+						<img src="{{ user_for_page.userprofile.avatar }}" id="profile_image" class="rounded-circle">
+					{% else %}
+						<img src="{% static "images/blank_profile.png"%}" id="profile_image" class="rounded-circle">
 					{% endif %}
+					
+				</div> -->
+<!-- 				<div class="col top-corners">
+		
+				</div> -->
+			</div>
+			<div class="row justify-content-md-center" id="middle_row">
+<!-- 				<div class="col" id="left_outer_col">
+		
+				</div> -->
+				<div class="col-md-auto" id="main_col">
+					<!-- Checks to see if user accessing profile is the user logged in -->
+					{% if user_for_page == user %}
+<!-- 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
+						<button class="btn btn-default" id="edit_profile" name="edit_profile"> Edit Profile </button> -->
+
+						<nav aria-label="Page navigation example" class="pagination_profile">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item"  ><a style="color: #ffb0b8;" class="page-link" href="{% url 'profile' user_for_page %}">Info</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
+						    <li class="page-item active"><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Favorites</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="#">Compare</a></li>
+						  </ul>
+						</nav>
+					{% else %}
+<!-- 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1> -->
+					{% endif %}
+
+					<div class="inner_content_div_favorites">
+
+ <div class="container, apartments_div_detail">
+<div class="table">
+          {% for apartment in favorites %}
+
+       <tr>
+         <td>
+         <div>
+     	<img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
+     				<div class='apartmentname'align="center" style="padding-bottom: 20px">
+				<a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
+					<h3> {{ apartment.name|capfirst }} </h3>
+				</a>
+                    <h5 id="apartment_price">{{ apartment.price }}</h5>
+                 	{% if user and not user.is_anonymous %}
+					<form action="{% url 'delete_favorite' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Remove From Favorites </button>
+					</form>
+					{% endif %}
+				{% if user and not user.is_anonymous %}
+				<form action="{% url 'save_compare' apartment.id %}" method="post">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
+				</form>
+				{% endif %}
 			</div>
 
-		{% endfor %}
+          
+			
+          </div>
+         </td>
+       </tr>
+       {% endfor %}
+</div>
+      {% if not favorites %}
+            <div>
+              <center>No Favorites</center>
+            </div>
 
-	{% endblock content %}	
+          {% endif %}
+
+
+					</div>
+
+							
+
+				</div>
+<!-- 				<div class="col" id="right_outer_col">
+		
+				</div> -->
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+{% endblock %}
