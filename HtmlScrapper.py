@@ -4,8 +4,6 @@
 import csv
 import re
 #creates raw html data code string
-begin=(("This is an example"))
-end="sentence"
 def ScrapHtmlCode(website):
     from lxml import html
     from lxml.etree import tostring
