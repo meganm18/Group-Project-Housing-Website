@@ -168,7 +168,36 @@ def writecsv(first, second):
                  'Description': appt['Description'],
                  'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
                   'Number': appt['Number'], 'Distance to Grounds': appt['Distance'],'Image':appt['Image']})
+        writer.writerow({'Apartment Name': 'The Flats', 'Company': 'Asset Campus Housing',
+                         'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$1720', 'Size': '3',
+                         'Bedrooms': 'Yes', 'Furnished': 'Yes',
+                         'Pets': 'The Flats at West Village is moments from UV, & UVA Medical Center offering the most convenient student living in the area! The Downtown Mall is also right outside your door, perfect for anyone looking for convenience to work, school, and play. At The Flats at West Village, our luxury Charlottesville apartments feature modern furniture packages (at no additional cost), washers and dryers, private bedrooms, and complimentary water, cable, and internet. Unique to our community, our 1, 2, 3, & 4 bedroom floor plans have been enhanced to include queen beds and stackable dressers, providing our residents with ample space! Entertain your entourage in the social backdrop of our resort-style swimming pool, fire pits, fitness center & activity rooms. Walk to local shops and restaurants, while experiencing all that West Main has to offer.',
+                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                         'Distance to Grounds': '0.9 miles from Grounds',
+                         'Image': 'http://www.flatsatwestvillage.com/sites/flatsatwestvillage.com/files/styles/width_1024/public/1_1.jpg?itok=97yRmZ8J'})
+        writer.writerow({'Apartment Name': 'Venable', 'Company': 'RealProperty',
+                         'Location': 'Venable Apartments, 13th St NW, Charlottesville, VA 22903', 'Price': '1200',
+                         'Size': '2', 'Bedrooms': 'No', 'Furnished': 'No',
+                         'Pets': 'Venable Court is conveniently located on the UVA Corner, featuring large living spaces, and balconies. Walk to class or catch the UTS just steps from your door. Bike storage on site, as well as in-unit laundry machines! ',
+                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                         'Distance to Grounds': '0.9 miles from Grounds',
+                         'Image': 'https://images1.apartments.com/i2/jj3M6yaao1sb9uUdveDSGuB1dShq16n8wKGKJgw03mM/117/venable-court-apartments-charlottesville-va-primary-photo.jpg'})
+        writer.writerow({'Apartment Name': 'Grandmarc', 'Company': 'GreyStar',
+                         'Location': '301 15th St NW, Charlotteville, VA 22903', 'Price': '$1620', 'Size': '4',
+                         'Bedrooms': 'Yes', 'Furnished': 'No',
+                         'Pets': 'GrandMarc at the Corner offers 1, 2, and 4-bedroom apartments near the University of Virginia. We’re right in the the middle of all the great things that make the Charlottesville community unique and lovable. You’re never far away from fun or your classes- we are at the center of it all! GrandMarc at the Corner wants you to have the best experience possible. ',
+                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                         'Distance to Grounds': '0.8 miles from Grounds',
+                         'Image': 'https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg'})
+        writer.writerow({'Apartment Name': '1800 Jefferson Park Avenue', 'Company': 'Nest Realty',
+                         'Location': '1800 Jefferson Park Avenue, Charlottesville, VA 22903', 'Price': '$1500',
+                         'Size': '3', 'Bedrooms': 'No', 'Furnished': 'No',
+                         'Pets': "1800 JPA stands as one of the tallest buildings in Charlottesville and one of the most popular places to live for someone looking for an affordable place to live within walking distance of UVA's Grounds or Medical Center. If you are considering UVA real estate, 1800 JPA should be on your radar. The community is comprised of a main 10-story 'Tower' and 4 'Garden' buildings. All condominiums are a stone's throw from UVA and units on the higher floors of the Tower offer either mountain views or views of Scott Stadium. Amenities include laundry facilities, reserved parking, and a community pool.",
+                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                         'Distance to Grounds': '0.6 miles from Grounds',
+                         'Image': 'https://ap.rdcpix.com/1748032062/410a8c9d8b96f39afe644116471fd811l-m0xd-w1020_h770_q80.jpg'})
     return None
+
 
 def writeunits(first, second):
     with open('units_data.csv', 'w') as csvfile:
