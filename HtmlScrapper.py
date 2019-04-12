@@ -131,7 +131,7 @@ def getinfo(webpage):
                 # Find the price of the individual unit
                 pattern = re.compile('rent">([^<]*)')
                 match = pattern.search(unit)
-                apptinfo[title]["Units"][Unit]["Price"] = match.group(1)
+                apptinfo[title]["Units"][Unit]["Price"] = (match.group(1)).replace("$","")
             except:
                 # Cant find anything put null
                 apptinfo[title]["Units"][Unit]["Price"] = "---"
