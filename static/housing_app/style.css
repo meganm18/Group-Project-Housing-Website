@@ -1,6 +1,8 @@
 
 body, html {
 	height: 100%;
+	margin: 0px;
+	padding: 0px;
 	padding-top: 28px;
 }
 
@@ -79,6 +81,8 @@ body, html {
 	right: 0;
 	z-index: 1;
 }
+
+
 
 .home_content_container {
 	position: absolute;
@@ -160,6 +164,16 @@ body, html {
 }
 
 /* CSS for Login.html Page */
+
+.login_background_image {
+	position: fixed;
+	background-image: url('../images/plain-background.png');
+	background-size: cover;
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
 
 .login_background_image {
 	position: fixed;
@@ -268,18 +282,42 @@ body, html {
 	text-align: center;
 }
 
+
 @media (min-width: 0px) {
-    .profile_div {
-		position: fixed;
-		top: 65%;
-		left: 50%;
-		width: 100%;
-		transform: translate(-50%, -50%);
-		color: black;
-		text-align: center;
-		margin: 0px;
-		padding: 0px;
+
+	@media (min-height: 0px){
+		.profile_div {
+			position: fixed;
+			top: 85%;
+			left: 50%;
+			width: 100%;
+			transform: translate(-50%, -50%);
+			color: black;
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+		}
 	}
+
+		@media (min-height: 630px){
+
+		    .profile_div {
+				position: fixed;
+				top: 65%;
+				left: 50%;
+				width: 100%;
+				transform: translate(-50%, -50%);
+				color: black;
+				text-align: center;
+				margin: 0px;
+				padding: 0px;
+			}
+		}
+	
+
+
+
+
 
 	#main_col {
 		background-color: white;
@@ -322,9 +360,23 @@ body, html {
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
+	 .pagination_profile{
+ 	position: absolute;
+ 	top: 80%;
+ 	transform: translate(-50%, -50%);
+ 	left: 50%;
+ }
 }
 
 @media (min-width: 576px) {
+
+	.pagination_profile{
+	 	position: absolute;
+	 	top: auto;
+	 	bottom: 0px;
+	 	transform: translate(-50%, -50%);
+	 	left: 50%;
+	 }
     .profile_div {
 		position: fixed;
 		top: 55%;
@@ -339,6 +391,7 @@ body, html {
 
 	#main_col {
 		width: 100%;
+		border-radius: 5px;
 		background-color: white;
 		margin: 0px;
 		padding: 0px;
@@ -347,7 +400,8 @@ body, html {
 
 	#middle_row {
 		width: 100%;
-		height: 500px;
+		border-radius: 5px;
+		height: 550px;
 		background-color: white;
 		margin: 0px;
 		padding: 0px;
@@ -382,10 +436,10 @@ body, html {
 }
 
 .inner_content_div{
-	position: relative;
-	top: 15%;
-	float: left;
-	padding-left: 20px;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	text-align: left;
 
 }
@@ -604,7 +658,7 @@ body, html {
 	}
 
 	#main_col_right_apartments {
-		overflow: auto;
+		overflow: hidden;
 		overflow-x: hidden;
 		width: 55%;
 		background-color: white;
@@ -654,7 +708,7 @@ body, html {
 	#apartment_thumbnail{
 		position: center;
 /*		height: 90%;*/
-		margin: 5px;
+		margin: 10px;
 		width: auto;
 		object-fit: cover;
 		width:130px;
@@ -782,5 +836,223 @@ body, html {
 	display: block;
 	text-align: center;
 	align-content: center;
+
+
+}
+
+
+/* CSS for apartment_detail.html page*/
+
+.apartment_detail_background {
+	top: 0px;
+	position: fixed;
+	background-image: url('../images/plain-background.png');
+	background-size: cover;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	z-index: -1;
+}
+
+
+#apartment_detail_image{
+	border-style: solid;
+	border-color: white;
+	border-radius: 25px;
+	border-width: 2px;
+	max-width: 100%;
+    max-height: 100%;
+
+}
+
+#location_title{
+	padding: 15px;
+}
+
+/*	* {
+	box-sizing: border-box;
+	}*/
+
+	/* Add a gray background color with some padding */
+
+	/* Header/Blog Title */
+	.header {
+	color: white;
+	font-family: 'Nunito', sans-serif;
+	padding: 30px;
+	padding-bottom: 0px;
+	padding-top: 40px;
+	font-size: 40px;
+	text-align: center;
+	background: transparent;
+	/*font-weight: bolder;*/
+	border-bottom-style: solid;
+	border-bottom-width: 5px;
+
+	}
+
+
+	/* Create two unequal columns that floats next to each other */
+	/* Left column */
+	.leftcolumn {  
+	font-family: 'Nunito', sans-serif; 
+	float: left;
+	width: 60%;
+
+	}
+
+	/* Right column */
+	.rightcolumn {
+	font-family: 'Nunito', sans-serif;
+	float: left;
+	width: 40%;
+	padding-left: 20px;
+	}
+
+	/* Fake image */
+	.fakeimg {
+	background-color: #aaa;
+	width: 100%;
+	padding: 20px;
+	}
+
+	/* Add a card effect for articles */
+	.card {
+	background: rgba(255, 255, 255, 1);
+	color: #666666;
+	box-shadow: 0 0 10px #959595;
+	padding: 20px;
+	margin-top: 20px;
+	border-color: ;
+	border-radius: 25px;
+	}
+
+	.card2 {
+	background: rgba(255, 255, 255, 1);
+	color: #666666;
+	box-shadow: 0 0 10px #959595;
+	border-radius: 25px;
+	padding: 20px;
+	font-size: 200%;
+	display:inline-block;
+	width: 100%;
+	margin-top: 20px;
+	}
+	/* Clear floats after the columns */
+	.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+
+
+
+	.checked {
+		color: goldenrod
+	}
+
+	.unchecked {
+		color : black
+	}
+	
+/*	img {
+    max-width: 100%;
+    max-height: 100%;
+	}*/
+	/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+	@media screen and (max-width: 800px) {
+	.leftcolumn, .rightcolumn {   
+		width: 100%;
+		padding: 0;
+	}
+}
+
+	/* Footer */
+	#footer {
+	font-family: 'Nunito', sans-serif;
+	background-color: white;
+	padding: 0px;
+
+	text-align: center;
+	background: #ffffff;
+	margin: 0px;
+
+
+	}
+
+#map_detail {
+  height: 500px;
+  width: auto;
+  padding: 10px;
+ }
+
+ .apartment_detail_container{
+
+ 	margin-left: 20px;
+ 	margin-right: 20px;
+
+ }
+
+ #review_thumbnail{
+ 	width: 50px;
+ 	height: 50px;
+	top: 0%;
+	position:relative;	
+    border-radius: 20px;
+    /*box-sizing: border-box;*/
+    /*background-color: white;*/
+    /*border: 5px solid #ffffff;*/
+    z-index: 2;
+    margin: 10px;
+    padding: 0px;
+ }	
+
+ .fieldWrapper textarea{
+ 	margin-left: 30px;
+ 	width: 90%;
+ 	height: 80px;
+ 	border-radius: 10px;
+ 	color: #666666;
+ }
+
+ .fieldWrapper textarea:focus{
+ 	outline: none !important;
+    border:1.5px solid #67bb96;
+    box-shadow: 0 0 10px #719ECE;
+ }
+
+ 
+
+
+ ::selection {
+    background-color: rgb(220, 133, 142, 0.5);
+    color: #fff;
+}
+
+.inner_content_div_reviews{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+
+}
+
+.inner_content_div_favorites{
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	width: 80%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+
+}
+
+
+.selector_advanced{
+	width: 40%;
+	align-content: center;
+	margin-left: 30%;
 
 }

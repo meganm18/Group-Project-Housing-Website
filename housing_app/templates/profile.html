@@ -12,8 +12,9 @@
 		<div class="container, profile_div">
 			<div class="row" id="top_row">
 <!-- 				<div class="col top-corners">
-	
+				
 				</div> -->
+				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Profile</h1>
 				<div class="col" id="profile_image_div">
 					{% if user_for_page.userprofile.avatar %}
 
@@ -36,11 +37,22 @@
 					{% if user_for_page == user %}
 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
 						<button class="btn btn-default" id="edit_profile" name="edit_profile"> Edit Profile </button>
+
+						<nav aria-label="Page navigation example" class="pagination_profile">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item active"  ><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Info</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="#">Compare</a></li>
+						  </ul>
+						</nav>
 					{% else %}
 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
 					{% endif %}
 
 					<div class="inner_content_div">
+
+
 						<h4 id="email_text">Email: {{user_for_page.email}}</h4>
 							
 						<h4 id="bio_text">Bio: {{user_for_page.userprofile.bio}}</h4>

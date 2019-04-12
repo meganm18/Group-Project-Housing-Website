@@ -13,6 +13,7 @@ def get_avatar(backend, strategy, details, response,
             user.userprofile.avatar = url
             user.save()
         except:
-            UserProfile.objects.create(user=user)
-            user.userprofile.avatar = url
-            user.save()
+            print("Not working")
+        # #     UserProfile.objects.create(user=user)
+        #     user.userprofile.avatar = url
+        #     user.save()
