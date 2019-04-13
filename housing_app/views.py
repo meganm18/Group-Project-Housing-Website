@@ -195,3 +195,24 @@ def delete_compare(request, apartment_id):
 		user.save()
 
 	return redirect('compare')
+
+@login_required
+def save_compare0(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare0 = apartment;
+		user_profile.save()
+		user.save()
+	return redirect('apartments')
+@login_required
+def save_compare1(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare1 = apartment;
+		user_profile.save()
+		user.save()
+	return redirect('apartments')
