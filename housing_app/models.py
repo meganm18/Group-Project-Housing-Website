@@ -35,11 +35,6 @@ class UserProfile(models.Model):
 	#avator = models.ImageField(default="static/images/blank_profile.png", max_length=500)
 	def __str__(self):
 		return self.user.username
-	def compareSize(self):
-		ct = 0
-		for apartment in self.favorites:
-			ct +=1
-		return ct
 
 class Review(models.Model):
 	review = models.TextField(max_length=500, blank=True)
