@@ -96,10 +96,6 @@ def favorites(request):
 def compare(request):
 	user = request.user
 	user_profile = user.userprofile
-<<<<<<< HEAD
-=======
-	compare = user_profile.compare.all()
->>>>>>> master
 	return render(request, 'compare.html', {'compare0':user_profile.compare0},{'compare1':user_profile.compare1})
 
 @login_required()
@@ -193,12 +189,8 @@ def delete_favorite(request, apartment_id):
 		user_profile.favorites.add(apartment)
 		user_profile.save()
 		user.save()
-
-<<<<<<< HEAD
 	return redirect('favorites')
 
-=======
-	return redirect('compare')
 
 @login_required
 def save_compare0(request, apartment_id):
