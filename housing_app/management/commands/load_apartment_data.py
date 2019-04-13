@@ -39,4 +39,5 @@ class Command(BaseCommand):
             apartment.distance = row['Distance to Grounds']
             apartment.number = row['Number']
             apartment.bathrooms = row['Bathrooms']
+            apartment.image = row['Image']
             apartment.save()
