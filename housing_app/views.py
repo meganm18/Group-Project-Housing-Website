@@ -212,4 +212,3 @@ def save_compare1(request, apartment_id):
 		user_profile.save()
 		user.save()
 	return redirect('apartments')
->>>>>>> master
