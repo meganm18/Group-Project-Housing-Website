@@ -1,31 +1,241 @@
 {% extends 'base.html' %}
+{% load static %}
+<html>
+{% block content %}
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+#content, html, body {
+    height: 98%;
+    width: 99%;
+    margin: .1%;
+}
+#left {
+    float: left;
+    width: 50%;
+    background: #f1f1f1;
+    height: 100%;
+    overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 2%;
+
+	/* Header/Blog Title */
+	.header {
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+	background: white;
+	float: right;
+	}
+
+	/* Create two unequal columns that floats next to each other */
+	/* Left column */
+	.leftcolumn {
+	float: right;
+	width: 20%;
+	margin: 5%;
+	padding: 20px;
+	}
+
+	/* Right column */
+	.rightcolumn {
+	float: right;
+	width: 20%;
+	padding-left: 20px;
+	}
+
+	/* Fake image */
+	.fakeimg {
+	background-color: #aaa;
+	width: 40%;
+	padding: 20px;
+	}
+
+	/* Add a card effect for articles */
+	.card {
+	background-color: white;
+	padding: 20px;
+	margin-top: 20px;
+	width: 20%;
+	}
+
+	.card2 {
+	background-color: white;
+	padding: 20px;
+	font-size: 200%;
+	display:inline-block;
+	width: 20%;
+	margin-top: 20px;
+	}
 
 
-	{% block content %}
-		<table>
-			<tr>
-				<th>Name</th>
-				<th>Location</th>
-				<th>Price</th>
-				<th>Size</th>
-			</tr>
-			{% for apartment in compare %}
-			<tr>
-				<td><a href="{% url 'apartment_detail' apartment.id %}">
-						<h3> {{ apartment.name|capfirst }} </h3>
-				</a></td>
-				<td>{{ apartment.location|capfirst }}</td>
-				<td>${{ apartment.price }}</td>
-				<td>{{ apartment.size }}</td>
-				<td>
-					<form action="{% url 'delete_compare' apartment.id %}" method="post">
-						{% csrf_token %}
-							<button type="submit" class="btn btn-default" name="compare_apartment" id="compare_apartment{{ forloop.counter }}"> Remove From Compare </button>
-				</form>
-				</td>
-			</tr>
-			{% endfor %}
-		</table>
+}
+#right {
+    float: left;
+    width: 50%;
+    background: #f1f1f1;
+    height: 100%;
+   overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 2%;
 
+	/* Header/Blog Title */
+	.header {
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+	background: white;
+	float: right;
+	}
 
-	{% endblock content %}
+	/* Create two unequal columns that floats next to each other */
+	/* Left column */
+	.leftcolumn {
+	float: right;
+	width: 20%;
+	margin: 5%;
+	padding: 20px;
+	}
+
+	/* Right column */
+	.rightcolumn {
+	float: right;
+	width: 20%;
+	padding-left: 20px;
+	}
+
+	/* Fake image */
+	.fakeimg {
+	background-color: #aaa;
+	width: 40%;
+	padding: 20px;
+	}
+
+	/* Add a card effect for articles */
+	.card {
+	background-color: white;
+	padding: 20px;
+	margin-top: 20px;
+	width: 20%;
+	}
+
+	.card2 {
+	background-color: white;
+	padding: 20px;
+	font-size: 200%;
+	display:inline-block;
+	width: 20%;
+	margin-top: 20px;
+	}
+}
+#compareheading {
+	float: center;
+	font-size: 100%;
+	text-align: center;
+}
+</style>
+</head>
+<div id="compareheading">
+	<h2>Compare Apartments</h2>
+</div>
+
+<div id="content">
+
+	<div id="left">
+		<div class="header">
+	<h1><strong>{{ compare0.name|capfirst }}</strong></h1>
+	</div>
+
+	<div class="row">
+		<div class="leftcolumn">
+			<div class="card">
+			<h3><strong>{{ compare0.location }}</strong> </h3>
+			<h5><strong>Company:</strong> {{ compare0.company }}</h5>
+			{% load static %}
+			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
+			<p><strong>Description of Property:</strong></p>
+			<p>{{ compare0.description}}</p>
+			</div>
+		</div>
+		<div class="rightcolumn">
+			<div class="card">
+			<h2>Property Statistics</h2>
+			<p> <strong>Price:</strong> ${{ compare0.price }} </p>
+			<p> <strong>Distance to Grounds:</strong> {{ compare0.distance }} </p>
+			<p> <strong>Size:</strong> {{ compare0.size }} sq ft </p>
+			<p> <strong>Furnished:</strong> {{ compare0.furnished }} </p>
+			<p> <strong>Pets Allowed:</strong> {{ compare0.pets }} </p>
+			<p> <strong>Number:</strong> {{ compare0.number }} </p>
+
+			</div>
+			<div class="card2">
+				<span>Rating</span>
+				<span class="checked">&#9733; &#9733; &#9733;</span>
+				<span class="unchecked">&#9733; &#9733;</span>
+			</div>
+			<div class="card">
+				<h2>Residence Living</h2>
+				<p>Read about the reality overall, landlords, amenities, noise, safety, laundry, and more</p>
+			</div>
+
+		<div class="card">
+			<!-- this map is just a placeholder for right now, will add real maps later-->
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.6386642118414!2d-78.49591228492919!3d38.032202479713426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b386399c46f897%3A0x12c077318569a0d7!2sThe+Flats+at+West+Village!5e0!3m2!1sen!2sus!4v1551679194224" width="450" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+	</div>
+	</div>
+	</div>
+	</div>
+
+	<div id="right">
+		<div class="header">
+	<h1><strong>{{ compare1.name|capfirst }}</strong></h1>
+	</div>
+
+	<div class="row">
+		<div class="leftcolumn">
+			<div class="card">
+			<h3><strong>{{ compare1.location }}</strong> </h3>
+			<h5><strong>Company:</strong> {{ compare1.company }}</h5>
+			{% load static %}
+			<img src="{% static 'images/' %}{{apartment.name}}.jpg" alt = "Apartment Preview">
+			<p><strong>Description of Property:</strong></p>
+			<p>{{ compare1.description}}</p>
+			</div>
+		</div>
+		<div class="rightcolumn">
+			<div class="card">
+			<h2>Property Statistics</h2>
+			<p> <strong>Price:</strong> ${{ compare1.price }} </p>
+			<p> <strong>Distance to Grounds:</strong> {{ compare1.distance }} </p>
+			<p> <strong>Size:</strong> {{ compare1.size }} sq ft </p>
+			<p> <strong>Furnished:</strong> {{ compare1.furnished }} </p>
+			<p> <strong>Pets Allowed:</strong> {{ compare1.pets }} </p>
+			<p> <strong>Number:</strong> {{ compare1.number }} </p>
+
+			</div>
+			<div class="card2">
+				<span>Rating</span>
+				<span class="checked">&#9733; &#9733; &#9733;</span>
+				<span class="unchecked">&#9733; &#9733;</span>
+			</div>
+			<div class="card">
+				<h2>Residence Living</h2>
+				<p>Read about the reality overall, landlords, amenities, noise, safety, laundry, and more</p>
+			</div>
+
+		<div class="card">
+			<!-- this map is just a placeholder for right now, will add real maps later-->
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.6386642118414!2d-78.49591228492919!3d38.032202479713426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b386399c46f897%3A0x12c077318569a0d7!2sThe+Flats+at+West+Village!5e0!3m2!1sen!2sus!4v1551679194224" width="450" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+{% endblock content %}
+</html>

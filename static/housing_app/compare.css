@@ -1,25 +1,15 @@
-.wrap {
-width: 100%;
-}
 
-.category {
-  float:left;
-  width:22%;
-}
-.floatleft {
+.left {
     float: left;
-    width: 22%;
-    margin-left:0.25%
+    width: 20%;
+    background: #7EEBBC;
+    height: 100%;
+    overflow: scroll;
 }
-
-.floatcenter {
-  float:left;
-    width: 22%;
-    margin-left:0.5%;
-}
-
-.floatright {
-    float: left;
-    width: 22%;
-    margin-left:0.75%
+right {
+    float: right;
+    width: 40%;
+    background: #FFB0B8;
+    height: 100%;
+    overflow: scroll;
 }
