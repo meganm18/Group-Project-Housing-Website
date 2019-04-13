@@ -56,7 +56,7 @@ def favorites(request):
 def compare(request):
 	user = request.user
 	user_profile = user.userprofile
-	return render(request, 'compare.html')
+	return render(request, 'compare.html', {'compare0':user_profile.compare0},{'compare1':user_profile.compare1})
 
 @login_required()
 def loginsuccess(request):

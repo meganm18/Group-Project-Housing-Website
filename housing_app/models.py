@@ -29,9 +29,9 @@ class UserProfile(models.Model):
 	avatar = models.ImageField(default="static/images/blank_profile.png")
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
-	compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
-	#compare0 = models.ForeignKey(Apartment, blank = True, null=True, on_delete='SET_DEFAULT', related_name="compare0")
-	#compare1 = models.ForeignKey(Apartment, blank = True, null=True, on_delete='SET_DEFAULT', related_name="compare1")
+	#compare = models.ManyToManyField(Apartment, blank=True, related_name="compare")
+	compare0 = models.ForeignKey(Apartment, blank = True, null=True, on_delete='SET_DEFAULT', related_name="compare0")
+	compare1 = models.ForeignKey(Apartment, blank = True, null=True, on_delete='SET_DEFAULT', related_name="compare1")
 	def __str__(self):
 		return self.user.username
 
@@ -45,4 +45,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.userprofile.save()
+	instance.userprofile.save()
