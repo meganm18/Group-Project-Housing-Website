@@ -97,7 +97,7 @@ def compare(request):
 	user = request.user
 	user_profile = user.userprofile
 	compare = user_profile.compare.all()
-	return render(request, 'compare.html',{'compare':compare})
+	return render(request, 'compare.html', {'compare0':user_profile.compare0},{'compare1':user_profile.compare1})
 
 @login_required()
 def loginsuccess(request):
