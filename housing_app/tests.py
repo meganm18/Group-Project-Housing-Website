@@ -121,10 +121,4 @@ class StatusCodesTestCase(TestCase):
         response6 = get_user_reviews(request6, request6.user.username)
         self.assertEqual(response6.status_code, 200)
 
-    def test_save_favorites(self):
-        request7 = self.factory.get(r'^save_favorite/(\d+)/')
-        request7.user = self.user1
-        response7 = save_favorite(request7, self.apartment1.id)
-        self.assertEqual(response7.status_code, 200)
 
-    
