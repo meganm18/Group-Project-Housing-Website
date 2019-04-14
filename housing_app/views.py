@@ -36,7 +36,15 @@ def apartments(request):
 			apartments = apartments.filter(bedrooms__icontains=bedroomInput)
 	else:
 		bedroomInput = "No Filter"
-	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput})
+	if 'ratingInput' in request.GET:
+		ratingInput = request.GET['ratingInput']
+		if "Sort by Average Rating (high to low)"==ratingInput:
+			apartments = apartments.filter(ratings__isnull=False).order_by('-ratings__average')
+		elif "Sort by Average Rating (low to high)"==ratingInput:
+			apartments = apartments.filter(ratings__isnull=False).order_by('ratings__average') 
+	else:
+		ratingInput = "No Filter"	
+	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput, 'ratingInput':ratingInput})
 
 
 def apartment_detail(request, id):
