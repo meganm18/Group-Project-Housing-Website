@@ -1,7 +1,8 @@
 from django.test import TestCase, RequestFactory
 from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
-from .views import home, apartments, apartment_detail, login, get_user_profile, get_user_reviews
+from .views import home, apartments, apartment_detail, login, get_user_profile, get_user_reviews, save_favorite
+from .views import save_compare0, save_compare1, delete_favorite
 
 
 class ApartmentTestCase(TestCase):
@@ -65,7 +66,7 @@ class SaveCompareTestCase(TestCase):
         self.profile_1.save()
         self.assertEqual(self.profile_1.compare1.name, "Apartment 2")
 
-class ViewPagesTestCase(TestCase):
+class StatusCodesTestCase(TestCase):
     #https://docs.djangoproject.com/en/2.1/topics/testing/advanced/
     def setUp(self):
         self.factory = RequestFactory()
@@ -119,3 +120,35 @@ class ViewPagesTestCase(TestCase):
         request6.user = self.user1
         response6 = get_user_reviews(request6, request6.user.username)
         self.assertEqual(response6.status_code, 200)
+
+    def test_save_favorites(self):
+        request7 = self.factory.get(r'^save_favorite/(\d+)/')
+        request7.user = self.user1
+        response7 = save_favorite(request7, self.apartment1.id)
+        self.assertEqual(response7.status_code, 200)
+
+    def test_save_compare0(self):
+        request8 = self.factory.get(r'^save_compare0/(\d+)/')
+        request8.user = self.user1
+        response8 = save_compare0(request8, self.apartment1.id)
+        self.assertEqual(response8.status_code, 200)
+
+    def test_save_compare1(self):
+        request9 = self.factory.get(r'^save_compare1/(\d+)/')
+        request9.user = self.user1
+        response9 = save_compare1(request9, self.apartment1.id)
+        self.assertEqual(response9.status_code, 200)
+
+    def test_delete_favorite0(self):
+        request10 = self.factory.get(r'^delete_favorite/(\d+)/')
+        request10.user = self.user1
+        self.user1.favorites.clear()
+        response10 = delete_favorite(request10, self.apartment1.id)
+        self.assertEqual(response10.status_code, 200)
+
+    def test_delete_favorite1(self):
+        request11 = self.factory.get(r'^delete_favorite/(\d+)/')
+        self.user1.favorites.add(self.apartment1.id)
+        request11.user = self.user1
+        response11 = delete_favorite(request11, self.apartment1.id)
+        self.assertEqual(response11.status_code, 200)
