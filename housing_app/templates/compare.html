@@ -67,7 +67,6 @@
 	<div class="apartment_detail_container">
 
 			<div class="row">
-			<div class="leftcolumn">
 				<div class="card">
 				{% load static %}
 				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
@@ -112,7 +111,6 @@
 						{% endif %}
 					</div>
 			</div>
-			<div class="rightcolumn">
 				<div class="card">
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ compare0.price }} </p>
@@ -375,12 +373,7 @@
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
 	    </script>
 		</div>
-
 		</div>
-		</div>
-
-
-	</div>
 	</div>
 
 	<div id="right">
@@ -392,7 +385,6 @@
 	<div class="apartment_detail_container">
 
 			<div class="row">
-			<div class="leftcolumn">
 				<div class="card">
 				{% load static %}
 				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
@@ -405,12 +397,12 @@
 				<div class="card">
 						<h2>Reviews</h2>
 
-						{% if not reviews1 %}
+						{% if not reviews0 %}
 							<p style="margin-left: 40px;">There are no reviews at this time</p>
 						{% else %}
 						<div style="height: 300px; width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
 
-								{% for review in reviews1 %}
+								{% for review in reviews0 %}
 								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
 									<div class="row">
 										<div class="col" style="background-color: transparent; color: black">
@@ -435,11 +427,8 @@
 
 						</div>
 						{% endif %}
-
-
 					</div>
 			</div>
-			<div class="rightcolumn">
 				<div class="card">
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ compare1.price }} </p>
@@ -449,11 +438,10 @@
 				<p> <strong>Pets Allowed:</strong> {{ compare1.pets }} </p>
 				<p> <strong>Number:</strong> {{ compare1.number }} </p>
 
-				</div>]
-
+				</div>
 				<!--Maps-->
 		<div class="card">
-	 		<div id="map_detail">
+	 				<div id="map_detail">
 	 		</div>
 
 
@@ -703,12 +691,8 @@
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
 	    </script>
 		</div>
-
 		</div>
 		</div>
-
-
-	</div>
 	</div>
 </div>
 {% endblock content %}
