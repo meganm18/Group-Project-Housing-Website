@@ -986,6 +986,12 @@ body, html {
   padding: 10px;
  }
 
+#map_detail1 {
+  height: 500px;
+  width: auto;
+  padding: 10px;
+ }
+
  .apartment_detail_container{
 
  	margin-left: 20px;

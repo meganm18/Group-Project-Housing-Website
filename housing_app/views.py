@@ -155,7 +155,6 @@ def save_favorite(request, apartment_id):
 		user_profile.favorites.add(apartment)
 		user_profile.save()
 		user.save()
-
 	return redirect('apartments')
 
 @login_required
@@ -186,11 +185,11 @@ def delete_favorite(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
-
 	if request.method == 'POST':
-		user_profile.favorites.add(apartment)
-		user_profile.save()
-		user.save()
+		if user_profile.favorites.objects.filter(id = apartment_id).size() > 0:
+			user_profile.favorites.delete(id = apartment_id)
+			user_profile.save()
+			user.save()
 	return redirect('favorites')
 
 

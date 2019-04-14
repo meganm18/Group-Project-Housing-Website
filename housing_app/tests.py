@@ -1,7 +1,8 @@
 from django.test import TestCase, RequestFactory
 from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
-from .views import home, apartments, apartment_detail, login
+from .views import home, apartments, apartment_detail, login, get_user_profile, get_user_reviews, save_favorite
+from .views import save_compare0, save_compare1, delete_favorite
 
 
 class ApartmentTestCase(TestCase):
@@ -65,7 +66,7 @@ class SaveCompareTestCase(TestCase):
         self.profile_1.save()
         self.assertEqual(self.profile_1.compare1.name, "Apartment 2")
 
-class ViewPagesTestCase(TestCase):
+class StatusCodesTestCase(TestCase):
     #https://docs.djangoproject.com/en/2.1/topics/testing/advanced/
     def setUp(self):
         self.factory = RequestFactory()
@@ -107,3 +108,17 @@ class ViewPagesTestCase(TestCase):
         request4.user = self.user1
         response4 = login(request4)
         self.assertEqual(response4.status_code, 200)
+
+    def test_user_profile(self):
+        request5 = self.factory.get(r'profile/(?P<username>[a-zA-Z0-9]+)$')
+        request5.user = self.user1
+        response5 = get_user_profile(request5, request5.user.username)
+        self.assertEqual(response5.status_code, 200)
+
+    def test_user_reviews(self):
+        request6 = self.factory.get(r'profile/(?P<username>[a-zA-Z0-9]+)/reviews/')
+        request6.user = self.user1
+        response6 = get_user_reviews(request6, request6.user.username)
+        self.assertEqual(response6.status_code, 200)
+
+
