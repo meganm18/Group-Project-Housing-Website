@@ -155,7 +155,6 @@ def save_favorite(request, apartment_id):
 		user_profile.favorites.add(apartment)
 		user_profile.save()
 		user.save()
-
 	return redirect('apartments')
 
 @login_required
