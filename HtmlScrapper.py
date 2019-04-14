@@ -3,6 +3,38 @@
 # website used to scrap the appt info
 import csv
 import re
+import pandas
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US')
+# Tool to combine appt attributes for appt_data later
+def Min_Max_Dict(apptdict,appts,attribute,data):
+    for apptindex in range(len(appts)):
+        data[apptindex]=data[apptindex].replace("$","").replace(",","")
+        if appts[apptindex] not in apptdict.keys():
+            apptdict.update({appts[apptindex]:{}})
+        pattern = re.compile('\d+')
+
+        if attribute not in apptdict[appts[apptindex]].keys():
+            apptdict[appts[apptindex]].update({attribute: []})
+        matches = pattern.findall(data[apptindex])
+        for match in matches:
+            match=int(match)
+            if not apptdict[appts[apptindex]][attribute]:
+                apptdict[appts[apptindex]][attribute].append(match)
+                apptdict[appts[apptindex]][attribute].append(match)
+            if match<apptdict[appts[apptindex]][attribute][0]:
+                apptdict[appts[apptindex]][attribute][0]=match
+            if match>apptdict[appts[apptindex]][attribute][1]:
+                apptdict[appts[apptindex]][attribute][1] = match
+    return apptdict
+
+def combine(data):
+    try:
+        if data[0]!=data[1]:
+            return ((locale.format_string("%d", data[0], grouping=True)+"-"+locale.format_string("%d", data[1], grouping=True)))
+        return (locale.format_string("%d", data[0], grouping=True))
+    except: return ('---')
+
 #creates raw html data code string
 def ScrapHtmlCode(website):
     from lxml import html
@@ -139,6 +171,19 @@ def getinfo(webpage):
     return(apptinfo)
 # Take in two parameters which are dicts of info and create a csv listing the info in the dict
 def writecsv(first, second):
+
+    appts = {}
+    colnames = ['Apartment', 'Unit Name', 'Price', 'Size', 'Bedrooms', 'Bathrooms']
+    data = pandas.read_csv('units_data.csv', names=colnames)
+    Apartments = data.Apartment.tolist()
+    attributes = []
+    attributes.append(data.Price.tolist())
+    attributes.append(data.Size.tolist())
+    attributes.append(data.Bedrooms.tolist())
+    attributes.append(data.Bathrooms.tolist())
+    for attribute in attributes:
+        appts = (Min_Max_Dict(appts, Apartments[1:], attribute[0], attribute[1:]))
+
     with open('apartment_data.csv', 'w') as csvfile:
         # Titles of the the csv
         fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'Size', 'Bedrooms', 'Furnished', 'Pets', 'Description',
@@ -150,48 +195,40 @@ def writecsv(first, second):
         for appt in first.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                 'Price': appt['Units'][(list(appt['Units'])[0])]['Price'],
-                 'Size': appt['Units'][(list(appt['Units'])[0])]['Size'],
-                 'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
+                 'Price': '$'+combine(appts[appt['Title']]['Price']),
+                 'Size': combine(appts[appt['Title']]['Size'])+' Sqrt ft.',
+                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']), 'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
-                 'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
+                 'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
                   'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image':appt['Image']})
         # second is the second dict of info on the page
         for appt in second.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                 'Price': appt['Units'][(list(appt['Units'])[0])]['Price'],
-                 'Size': appt['Units'][(list(appt['Units'])[0])]['Size'],
-                 'Bedrooms': appt['Units'][(list(appt['Units'])[0])]['Beds'], 'Furnished': '---', 'Pets': '---',
+                 'Price': '$'+combine(appts[appt['Title']]['Price']),
+                 'Size': combine(appts[appt['Title']]['Size'])+' Sqrt ft.',
+                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']), 'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
-                 'Bathrooms': appt['Units'][(list(appt['Units'])[0])]['Baths'],
-                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'],'Image':appt['Image']})
-        writer.writerow({'Apartment Name': 'The Flats', 'Company': 'Asset Campus Housing',
-                         'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$1720', 'Size': '3',
-                         'Bedrooms': 'Yes', 'Furnished': 'Yes',
-                         'Pets': 'The Flats at West Village is moments from UV, & UVA Medical Center offering the most convenient student living in the area! The Downtown Mall is also right outside your door, perfect for anyone looking for convenience to work, school, and play. At The Flats at West Village, our luxury Charlottesville apartments feature modern furniture packages (at no additional cost), washers and dryers, private bedrooms, and complimentary water, cable, and internet. Unique to our community, our 1, 2, 3, & 4 bedroom floor plans have been enhanced to include queen beds and stackable dressers, providing our residents with ample space! Entertain your entourage in the social backdrop of our resort-style swimming pool, fire pits, fitness center & activity rooms. Walk to local shops and restaurants, while experiencing all that West Main has to offer.',
-                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                 'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
+                 'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image': appt['Image']})
+        writer.writerow({'Apartment Name': 'The Flats at West Village', 'Company': 'Asset Campus Housing',
+                         'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$655–979', 'Size': '500-1532 Sqrt ft.',
+                         'Bedrooms': '1-4', 'Furnished': 'Yes',
+                         'Pets':'Yes', 'Description':'The Flats at West Village is moments from UV, & UVA Medical Center offering the most convenient student living in the area! The Downtown Mall is also right outside your door, perfect for anyone looking for convenience to work, school, and play. At The Flats at West Village, our luxury Charlottesville apartments feature modern furniture packages (at no additional cost), washers and dryers, private bedrooms, and complimentary water, cable, and internet. Unique to our community, our 1, 2, 3, & 4 bedroom floor plans have been enhanced to include queen beds and stackable dressers, providing our residents with ample space! Entertain your entourage in the social backdrop of our resort-style swimming pool, fire pits, fitness center & activity rooms. Walk to local shops and restaurants, while experiencing all that West Main has to offer.',
+                          'Bathrooms': '1-4', 'Number': '(434) 509-4430',
                          'Distance to Grounds': '0.9 miles from Grounds',
                          'Image': 'http://www.flatsatwestvillage.com/sites/flatsatwestvillage.com/files/styles/width_1024/public/1_1.jpg?itok=97yRmZ8J'})
-        writer.writerow({'Apartment Name': 'Venable', 'Company': 'RealProperty',
-                         'Location': 'Venable Apartments, 13th St NW, Charlottesville, VA 22903', 'Price': '1200',
-                         'Size': '2', 'Bedrooms': 'No', 'Furnished': 'No',
-                         'Pets': 'Venable Court is conveniently located on the UVA Corner, featuring large living spaces, and balconies. Walk to class or catch the UTS just steps from your door. Bike storage on site, as well as in-unit laundry machines! ',
-                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
-                         'Distance to Grounds': '0.9 miles from Grounds',
-                         'Image': 'https://images1.apartments.com/i2/jj3M6yaao1sb9uUdveDSGuB1dShq16n8wKGKJgw03mM/117/venable-court-apartments-charlottesville-va-primary-photo.jpg'})
         writer.writerow({'Apartment Name': 'Grandmarc', 'Company': 'GreyStar',
-                         'Location': '301 15th St NW, Charlotteville, VA 22903', 'Price': '$1620', 'Size': '4',
-                         'Bedrooms': 'Yes', 'Furnished': 'No',
-                         'Pets': 'GrandMarc at the Corner offers 1, 2, and 4-bedroom apartments near the University of Virginia. We’re right in the the middle of all the great things that make the Charlottesville community unique and lovable. You’re never far away from fun or your classes- we are at the center of it all! GrandMarc at the Corner wants you to have the best experience possible. ',
-                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
-                         'Distance to Grounds': '0.8 miles from Grounds',
+                         'Location': '301 15th St NW, Charlotteville, VA 22903', 'Price': '$694-1405', 'Size': '596-1466 Sqrt ft.',
+                         'Bedrooms': '1-4', 'Furnished': 'No',
+                         'Pets': '---','Description': 'GrandMarc at the Corner offers 1, 2, and 4-bedroom apartments near the University of Virginia. We’re right in the the middle of all the great things that make the Charlottesville community unique and lovable. You’re never far away from fun or your classes- we are at the center of it all! GrandMarc at the Corner wants you to have the best experience possible.',
+                         'Bathrooms': '1-4', 'Number': '(434) 293-5787','Distance to Grounds': '0.8 miles from Grounds',
                          'Image': 'https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg'})
         writer.writerow({'Apartment Name': '1800 Jefferson Park Avenue', 'Company': 'Nest Realty',
-                         'Location': '1800 Jefferson Park Avenue, Charlottesville, VA 22903', 'Price': '$1500',
-                         'Size': '3', 'Bedrooms': 'No', 'Furnished': 'No',
-                         'Pets': "1800 JPA stands as one of the tallest buildings in Charlottesville and one of the most popular places to live for someone looking for an affordable place to live within walking distance of UVA's Grounds or Medical Center. If you are considering UVA real estate, 1800 JPA should be on your radar. The community is comprised of a main 10-story 'Tower' and 4 'Garden' buildings. All condominiums are a stone's throw from UVA and units on the higher floors of the Tower offer either mountain views or views of Scott Stadium. Amenities include laundry facilities, reserved parking, and a community pool.",
-                         'Description': '---', 'Bathrooms': '---', 'Number': '---',
+                         'Location': '1800 Jefferson Park Avenue, Charlottesville, VA 22903', 'Price': '$1275-1375',
+                         'Size': '771 Sqrt ft.', 'Bedrooms': '2', 'Furnished': 'No',
+                         'Pets': "---",'Description': "1800 JPA stands as one of the tallest buildings in Charlottesville and one of the most popular places to live for someone looking for an affordable place to live within walking distance of UVA's Grounds or Medical Center. If you are considering UVA real estate, 1800 JPA should be on your radar. The community is comprised of a main 10-story 'Tower' and 4 'Garden' buildings. All condominiums are a stone's throw from UVA and units on the higher floors of the Tower offer either mountain views or views of Scott Stadium. Amenities include laundry facilities, reserved parking, and a community pool.",
+                         'Bathrooms': '1-2', 'Number': '(434) 466-5645',
                          'Distance to Grounds': '0.6 miles from Grounds',
                          'Image': 'https://ap.rdcpix.com/1748032062/410a8c9d8b96f39afe644116471fd811l-m0xd-w1020_h770_q80.jpg'})
     return None
@@ -238,5 +275,5 @@ secondpage=(ScrapHtmlCode('https://www.collegestudentapartments.com/college/univ
 first_page_appt_info= (getinfo(firstpage))
 second_page_appt_info= (getinfo(secondpage))
 # Write CSV from the info in the first and second page
-writecsv(first_page_appt_info,second_page_appt_info)
 writeunits(first_page_appt_info,second_page_appt_info)
+writecsv(first_page_appt_info,second_page_appt_info)
