@@ -194,7 +194,7 @@ def delete_favorite(request, apartment_id):
 
 
 @login_required
-def save_compare0(request, apartment_id):
+def fav_save_compare0(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
@@ -202,9 +202,9 @@ def save_compare0(request, apartment_id):
 		user_profile.compare0 = apartment;
 		user_profile.save()
 		user.save()
-	return redirect('apartments')
+	return redirect('favorites')
 @login_required
-def save_compare1(request, apartment_id):
+def fav_save_compare1(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
@@ -212,4 +212,4 @@ def save_compare1(request, apartment_id):
 		user_profile.compare1 = apartment;
 		user_profile.save()
 		user.save()
-	return redirect('apartments')
+	return redirect('favorites')

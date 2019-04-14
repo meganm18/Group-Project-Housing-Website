@@ -82,13 +82,13 @@ div.table {
 					{% csrf_token %}
 					<button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Remove From Favorites </button>
 					</form>
-				<form action="{% url 'save_compare0' apartment.id %}" method="post">
+				<form action="{% url 'fav_save_compare0' apartment.id %}" method="post">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="compare_apartment1" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
+					<button type="submit" class="btn btn-default" name="fav_compare_apartment1" id="compare_apartment{{ forloop.counter }}"> Set as First Compare Apartment</button>
 				</form>
-						<form action="{% url 'save_compare1' apartment.id %}" method="post">
+						<form action="{% url 'fav_save_compare1' apartment.id %}" method="post">
 					{% csrf_token %}
-					<button type="submit" class="btn btn-default" name="compare_apartment1" id="compare_apartment{{ forloop.counter }}"> Select to Compare </button>
+					<button type="submit" class="btn btn-default" name="fav_compare_apartment1" id="compare_apartment{{ forloop.counter }}"> Set as Second Compare Apartment</button>
 				</form>
 				{% endif %}
 			</div>
