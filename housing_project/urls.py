@@ -40,6 +40,8 @@ urlpatterns = [
    # url(r'^delete_compare0/(\d+)/', views.delete_compare0, name='delete_compare0'),
     url(r'^save_compare1/(\d+)/', views.save_compare1, name='save_compare1'),
    # url(r'^delete_compare1/(\d+)/', views.delete_compare1, name='delete_compare1'),
+    url(r'^fav_save_compare0/(\d+)/', views.fav_save_compare0, name='fav_save_compare0'),
+    url(r'^fav_save_compare1/(\d+)/', views.fav_save_compare1, name='fav_save_compare1'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     url(r'^filter/', views.apartments, name='filter'),
 ]
