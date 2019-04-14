@@ -122,3 +122,14 @@ class StatusCodesTestCase(TestCase):
         self.assertEqual(response6.status_code, 200)
 
 
+class SortingApartmentsTestCase(TestCase):
+    def setUp(self):
+        #create apartments with unique prices and ratings
+    def test_rating_sort(self):
+        
+    def test_price_sort(self):
+        
+class FilteringApartmentsTestCase(TestCase):
+    def setUp(self):
+        #create apartments with unique bedroom numbers
+    def test_bedroom_sort(self):
