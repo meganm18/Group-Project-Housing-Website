@@ -96,8 +96,7 @@ def favorites(request):
 def compare(request):
 	user = request.user
 	user_profile = user.userprofile
-	compare = user_profile.compare.all()
-	return render(request, 'compare.html',{'compare':compare})
+	return render(request, 'compare.html', {'compare0':user_profile.compare0},{'compare1':user_profile.compare1})
 
 @login_required()
 def loginsuccess(request):
@@ -158,40 +157,58 @@ def save_favorite(request, apartment_id):
 	return redirect('apartments')
 
 @login_required
-def save_compare(request, apartment_id):
+def save_compare0(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
 	if request.method == "POST":
-		user_profile.compare.add(apartment)
+		user_profile.compare0 = apartment;
+		user_profile.save()
+		user.save()
+	return redirect('apartments')
+@login_required
+def save_compare1(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare1 = apartment;
 		user_profile.save()
 		user.save()
 	return redirect('apartments')
 
 
+
 @login_required
 def delete_favorite(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
-
 	user = request.user
 	user_profile = user.userprofile
 
 	if request.method == 'POST':
-		user_profile.favorites.remove(apartment)
+		user_profile.favorites.add(apartment)
 		user_profile.save()
 		user.save()
-
 	return redirect('favorites')
 
+
 @login_required
-def delete_compare(request, apartment_id):
+def save_compare0(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
-
-	if request.method == 'POST':
-		user_profile.compare.remove(apartment)
+	if request.method == "POST":
+		user_profile.compare0 = apartment;
 		user_profile.save()
 		user.save()
-
-	return redirect('compare')
+	return redirect('apartments')
+@login_required
+def save_compare1(request, apartment_id):
+	apartment = Apartment.objects.get(pk=apartment_id)
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare1 = apartment;
+		user_profile.save()
+		user.save()
+	return redirect('apartments')

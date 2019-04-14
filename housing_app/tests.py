@@ -58,14 +58,12 @@ class SaveCompareTestCase(TestCase):
         except:
             UserProfile.objects.create(user=ex_user1, bio="hello")
             self.profile_1 = UserProfile.objects.get(bio="hello")
-        self.profile_1.compare.set = Apartment.objects
-        self.profile_1.compare.clear()
-        self.profile_1.compare.add(apartment_1)
+        self.profile_1.compare0=apartment_1
         self.profile_1.save()
-        self.assertEqual(self.profile_1.compare.all()[0].name, "Apartment 1")
-        self.profile_1.compare.add(apartment_2)
+        self.assertEqual(self.profile_1.compare0.name, "Apartment 1")
+        self.profile_1.compare1 = apartment_2
         self.profile_1.save()
-        self.assertEqual(self.profile_1.compare.all()[1].name, "Apartment 2")
+        self.assertEqual(self.profile_1.compare1.name, "Apartment 2")
 
 class ViewPagesTestCase(TestCase):
     #https://docs.djangoproject.com/en/2.1/topics/testing/advanced/
