@@ -63,13 +63,10 @@ div.table {
 <div class="profile_background_image"></div>
 
 	<div class="profile_content_container" id="outer_container">
-
 		<div class="container, profile_div">
 			<div class="row" id="top_row">
 				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Compare</h1>
 			</div>
-
-
 <div id="content">
 
 	<div id="left">
@@ -142,6 +139,7 @@ div.table {
 			</div>
 
 		</div>
+
 	</div>
 
 	<div id="right">
@@ -209,6 +207,7 @@ div.table {
 				</div>
 	</div>
 		</div>
+
 	</div>
 
 
@@ -455,10 +454,26 @@ div.table {
 				<script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
 	    </script>
+
 		</div>
+
+		</div>
+<div class="container">
+{% if user %}
+						<nav aria-label="Page navigation example" class="pagination_profile">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item"  ><a style="color: #ffb0b8;" class="page-link" href="{% url 'profile' user %}">Info</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item"><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Compare</a></li>
+						  </ul>
+						</nav>
+		{% endif %}
 		</div>
 	</div>
+
 	</div>
+
 	</div>
 
 {% endblock content %}
