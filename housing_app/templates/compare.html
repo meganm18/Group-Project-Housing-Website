@@ -75,22 +75,27 @@ div.table {
 	<div id="left">
 		<div class='apartmentname'align="center" style="padding-bottom: 20px">
 			<h3> {{ compare0.name|capfirst }} </h3>
+
 		</div>
 
 	<div class = "apartment_detail_background"></div>
 	<div class="apartment_detail_container">
 
 			<div class="row">
+
 				<div class="card">
 				{% load static %}
-				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
+
 				<h2 id="location_title"><strong>{{ compare0.location }}</strong> </h2>
+					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
+					<img style="width:50%; margin-left: auto; margin-right: auto;" src={{compare0.image}} id="apartment_thumbnail">
 				<h5><strong>Company:</strong> {{ compare0.company }}</h5>
+
 				<p><strong>Description of Property:</strong></p>
 				<p>{{ compare0.description}}</p>
 				</div>
+				<div class="card" style="width=50%;">
 
-				<div class="card" style="width=100%;">
 						<h2>Reviews</h2>
 
 						{% if not reviews0 %}
@@ -124,7 +129,6 @@ div.table {
 						</div>
 						{% endif %}
 					</div>
-			</div>
 				<div class="card">
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ compare0.price }} </p>
@@ -135,6 +139,7 @@ div.table {
 				<p> <strong>Number:</strong> {{ compare0.number }} </p>
 
 				</div>
+			</div>
 
 		</div>
 	</div>
@@ -150,8 +155,9 @@ div.table {
 			<div class="row">
 				<div class="card">
 				{% load static %}
-				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
 				<h2 id="location_title"><strong>{{ compare1.location }}</strong> </h2>
+					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
+					<img style="width:50%; margin-left: auto; margin-right: auto;" src={{compare1.image}} id="apartment_thumbnail1">
 				<h5><strong>Company:</strong> {{ compare1.company }}</h5>
 				<p><strong>Description of Property:</strong></p>
 				<p>{{ compare1.description}}</p>
@@ -191,7 +197,6 @@ div.table {
 						</div>
 						{% endif %}
 					</div>
-			</div>
 				<div class="card">
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ compare1.price }} </p>
@@ -202,7 +207,7 @@ div.table {
 				<p> <strong>Number:</strong> {{ compare1.number }} </p>
 
 				</div>
-
+	</div>
 		</div>
 	</div>
 
