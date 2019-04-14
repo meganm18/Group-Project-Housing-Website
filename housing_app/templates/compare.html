@@ -11,6 +11,7 @@
 <style type="text/css">
 
 #overall {
+	height: 500px;
 	overflow-y: scroll;
 }
 #content, html, body {
@@ -55,37 +56,32 @@ div.table {
   background-color: #FDFDFD;
   width:100%;
   height: 400px;
-  overflow: auto;
+  overflow-y: scroll;
+}
+
+.overall{
+	height: 500px;
+	overflow-y: scroll;
 }
 </style>
 </head>
-<div id="overall">
-<div class="profile_background_image"></div>
-
 	<div class="profile_content_container" id="outer_container">
 
-		<div class="container, profile_div">
+		<div class="container">
 			<div class="row" id="top_row">
 				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Compare</h1>
 			</div>
-
-
-<div id="content">
-
+<div class="row justify-content-md-center" id="middle_row">
+	<div class="overall">
+				<div class="col-md-auto" id="main_col">
 	<div id="left">
 		<div class='apartmentname'align="center" style="padding-bottom: 20px">
 			<h3> {{ compare0.name|capfirst }} </h3>
-
 		</div>
-
-	<div class = "apartment_detail_background"></div>
 	<div class="apartment_detail_container">
-
 			<div class="row">
-
 				<div class="card">
 				{% load static %}
-
 				<h2 id="location_title"><strong>{{ compare0.location }}</strong> </h2>
 					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
 					<img style="width:50%; margin-left: auto; margin-right: auto;" src={{compare0.image}} id="apartment_thumbnail">
@@ -124,10 +120,8 @@ div.table {
 								</div>
 
 								{% endfor %}
-
-
 						</div>
-						{% endif %}
+							{% endif %}
 					</div>
 				<div class="card">
 				<h2>Property Statistics</h2>
@@ -142,6 +136,7 @@ div.table {
 			</div>
 
 		</div>
+
 	</div>
 
 	<div id="right">
@@ -207,8 +202,9 @@ div.table {
 				<p> <strong>Number:</strong> {{ compare1.number }} </p>
 
 				</div>
-	</div>
+			</div>
 		</div>
+
 	</div>
 
 
@@ -455,10 +451,29 @@ div.table {
 				<script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk&callback=initMap">
 	    </script>
+
 		</div>
-		</div>
+
+<div class="container">
+{% if user %}
+						<nav aria-label="Page navigation example" class="pagination_profile">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item"  ><a style="color: #ffb0b8;" class="page-link" href="{% url 'profile' user %}">Info</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
+						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item"><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Compare</a></li>
+						  </ul>
+						</nav>
+		{% endif %}
+</div>
+				</div>
 	</div>
+
 	</div>
+
 	</div>
+</div>
+
+
 {% endblock content %}
 </html>
