@@ -121,7 +121,7 @@ class StatusCodesTestCase(TestCase):
         response6 = get_user_reviews(request6, request6.user.username)
         self.assertEqual(response6.status_code, 200)
 
-
+'''
 class SortingApartmentsTestCase(TestCase):
     def setUp(self):
         #create apartments with unique prices and ratings
@@ -133,3 +133,4 @@ class FilteringApartmentsTestCase(TestCase):
     def setUp(self):
         #create apartments with unique bedroom numbers
     def test_bedroom_sort(self):
+'''
