@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.shortcuts import render
+# import json
+# from django.core.serializers.json import DjangoJSONEncoder
 
 # found how to sort here: https://stackoverflowfrom django.shortcuts import get_object_or_404.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
 # found info for filtering here: https://stackoverflow.com/questions/51905712/how-to-get-the-value-of-a-django-model-field-object
@@ -22,21 +24,18 @@ def home(request):
 
 def apartments(request):
 	search_term=''
-	apartments = Apartment.objects.all()
-	paginator = Paginator(apartments, 15) # Show 25 apartments per page
-	page = request.GET.get('page')
-	apartments_page = paginator.get_page(page)
+	apartments_list = Apartment.objects.all()
 	if 'sortInput' in request.GET:
 		if "Sort by Price (low to high)"==request.GET['sortInput']:
-			apartments = Apartment.objects.order_by('price')
+			apartments_list = Apartment.objects.order_by('price')
 		elif "Sort by Price (high to low)"==request.GET['sortInput']:
-			apartments = Apartment.objects.order_by('-price')
+			apartments_list = Apartment.objects.order_by('-price')
 	if 'search' in request.GET:
 		search_term= request.GET['search']
-		apartments= apartments.filter(name__icontains=search_term)
+		apartments_list= apartments_list.filter(name__icontains=search_term)
 	if 'max_price_input' in request.GET:
 		maxPriceInput = request.GET['max_price_input']
-		apartments = apartments.filter(price__lt=maxPriceInput)
+		apartments_list = apartments_list.filter(price__lt=maxPriceInput)
 		"""
 		for apt in apartments:
 			aptprice = getattr(apt, "price")
@@ -54,17 +53,20 @@ def apartments(request):
 	if 'bedroomInput' in request.GET:
 		bedroomInput = request.GET['bedroomInput']
 		if bedroomInput != "No Filter":
-			apartments = apartments.filter(bedrooms__icontains=bedroomInput)
+			apartments_list = apartments_list.filter(bedrooms__icontains=bedroomInput)
 	else:
 		bedroomInput = "No Filter"
 	if 'ratingInput' in request.GET:
 		ratingInput = request.GET['ratingInput']
 		if "Sort by Average Rating (high to low)"==ratingInput:
-			apartments = apartments.filter(ratings__isnull=False).order_by('-ratings__average')
+			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('-ratings__average')
 		elif "Sort by Average Rating (low to high)"==ratingInput:
-			apartments = apartments.filter(ratings__isnull=False).order_by('ratings__average') 
+			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('ratings__average') 
 	else:
-		ratingInput = "No Filter"	
+		ratingInput = "No Filter"
+	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
+	page = request.GET.get('page')
+	apartments = paginator.get_page(page)	
 	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput, 'ratingInput':ratingInput})
 
 
