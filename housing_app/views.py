@@ -10,7 +10,9 @@ from .models import Apartment, UserProfile, Review
 from .forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
 # found how to sort here: https://stackoverflowfrom django.shortcuts import get_object_or_404.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
 
 def home(request):
@@ -18,7 +20,11 @@ def home(request):
 
 def apartments(request):
 	search_term=''
-	apartments = Apartment.objects.all()
+	apartments_list = Apartment.objects.all()
+	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
+	page = request.GET.get('page')
+	apartments = paginator.get_page(page)
+
 	if 'sortInput' in request.GET:
 		if "Sort by Price (low to high)"==request.GET['sortInput']:
 			apartments = Apartment.objects.order_by('price')
@@ -129,7 +135,7 @@ def get_user_profile(request, username):
 			return HttpResponseRedirect(request.path_info)
 		return render(request, 'profile.html', {'form': form,"user_for_page":user_for_page})
 	else:
-		form = UserProfileForm()		
+		form = UserProfileForm(instance=instance)		
 		return render(request, 'profile.html', {'form': form,"user_for_page":user_for_page})
     # try:
     #     user_for_page = User.objects.get(username=username)

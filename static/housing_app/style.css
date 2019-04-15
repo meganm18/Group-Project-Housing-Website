@@ -685,6 +685,7 @@ body, html {
 
 	.apartmentname{
 		max-width: 100%;
+		min-height: 150px;
 		padding: 0px;
 		margin-left: 10px;
 		margin-right: 10px;
@@ -887,9 +888,9 @@ body, html {
 	text-align: center;
 	background: transparent;
 	/*font-weight: bolder;*/
-	border-bottom-style: solid;
+/*	border-bottom-style: solid;
 	border-bottom-width: 5px;
-
+*/
 	}
 
 
@@ -996,8 +997,8 @@ body, html {
 
  .apartment_detail_container{
 
- 	margin-left: 20px;
- 	margin-right: 20px;
+ 	margin-left: 2rem;
+ 	margin-right: 2rem;
 
  }
 
@@ -1062,5 +1063,32 @@ body, html {
 	width: 40%;
 	align-content: center;
 	margin-left: 30%;
-
 }
+
+.fieldWrapper2 {
+ 	position: absolute;
+ 	left: 50%;
+ 	top: 50%;
+ 	transform: translate(-50%, -50%);
+ 	width: 80%;
+ 	height: 40%;
+ }
+
+ .fieldWrapper2 label {
+ 	align-self: flex-start;
+ }
+
+.fieldWrapper2 textarea{
+ 	margin-left: 30px;
+ 	width: 90%;
+ 	height: 100%;
+ 	border-radius: 10px;
+ 	color: #666666;
+ }
+
+ .fieldWrapper2 textarea:focus{
+ 	outline: none !important;
+    border:1.5px solid #67bb96;
+    box-shadow: 0 0 10px #719ECE;
+ }
+

@@ -56,6 +56,28 @@ div.table {
 	height: 80%;
 	overflow-y: scroll;
 }
+.page-link{
+  color: #dc858e;
+}
+
+.page-link:hover{
+  color: #dc858e;
+}
+
+.page-link:active{
+  color: #dc858e;
+  border-color: #dc858e;
+}
+
+.page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.page-item.active .page-link{
+  background-color: #dc858e;
+  border-color: #dc858e;
+}
 </style>
 	<div class="profile_content_container" id="outer_container">
 
@@ -451,10 +473,10 @@ div.table {
 {% if user %}
 						<nav aria-label="Page navigation example" class="pagination_profile">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item"  ><a style="color: #ffb0b8;" class="page-link" href="{% url 'profile' user %}">Info</a></li>
-						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
-						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
-						    <li class="page-item"><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Compare</a></li>
+						    <li class="page-item"  ><a class="page-link" href="{% url 'profile' user %}">Info</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item-active"><a class="page-link" href="#">Compare</a></li>
 						  </ul>
 						</nav>
 		{% endif %}
