@@ -9,13 +9,12 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style type="text/css">
-
 #overall {
-	height: 500px;
+	height: 80%;
 	overflow-y: scroll;
 }
 #content, html, body {
-    height: 500px;
+    height: 80%;
     width: 99%;
     margin: .1%;
     background-color: #FDFDFD;
@@ -47,24 +46,17 @@
 		background: #f1f1f1;
 	}*/
 }
-#compareheading {
-	float: center;
-	font-size: 100%;
-	text-align: center;
-}
 div.table {
   background-color: #FDFDFD;
   width:100%;
-  height: 400px;
+  height: 80%;
   overflow-y: scroll;
 }
-
 .overall{
-	height: 500px;
+	height: 80%;
 	overflow-y: scroll;
 }
 </style>
-</head>
 	<div class="profile_content_container" id="outer_container">
 
 		<div class="container">
@@ -453,8 +445,9 @@ div.table {
 	    </script>
 
 		</div>
-
-<div class="container">
+				</div>
+	</div>
+<div class="container" id="main_col" style="-ms-transform: translateY(-20%); transform: translateY(-10%);">
 {% if user %}
 						<nav aria-label="Page navigation example" class="pagination_profile">
 						  <ul class="pagination justify-content-center">
@@ -470,10 +463,6 @@ div.table {
 	</div>
 
 	</div>
-
-	</div>
-</div>
-
 
 {% endblock content %}
 </html>
