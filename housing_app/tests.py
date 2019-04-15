@@ -146,6 +146,12 @@ class StatusCodesTestCase(TestCase):
         response10 = fav_save_compare1(request10, self.apartment1.id)
         self.assertEqual(response10.status_code, 302) #redirects so status code of 302 instead of 200
 
+    def test_save_favorite(self):
+        request11 = self.factory.get(r'^fav_save_compare1/(\d+)/')
+        request11.user = self.user1
+        response11 = save_favorite(request11, self.apartment1.id)
+        self.assertEqual(response11.status_code, 302)  # redirects so status code of 302 instead of 200
+
    
 '''
 class SortingApartmentsTestCase(TestCase):
