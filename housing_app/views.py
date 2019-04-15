@@ -6,7 +6,7 @@ from django.db import transaction
 from django.shortcuts import redirect
 from django.http import Http404, HttpResponseRedirect
 from social_django.models import UserSocialAuth
-from .models import Apartment, UserProfile, Review
+from .models import Apartment, UserProfile, Review, Unit
 from .forms import UserForm, ProfileForm, ReviewForm
 from django.contrib.auth.models import User
 # found how to sort here: https://stackoverflow.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
@@ -51,6 +51,8 @@ def apartment_detail(request, id):
 	try:
 		apartment = Apartment.objects.get(id=id)
 
+		units = Unit.objects.all()
+		units = units.filter(apartment_name__icontains=apartment.name)
 		if request.method == "POST":
 			form = ReviewForm(request.POST)
 			if form.is_valid():
@@ -61,11 +63,11 @@ def apartment_detail(request, id):
 
 				form = ReviewForm()
 				return HttpResponseRedirect(request.path_info)
-			return render(request, 'apartment_detail.html', {'apartment': apartment, 'form': form,})
+			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units ,'form': form,})
 		else:
 			form = ReviewForm()
 			reviews = Review.objects.all().filter(apartment=apartment)		
-			return render(request, 'apartment_detail.html', {'apartment': apartment, 'form': form, 'reviews':reviews})
+			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units , 'form': form, 'reviews':reviews})
 	except Apartment.DoesNotExist:
 		raise Http404("Apartment not found")
 
