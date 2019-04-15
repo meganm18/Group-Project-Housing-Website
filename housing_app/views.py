@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.http import Http404, HttpResponseRedirect
 from social_django.models import UserSocialAuth
 from .models import Apartment, UserProfile, Review, Unit
-from .forms import UserForm, ProfileForm, ReviewForm
+from .forms import UserForm, UserProfileForm, ReviewForm
 
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
