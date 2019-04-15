@@ -129,7 +129,7 @@ class SortingApartmentsTestCase(TestCase):
         apartmentObjs = apartmentObjs.order_by('-price')
         apartmentObjs.save()
         self.assertEqual(apartmentObjs[0].name, "Apartment 2")
-        
+
 class FilteringApartmentsTestCase(TestCase):
     def setUp(self):
         #create apartments with unique bedroom numbers
