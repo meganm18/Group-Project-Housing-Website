@@ -15,6 +15,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 
 # found how to sort here: https://stackoverflowfrom django.shortcuts import get_object_or_404.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
+# found info for filtering here: https://stackoverflow.com/questions/51905712/how-to-get-the-value-of-a-django-model-field-object
 
 def home(request):
 	return render(request, 'home.html')
@@ -36,6 +37,18 @@ def apartments(request):
 	if 'max_price_input' in request.GET:
 		maxPriceInput = request.GET['max_price_input']
 		apartments = apartments.filter(price__lt=maxPriceInput)
+		"""
+		for apt in apartments:
+			aptprice = getattr(apt, "price")
+			if "-" in aptprice:
+				aptprice = aptprice.split("-")[1]
+			if "–" in aptprice: # this looks like a hyphen but is not. This is not duplicate code
+				aptprice = aptprice.split("–")[1]
+			aptprice = aptprice.replace("-","").replace(",","").replace("$","").strip()
+			if int(aptprice) > int(maxPriceInput):
+				aptname = getattr(apt, "name")
+				apartments = apartments.filter(name__icontains=aptname)
+		"""
 	else:
 		maxPriceInput = 3000;
 	if 'bedroomInput' in request.GET:
@@ -95,11 +108,8 @@ def logout(request):
 def favorites(request):
 	user_for_page = request.user
 	user = request.user
-
 	user_profile = user.userprofile
-
 	favorites = user_profile.favorites.all()
-
 	return render(request, 'favorites.html', {'user_for_page': user_for_page,'favorites': favorites})
 
 ## page like favorites that will list your ratings
@@ -113,10 +123,11 @@ def favorites(request):
 @login_required()
 def compare(request):
 	user = request.user
+	user_for_page = request.user
 	user_profile = user.userprofile
 	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
 	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
-	return render(request, 'compare.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1})
+	return render(request, 'compare.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
 
 @login_required()
 def loginsuccess(request):
