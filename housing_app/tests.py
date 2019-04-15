@@ -121,6 +121,17 @@ class StatusCodesTestCase(TestCase):
         response6 = get_user_reviews(request6, request6.user.username)
         self.assertEqual(response6.status_code, 200)
 
+    def test_save_compare0(self):
+        request7 = self.factory.get(r'^save_compare0/(\d+)/')
+        request7.user = self.user1
+        response7 = get_user_reviews(request7, self.apartment1.id)
+        self.assertEqual(response7.status_code, 200)
+
+    def test_save_compare1(self):
+        request8 = self.factory.get(r'^save_compare1/(\d+)/')
+        request8.user = self.user1
+        response8 = get_user_reviews(request8, self.apartment1.id)
+        self.assertEqual(response8.status_code, 200)
 '''
 class SortingApartmentsTestCase(TestCase):
     def setUp(self):
