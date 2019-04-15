@@ -111,9 +111,12 @@ def getinfo(webpage):
         try:
             pattern = re.compile('og:image" content="([^"]*)')
             match = pattern.search(info)
-            apptinfo[title]["Image"]=match.group(1)
+            match=match.group(1)
+            if match[-1]=='/':
+                match="https://collegestudentapartments.com/img/no-image-main2.jpg"
+            apptinfo[title]["Image"]=match
         except:
-            apptinfo[title]["Image"] = "---"
+            apptinfo[title]["Image"] = "https://collegestudentapartments.com/img/no-image-main2.jpg"
         #This is gonna be pretty difficult to follow
         #gonna basically put another dict of dicts in the dict :(
         # Units{untit name{Title:X,beds:Y,:Size:Z, Prince:W}}
@@ -137,7 +140,7 @@ def getinfo(webpage):
                 Unit=title+": "+"Untitled"
             try:
                 # Find number of beds
-                pattern = re.compile('beds.*longText">(\d)')
+                pattern = re.compile('>([^a-z]*?) Bedroom')
                 match = pattern.search(unit)
                 apptinfo[title]["Units"][Unit]["Beds"] = match.group(1)
             except:
@@ -145,7 +148,7 @@ def getinfo(webpage):
                 apptinfo[title]["Units"][Unit]["Beds"] = "---"
             try:
                 # Find number of baths
-                pattern = re.compile('baths.*longText">(\d)')
+                pattern = re.compile('>([^a-z]*?) Bathroom')
                 match = pattern.search(unit)
                 apptinfo[title]["Units"][Unit]["Baths"] = match.group(1)
             except:
@@ -163,10 +166,10 @@ def getinfo(webpage):
                 # Find the price of the individual unit
                 pattern = re.compile('rent">([^<]*)')
                 match = pattern.search(unit)
-                apptinfo[title]["Units"][Unit]["Price"] = (match.group(1)).replace("$","")
+                apptinfo[title]["Units"][Unit]["Price"] = "$"+(match.group(1)).replace("$","")
             except:
                 # Cant find anything put null
-                apptinfo[title]["Units"][Unit]["Price"] = "---"
+                apptinfo[title]["Units"][Unit]["Price"] = "$"+"---"
         # apptinfo[title]["Description"]=match.group(1)
     return(apptinfo)
 # Take in two parameters which are dicts of info and create a csv listing the info in the dict

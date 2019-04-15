@@ -24,6 +24,15 @@ class Apartment(models.Model):
 	def __str__(self):
 		return self.name
 
+class Unit(models.Model):
+	unit_name = models.CharField(max_length=150)
+	apartment_name = models.CharField(max_length=150)
+	price = models.CharField(max_length=100)
+	size = models.CharField(max_length=100)
+	bedrooms = models.CharField(max_length=100)
+	bathrooms = models.CharField(max_length=100, default="--")
+	def __str__(self):
+		return self.name
 ## We needed to change the database to fix the login problem. I was having trouble doing that and there was probably
 ## a more elegant solution but this seems to work.
 class UserProfile(models.Model):
