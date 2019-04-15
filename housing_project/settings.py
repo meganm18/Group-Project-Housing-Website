@@ -237,3 +237,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20
+
+STAR_RATINGS_STAR_SPRITE = 'star-ratings/images/stars.png'

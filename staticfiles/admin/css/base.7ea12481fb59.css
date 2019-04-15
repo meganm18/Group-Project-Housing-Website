@@ -748,11 +748,19 @@ a.deletelink:focus, a.deletelink:hover {
 }
 
 .object-tools a.viewsitelink, .object-tools a.golink {
+    background-image: url("../img/tooltag-arrowright.bbfb788a849e.svg");
 }
 
 .object-tools a.addlink {
     background-image: url("../img/tooltag-add.e59d620a9742.svg");
 }
+
+/* OBJECT HISTORY */
+
+table#change-history {
+    width: 100%;
+}
+
 table#change-history tbody th {
     width: 16em;
 }

@@ -264,6 +264,26 @@ function closeForm() {
              <script>
                
               function initMap() {
+
+              var custom_icon_path_1 = "{% static "images/pin_pink.png" %}"
+              var custom_icon_path_2 = "{% static "images/pin_green.png" %}"
+
+              // custom_icon = {
+              //         url: custom_icon_path_1,
+              //         size: new google.maps.Size(20, 38),
+              //         scaledSize: new google.maps.Size(20, 38),
+              //         labelOrigin: new google.maps.Point(30, 30),
+              // };
+
+              // custom_icon_2 = {
+              //         url: custom_icon_path_2,
+              //         size: new google.maps.Size(20, 38),
+              //         scaledSize: new google.maps.Size(20, 38),
+              //         labelOrigin: new google.maps.Point(30, 30),
+              // };
+
+              // var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
               var apt_coordinates = {lat: 38.0325982, lng: -78.4955055};
               var apt_coor_2 = {lat:38.0327987, lng: -78.4952891};
               var apt_coor_3 ={lat:38.037524, lng:-78.4989593}; 
@@ -494,24 +514,98 @@ function closeForm() {
 ]
               });
 
-              var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats'});
-              var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable'}); 
+              var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats', icon: custom_icon_path_1});
+              var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable', icon: custom_icon_path_1}); 
              //var marker3 = new google.maps.Marker({position: apt_coor_3, map: map},label: 'The Standard'}); 
-              var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc'}); 
-              var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA'}); 
-             var marker6 = new google.maps.Marker({position: apt_coor_6, map: map, label: '112 West Market St.'});
-              var marker7 = new google.maps.Marker({position: apt_coor_7, map: map, label: '1115 Wertland St.'});
-              var marker8 = new google.maps.Marker({position: apt_coor_8, map: map, label: '64 University Way'});
+              var marker4 = new google.maps.Marker({position: apt_coor_4, map: map, label: 'Grandmarc', icon: custom_icon_path_1}); 
+              var marker5 = new google.maps.Marker({position: apt_coor_5, map: map, label: '1800 JPA', icon: custom_icon_path_1}); 
+             var marker6 = new google.maps.Marker({position: apt_coor_6, map: map, label: '112 West Market St.', icon: custom_icon_path_1});
+              var marker7 = new google.maps.Marker({position: apt_coor_7, map: map, label: '1115 Wertland St.', icon: custom_icon_path_1});
+              var marker8 = new google.maps.Marker({position: apt_coor_8, map: map, label: '64 University Way', icon: custom_icon_path_1});
 
-               var marker10 = new google.maps.Marker({position: apt_coor_10, map: map, label: '300 4th St. SE'});
-              var marker11 = new google.maps.Marker({position: apt_coor_11, map: map, label: '2021 Ivy Rd'});
-              var marker12 = new google.maps.Marker({position: apt_coor_12, map: map, label: '1801 Lambeth Lane'});
-              var marker13 = new google.maps.Marker({position: apt_coor_13, map: map, label: 'Reserve at Belvedere'});
+               var marker10 = new google.maps.Marker({position: apt_coor_10, map: map, label: '300 4th St. SE', icon: custom_icon_path_1});
+              var marker11 = new google.maps.Marker({position: apt_coor_11, map: map, label: '2021 Ivy Rd', icon: custom_icon_path_1});
+              var marker12 = new google.maps.Marker({position: apt_coor_12, map: map, label: '1801 Lambeth Lane', icon: custom_icon_path_1});
+              var marker13 = new google.maps.Marker({position: apt_coor_13, map: map, label: 'Reserve at Belvedere', icon:custom_icon_path_1});
 
 
+            // This is hard coded and terrible but it's just meant to show how the functionality works, sorry for the mess
+                google.maps.event.addListener(marker, 'mouseover', function() {
+                    marker.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker, 'mouseout', function() {
+                    marker.setIcon(custom_icon_path_1);
+                });
+
+                google.maps.event.addListener(marker2, 'mouseover', function() {
+                    marker2.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker2, 'mouseout', function() {
+                    marker2.setIcon(custom_icon_path_1);
+                });
               
-                
-                }
+               google.maps.event.addListener(marker4, 'mouseover', function() {
+                    marker4.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker4, 'mouseout', function() {
+                    marker4.setIcon(custom_icon_path_1);
+                });
+
+               google.maps.event.addListener(marker5, 'mouseover', function() {
+                    marker5.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker5, 'mouseout', function() {
+                    marker5.setIcon(custom_icon_path_1);
+                });
+
+               google.maps.event.addListener(marker6, 'mouseover', function() {
+                    marker6.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker6, 'mouseout', function() {
+                    marker6.setIcon(custom_icon_path_1);
+                });
+
+               google.maps.event.addListener(marker7, 'mouseover', function() {
+                    marker7.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker7, 'mouseout', function() {
+                    marker7.setIcon(custom_icon_path_1);
+                });
+               google.maps.event.addListener(marker8, 'mouseover', function() {
+                    marker8.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker8, 'mouseout', function() {
+                    marker8.setIcon(custom_icon_path_1);
+                });
+
+               google.maps.event.addListener(marker10, 'mouseover', function() {
+                    marker10.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker10, 'mouseout', function() {
+                    marker10.setIcon(custom_icon_path_1);
+                });
+               google.maps.event.addListener(marker11, 'mouseover', function() {
+                    marker11.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker11, 'mouseout', function() {
+                    marker11.setIcon(custom_icon_path_1);
+                });
+
+               google.maps.event.addListener(marker12, 'mouseover', function() {
+                    marker12.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker12, 'mouseout', function() {
+                    marker12.setIcon(custom_icon_path_1);
+                });   
+
+               google.maps.event.addListener(marker13, 'mouseover', function() {
+                    marker13.setIcon(custom_icon_path_2);
+                });
+                google.maps.event.addListener(marker13, 'mouseout', function() {
+                    marker13.setIcon(custom_icon_path_1);
+                });             
+            }
+
              </script>
 
                 <script async defer
