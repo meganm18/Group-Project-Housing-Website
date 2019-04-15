@@ -3,9 +3,8 @@
 {% extends 'base.html' %}
 
 	{% block content %}
-
-  {% load staticfiles %}
   {% load ratings %}
+  {% load staticfiles %}
 <!-- found how to make the advanced search form here: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup_form-->
 <!-- found how to make the price sliding bar here: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_rangeslider-->
 <!-- and had help here: https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
@@ -630,7 +629,7 @@ function closeForm() {
 				            <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
 					            <h3> {{ apartment.name|capfirst }} </h3>
 				            </a>
-                    <h5 id="apartment_price">{{ apartment.price }}</h5>
+                    <h5 id="apartment_price">{{ apartment.price }} Rating: {{apartment.ratings.get.average}}</h5>
 				            {% if user and not user.is_anonymous %}
 
 				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
