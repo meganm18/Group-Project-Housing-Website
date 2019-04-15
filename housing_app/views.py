@@ -21,11 +21,10 @@ def home(request):
 
 def apartments(request):
 	search_term=''
-	apartments_list = Apartment.objects.all()
-	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
+	apartments = Apartment.objects.all()
+	paginator = Paginator(apartments, 15) # Show 25 apartments per page
 	page = request.GET.get('page')
-	apartments = paginator.get_page(page)
-
+	apartments_page = paginator.get_page(page)
 	if 'sortInput' in request.GET:
 		if "Sort by Price (low to high)"==request.GET['sortInput']:
 			apartments = Apartment.objects.order_by('price')
