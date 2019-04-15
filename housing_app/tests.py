@@ -1,6 +1,7 @@
 from django.test import TestCase, RequestFactory
 from .models import Apartment, UserProfile
 from django.contrib.auth.models import User
+from .forms import UserProfileForm
 from .views import home, apartments, apartment_detail, login, get_user_profile, get_user_reviews, save_favorite
 from .views import save_compare0, save_compare1, fav_save_compare0, fav_save_compare1
 
@@ -159,3 +160,12 @@ class FilteringApartmentsTestCase(TestCase):
         #create apartments with unique bedroom numbers
     def test_bedroom_sort(self):
 '''
+
+class UpdateBioTestCase(TestCase):
+    def setUp(self):
+        User.objects.create(username="user_bio")
+
+    def test_userprofileform(self):
+        form_data = {'bio':'this is a test bio'}
+        form = UserProfileForm(data=form_data)
+        self.assertTrue(form.is_valid())
