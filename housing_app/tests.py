@@ -125,13 +125,13 @@ class StatusCodesTestCase(TestCase):
         request7 = self.factory.get(r'^save_compare0/(\d+)/')
         request7.user = self.user1
         response7 = save_compare0(request7, self.apartment1.id)
-        self.assertEqual(response7.status_code, 200)
+        self.assertEqual(response7.status_code, 302) #redirects so status code of 302 instead of 200
 
     def test_save_compare1(self):
         request8 = self.factory.get(r'^save_compare1/(\d+)/')
         request8.user = self.user1
         response8 = save_compare1(request8, self.apartment1.id)
-        self.assertEqual(response8.status_code, 200)
+        self.assertEqual(response8.status_code, 302) #redirects so status code of 302 instead of 200
 '''
 class SortingApartmentsTestCase(TestCase):
     def setUp(self):
