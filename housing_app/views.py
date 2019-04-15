@@ -163,7 +163,6 @@ def get_user_reviews(request, username):
 		reviews = Review.objects.all().filter(user=user_for_page)	
 	except:
 		raise Http404
-
 	return render(request, 'reviews.html', {"user_for_page":user_for_page,"reviews":reviews})
 
 # The following code saves the user profile data in combination with the receivers in models.py
