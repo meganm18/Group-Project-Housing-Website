@@ -54,8 +54,25 @@
 
 
 						<h4 id="email_text">Email: {{user_for_page.email}}</h4>
+
+						{{user_for_page.userprofile.avatar.url}}
 							
 						<h4 id="bio_text">Bio: {{user_for_page.userprofile.bio}}</h4>
+
+						<form method="POST" enctype="multipart/form-data">
+							{% csrf_token %}
+
+							{% for field in form %}
+						        <div class="fieldWrapper">
+						            {{ field.errors }}
+						            {{ field.label_tag }} {{ field }}
+						             
+						        </div>
+						    {% endfor %}
+			
+							<button type="submit" class="btn btn-default" style="float: right; color: #666666;">Submit</button>
+						</form>
+
 					</div>
 
 							

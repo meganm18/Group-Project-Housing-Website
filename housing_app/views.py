@@ -7,9 +7,11 @@ from django.shortcuts import redirect
 from django.http import Http404, HttpResponseRedirect
 from social_django.models import UserSocialAuth
 from .models import Apartment, UserProfile, Review
-from .forms import UserForm, ProfileForm, ReviewForm
+from .forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth.models import User
-# found how to sort here: https://stackoverflow.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
+from django.shortcuts import get_object_or_404
+from django.core.files.storage import FileSystemStorage
+# found how to sort here: https://stackoverflowfrom django.shortcuts import get_object_or_404.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
 
 def home(request):
 	return render(request, 'home.html')
@@ -113,12 +115,28 @@ def loginsuccess(request):
 	return render(request, 'login-success.html')
 
 def get_user_profile(request, username):
-    try:
-        user_for_page = User.objects.get(username=username)
-    except:
-        raise Http404
+	try:
+		user_for_page = User.objects.get(username=username)
+	except:
+		raise Http404
+	instance = get_object_or_404(UserProfile, user=user_for_page)
+	if request.method == "POST":
+		form = UserProfileForm(request.POST or None, request.FILES or None, instance=instance)
+		if form.is_valid():
+			# post = form.save(commit=False)
+			form.save()
+			form = UserProfileForm()
+			return HttpResponseRedirect(request.path_info)
+		return render(request, 'profile.html', {'form': form,"user_for_page":user_for_page})
+	else:
+		form = UserProfileForm()		
+		return render(request, 'profile.html', {'form': form,"user_for_page":user_for_page})
+    # try:
+    #     user_for_page = User.objects.get(username=username)
+    # except:
+    #     raise Http404
 
-    return render(request, 'profile.html', {"user_for_page":user_for_page})
+    # return render(request, 'profile.html', {"user_for_page":user_for_page})
 
 def get_user_reviews(request, username):
 	try:
@@ -136,20 +154,20 @@ def get_user_reviews(request, username):
 def update_profile(request):
 	if request.method == 'POST':
 		user_form = UserForm(request.POST, instance=request.user)
-		profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
-		if user_form.is_valid() and profile_form.is_valid():
+		user_profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
+		if user_form.is_valid() and user_profile_form.is_valid():
 			user_form.save()
-			profile_form.save()
+			user_profile_form.save()
 			messages.success(request, _('Your profile was successfully updated!'))
 			return redirect('home')
 		else:
 			messages.error(request, _('Please correct the error below.'))
 	else:
 		user_form = UserForm(instance=request.user)
-		profile_form = ProfileForm(instance=request.user.userprofile)
+		user_profile_form = ProfileForm(instance=request.user.userprofile)
 	return render(request, 'account', {
 		'user_form': user_form,
-		'profile_form': profile_form
+		'user_profile_form': user_profile_form
 	})
 
 @login_required
@@ -164,6 +182,25 @@ def save_favorite(request, apartment_id):
 		user_profile.save()
 		user.save()
 	return redirect('apartments')
+
+@login_required
+def edit_profile_view(request):
+
+		user = request.user
+		user_profile = user.userprofile
+
+		if request.method == "POST":
+			form = ProfileForm(request.POST or None, instance=instance)
+			if form.is_valid():
+				# post = form.save(commit=False)
+				form.save()
+				form = ProfileForm()
+				return HttpResponseRedirect(request.path_info)
+
+			return render(request, 'profile.html', {'form': form})
+		else:
+			form = ProfileForm()		
+			return render(request, 'profile.html', {'form': form})
 
 @login_required
 def save_compare0(request, apartment_id):

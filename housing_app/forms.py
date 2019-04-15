@@ -15,10 +15,13 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
-class ProfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
+    # avatar = forms.ImageField(required=False)
+    # bio = forms.Textarea()
+
     class Meta:
         model = UserProfile
-        fields = ['bio', 'favorites']
+        fields = ['avatar', 'bio']
 
 class ReviewForm(forms.ModelForm):
     review = forms.Textarea()
@@ -26,3 +29,4 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['review',]
+

@@ -17,6 +17,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
 
 from housing_app import views
 
@@ -44,6 +45,9 @@ urlpatterns = [
     url(r'^fav_save_compare1/(\d+)/', views.fav_save_compare1, name='fav_save_compare1'),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     url(r'^filter/', views.apartments, name='filter'),
+    # url(r'^edit_profile/', views.save_profile, name='save_profile'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
