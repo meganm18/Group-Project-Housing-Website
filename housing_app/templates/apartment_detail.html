@@ -10,6 +10,9 @@
 		padding: 30px;
 		background: #f1f1f1;
 	}*/
+	p3 {
+  text-decoration: underline;
+}
 
 
 
@@ -91,12 +94,23 @@
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ apartment.price }} </p>
 				<p> <strong>Distance to Grounds:</strong> {{ apartment.distance }} </p>
-				<p> <strong>Size:</strong> {{ apartment.size }} sq ft </p>
+				<p> <strong>Size:</strong> {{ apartment.size }}</p>
 				<p> <strong>Furnished:</strong> {{ apartment.furnished }} </p>
 				<p> <strong>Pets Allowed:</strong> {{ apartment.pets }} </p>
 				<p> <strong>Number:</strong> {{ apartment.number }} </p>
-
 				</div>
+				<div class="card">
+					<h2>Units</h2>
+					{% for unit in units %}
+						<p3> <strong>Name:</strong> {{ unit.unit_name }} </p3>
+						<p> <strong>Price:</strong> {{ unit.price }} </p>
+						<p> <strong>Size:</strong> {{ unit.size }}</p>
+						<p> <strong>Beds:</strong> {{ unit.bedrooms }} </p>
+						<p> <strong>Baths:</strong> {{ unit.bathrooms }} </p>
+					{% endfor %}
+				</div>
+				</div>
+
 				<div class="card2">
 					<h2>Apartment Rating</h2>
 					<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
