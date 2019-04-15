@@ -37,7 +37,7 @@ class Unit(models.Model):
 ## a more elegant solution but this seems to work.
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=255)
+	avatar = models.ImageField(default="static/images/blank_profile.png", max_length=255,upload_to='images/')
 	bio = models.TextField(max_length=500, blank=True)
 	favorites = models.ManyToManyField(Apartment, blank=True,related_name="favorites")
 	compare0 = models.ForeignKey(Apartment, blank = True, null=True, on_delete='SET_DEFAULT', related_name="compare0")

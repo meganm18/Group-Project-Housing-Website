@@ -3,7 +3,156 @@
 
 	{% load static %}
 
+
+
 	{% block content %}
+
+		  <style>
+
+.open-advanced{
+/*  background-color: transparent;*/
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+/*  opacity: 0.8;*/
+  position: fixed;
+  top: 0%;
+  right: 10%;
+ /* width: 280px;
+  height: 40px;*/
+}
+
+.form-advanced{
+  font-family: 'Nunito', sans-serif;
+  color: #666666;
+  display: none;
+  position: absolute;
+  top:0px;
+  right: 0px;
+  /*border: 3px solid #f1f1f1;*/
+  background-color: white;
+  opacity: 1;
+  z-index: 1;
+  width: 100%;
+  height: 500px;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/*.form-container input[type=bedrooms-filtering]:focus {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-container input[type=price-filtering], .form-container input[type=bedrooms-filtering] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}*/
+
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+
+div.table {
+  background-color: #FDFDFD;
+  width:100%;
+  height: 580px;
+  overflow: auto;
+}
+
+.page-link{
+  color: #dc858e;
+}
+
+.page-link:hover{
+  color: #dc858e;
+}
+
+.page-link:active{
+  color: #dc858e;
+  border-color: #dc858e;
+}
+
+.page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.page-item.active .page-link{
+  background-color: #dc858e;
+  border-color: #dc858e;
+}
+
+/*.btn-file {
+    position: relative;
+    left: 75px;
+    overflow: hidden;
+}
+.btn-file:hover{
+    color: red;
+}
+.btn-file input[type=file] {
+
+    position: absolute;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+*/
+</style>
 
 	<div class="profile_background_image"></div>
 
@@ -35,17 +184,53 @@
 				<div class="col-md-auto" id="main_col">
 					<!-- Checks to see if user accessing profile is the user logged in -->
 					{% if user_for_page == user %}
-						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
-						<button class="btn btn-default" id="edit_profile" name="edit_profile"> Edit Profile </button>
+						<h1 class="profile_name" style="z-index: 100;">{{user_for_page.get_full_name}}</h1>
+						<button class="btn btn-default" onclick="openForm()" id="edit_profile" name="edit_profile"> Edit Profile </button>
 
-						<nav aria-label="Page navigation example" class="pagination_profile">
+						<nav aria-label="Page navigation example" class="pagination_profile"style="z-index: 100;">
 						  <ul class="pagination justify-content-center">
-						    <li class="page-item active"  ><a style="color: #ddb0b8; background-color: #f0f0f0; border-color: #d0d0d0;" class="page-link" href="#">Info</a></li>
-						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
-						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
-						    <li class="page-item"><a style="color: #ffb0b8;" class="page-link" href="{% url 'compare' %}">Compare</a></li>
+						    <li class="page-item active"  ><a class="page-link" href="#">Info</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li>
 						  </ul>
 						</nav>
+
+						<div class="form-advanced form-group" id="myForm">
+                			<button class="btn btn-default" onclick="closeForm()" style="float: left;"> Cancel</button>
+                 			
+                 			 <form method="POST" enctype="multipart/form-data">
+							{% csrf_token %}
+
+							<label class="btn btn-default" for="id_avatar" style="position: absolute; margin-left: 10px; top: 0px;">
+								{{ form.avatar.errors }}
+    							{{ form.avatar }}
+    							Select Image
+
+							</label>
+								<span class='label label-info' id="upload-file-info" style="position: absolute; margin-left: 120px; padding: .375rem .75rem; margin-top: 0.5px;"></span>
+							
+								
+								<div class="fieldWrapper2">
+									{{ form.bio.errors }}
+	    							{{ form.bio.label_tag }}
+	    							{{ form.bio }}
+	    						</div>
+
+						             
+						        							
+							<button type="submit" class="btn btn-default" style="top: 85%; position: absolute; left: 50%; color: #666666;transform: translate(-50%, -50%);">Save changes</button>
+							</form>
+						</div>
+						<script>
+						function openForm() {
+						  document.getElementById("myForm").style.display = "block";
+						}
+
+						function closeForm() {
+						  document.getElementById("myForm").style.display = "none";
+						}
+						</script>
 					{% else %}
 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
 					{% endif %}
@@ -54,8 +239,13 @@
 
 
 						<h4 id="email_text">Email: {{user_for_page.email}}</h4>
+
+						<!-- {{user_for_page.userprofile.avatar.url}} -->
 							
 						<h4 id="bio_text">Bio: {{user_for_page.userprofile.bio}}</h4>
+
+
+
 					</div>
 
 							
