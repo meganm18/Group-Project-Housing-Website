@@ -629,7 +629,7 @@ function closeForm() {
 				            <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
 					            <h3> {{ apartment.name|capfirst }} </h3>
 				            </a>
-                    <h5 id="apartment_price">{{ apartment.price }} Rating: {{apartment.ratings.get.average}}</h5>
+                    <h5 id="apartment_price">{{ apartment.price }} | Rating: {{apartment.ratings.get.average}}</h5>
 				            {% if user and not user.is_anonymous %}
 
 				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
