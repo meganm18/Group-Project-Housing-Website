@@ -152,6 +152,11 @@ class StatusCodesTestCase(TestCase):
         response11 = save_favorite(request11, self.apartment1.id)
         self.assertEqual(response11.status_code, 302)  # redirects so status code of 302 instead of 200
 
+    def test_filter_page(self):
+        request12 = self.factory.get(r'^filter/')
+        request12.user = self.user1
+        response12 = apartments(request12)
+        self.assertEqual(response12.status_code, 200)
    
 '''
 class SortingApartmentsTestCase(TestCase):
