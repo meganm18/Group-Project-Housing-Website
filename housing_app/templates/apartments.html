@@ -629,12 +629,13 @@ function closeForm() {
 				            <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
 					            <h3> {{ apartment.name|capfirst }} </h3>
 				            </a>
-                    <h5 id="apartment_price">{{ apartment.price }} </h5>
+                    <h5 id="apartment_price" style="margin: 0%;">{{ apartment.price }} </h5>
+                                <h5 id="apartment_bedrooms" style="margin: 0%">Bedrooms: {{ apartment.bedrooms }} Bathrooms: {{ apartment.bathrooms }}</h5>
 				            {% if user and not user.is_anonymous %}
 
 				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
 					             {% csrf_token %}
-					             <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
+					             <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}" style="padding: 1%"> Save to Favorites </button>
 				              </form>
                       <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
                       <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
@@ -646,11 +647,11 @@ function closeForm() {
 
                       <form action="{% url 'save_compare0' apartment.id %}" method="post" style="position: relative;">
                         {% csrf_token %}
-					              <button type="submit" class="btn btn-default" name="compare_apartment0" style="position: absolute; left: 52%; top: 50%; transform: translate(-30%, -120%); width: 70%;"> Set as First Compare Apartment</button>
+					              <button type="submit" class="btn btn-default" name="compare_apartment0" style="position: absolute; left: 48%; top: 50%; transform: translate(-30%, -120%); width: 70%; padding: 1%"> Set as First Compare Apartment</button>
 				              </form>
 				              <form action="{% url 'save_compare1' apartment.id %}" method="post" style="position: relative;">
 					               {% csrf_token %}
-					               <button type="submit" class="btn btn-default" name="compare_apartment1" style="position: absolute; left: 51%; top: 50%; transform: translate(-30%, -50%); width: 70%;"> Set as Second Compare Apartment</button>
+					               <button type="submit" class="btn btn-default" name="compare_apartment1" style="padding: 1%; position: absolute; left: 47%; top: 50%; transform: translate(-30%, -50%); width: 70%;"> Set as Second Compare Apartment</button>
 				              </form>
                     {% else %}
 
