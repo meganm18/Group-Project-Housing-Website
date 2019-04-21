@@ -28,6 +28,7 @@
 			
 			<div class="row">
 			<div class="leftcolumn">
+
 				<div class="card">
 				{% load static %}
 				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
@@ -91,6 +92,25 @@
 					</div>
 			</div>
 			<div class="rightcolumn">
+                <div class="card">
+                            {% if user and not user.is_anonymous %}
+
+				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
+					             {% csrf_token %}
+					             <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
+				              </form>
+                      <form action="{% url 'save_compare0' apartment.id %}" method="post" style="position: relative;">
+                        {% csrf_token %}
+					              <button type="submit" class="btn btn-default" name="compare_apartment0" style="position: absolute; left: 52%; top: 50%; transform: translate(-30%, -120%); width: 70%;"> Set as First Compare Apartment</button>
+				              </form>
+				              <form action="{% url 'save_compare1' apartment.id %}" method="post" style="position: relative;">
+					               {% csrf_token %}
+					               <button type="submit" class="btn btn-default" name="compare_apartment1" style="position: absolute; left: 51%; top: 50%; transform: translate(-30%, -50%); width: 70%;"> Set as Second Compare Apartment</button>
+				              </form>
+                    {% else %}
+
+				            {% endif %}
+                </div>
 				<div class="card">
 				<h2>Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ apartment.price }} </p>
