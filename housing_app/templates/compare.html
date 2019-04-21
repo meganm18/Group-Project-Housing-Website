@@ -201,12 +201,12 @@ div.table {
 				<div class="card">
 						<h4>Reviews</h4>
 
-						{% if not reviews0 %}
+						{% if not reviews1 %}
 							<p style="margin-left: 40px;">There are no reviews at this time</p>
 						{% else %}
 						<div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
 
-								{% for review in reviews0 %}
+								{% for review in reviews1 %}
 								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
 									<div class="row">
 										<div class="col" style="background-color: transparent; color: black">
@@ -232,7 +232,7 @@ div.table {
 						</div>
 						{% endif %}
 					</div>
-				<div class="card">
+				<div class="card" style="width: 100%">
 					<h4>Property Statistics</h4>
 					<p style="margin-bottom: 3px"> <strong>Bedrooms:</strong> {{ compare1.bedrooms }} <strong>Bathrooms:</strong> {{ compare1.bathrooms }}</p>
 					<p style="margin-bottom: 3px"> <strong>Price:</strong> {{ compare1.price }} <strong>Size:</strong> {{ compare1.size }}</p>
@@ -241,7 +241,7 @@ div.table {
 
 				</div>
 			</div>
-		</div>
+	</div>
 
 	</div>
 {% endif %}

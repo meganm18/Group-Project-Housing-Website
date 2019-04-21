@@ -91,9 +91,7 @@ div.table {
 		</div>
 
 	<div id="left">
-        <div class="apartment_detail_container">
-			<div class="row">
-          <div id="search_bar_div">
+		 <div id="search_bar_div">
 
             <form action="/compare0_search" id="search_bar_apartments" method="get">
               <div class="input-group mb-3">
@@ -104,6 +102,9 @@ div.table {
               </div>
             </form>
           </div>
+        <div class="apartment_detail_container">
+			<div class="row">
+
 
          <div class="row justify-content-md-center" id="middle_row_apartments">
         <div class="col-md-auto" id="main_col_left_apartments" style="width: 100%;">
@@ -182,6 +183,17 @@ div.table {
         </div>
 
 	<div id="right">
+		<div id="search_bar_div">
+
+            <form action="/compare1_search" id="search_bar_apartments" method="get">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                <div class="input-group-append">
+                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                </div>
+              </div>
+            </form>
+          </div>
         {% if compare1 %}
 		<div class='apartmentname'align="center" style="padding-bottom: 20px">
 			<a href="{% url 'apartment_detail' compare1.id %}" id="apartment_link">
@@ -205,12 +217,12 @@ div.table {
 				<div class="card">
 						<h4>Reviews</h4>
 
-						{% if not reviews0 %}
+						{% if not reviews1 %}
 							<p style="margin-left: 40px;">There are no reviews at this time</p>
 						{% else %}
 						<div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
 
-								{% for review in reviews0 %}
+								{% for review in reviews1 %}
 								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
 									<div class="row">
 										<div class="col" style="background-color: transparent; color: black">
@@ -259,7 +271,7 @@ div.table {
 						    <li class="page-item"  ><a class="page-link" href="{% url 'profile' user %}">Info</a></li>
 						    <li class="page-item"><a class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
 						    <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
-						    <li class="page-item-active"><a class="page-link" href="#">Compare</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li>
 						  </ul>
 						</nav>
 						<ul class="pagination justify-content-end" style="margin-right:2%">

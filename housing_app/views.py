@@ -318,7 +318,11 @@ def search_compare0(request):
 	paginator = Paginator(apartments_list, 15)  # Show 25 apartments per page
 	page = request.GET.get('page')
 	apartments = paginator.get_page(page)
-	return render(request, 'compare_search0.html', {'apartments': apartments, 'search_term': search_term})
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_search0.html', {'apartments': apartments,'search_term': search_term, 'compare0': user_profile.compare0, 'compare1': user_profile.compare1, 'reviews0': reviews0, 'reviews1': reviews1,})
+
+
 @login_required
 def save_compare0_search(request, apartment_id):
 		apartment = Apartment.objects.get(pk=apartment_id)
@@ -340,7 +344,11 @@ def search_compare1(request):
 	paginator = Paginator(apartments_list, 15)  # Show 25 apartments per page
 	page = request.GET.get('page')
 	apartments = paginator.get_page(page)
-	return render(request, 'compare_search1.html', {'apartments': apartments, 'search_term': search_term})
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_search1.html', {'apartments': apartments,'search_term': search_term, 'compare0': user_profile.compare0, 'compare1': user_profile.compare1, 'reviews0': reviews0,'reviews1': reviews1})
+
+
 @login_required
 def save_compare1_search(request, apartment_id):
 		apartment = Apartment.objects.get(pk=apartment_id)
