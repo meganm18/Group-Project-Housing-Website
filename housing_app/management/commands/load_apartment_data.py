@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core.management import BaseCommand
 
 from housing_app.models import Apartment
+from housing_app.models import Unit
 from pytz import UTC
 
 
@@ -30,7 +31,7 @@ class Command(BaseCommand):
             apartment.name = row['Apartment Name']
             apartment.company = row['Company']
             apartment.location = row['Location']
-            apartment.price = row['Price'].replace("$","")
+            apartment.price = row['Price']
             apartment.size = row['Size']
             apartment.bedrooms = row['Bedrooms']
             apartment.furnished = row['Furnished']
@@ -41,3 +42,14 @@ class Command(BaseCommand):
             apartment.bathrooms = row['Bathrooms']
             apartment.image = row['Image']
             apartment.save()
+
+        for row in DictReader(open('./units_data.csv')):
+            unit = Unit()
+            unit.unit_name = row['Unit Name']
+            unit.apartment_name = row['Apartment']
+            unit.price = row['Price']
+            unit.size = row['Size']
+            unit.bedrooms = row['Bedrooms']
+            unit.bathrooms = row['Bathrooms']
+            unit.save()
+

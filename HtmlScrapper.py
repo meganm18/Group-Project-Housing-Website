@@ -72,6 +72,7 @@ def getinfo(webpage):
     for link in getwebsites(webpage):
         # take html from each link, which are the sites individual pages
         info = (ScrapHtmlCode(link))
+
         # get title
         pattern = re.compile('title>([^|]*) UVA')
         match = pattern.search(info)
@@ -111,10 +112,9 @@ def getinfo(webpage):
         try:
             pattern = re.compile('og:image" content="([^"]*)')
             match = pattern.search(info)
-            match=match.group(1)
-            if match[-1]=='/':
-                match="https://collegestudentapartments.com/img/no-image-main2.jpg"
-            apptinfo[title]["Image"]=match
+            apptinfo[title]["Image"]="https:"+match.group(1)
+            if match.group(1)[-1]=='/':
+                apptinfo[title]["Image"]='https://collegestudentapartments.com/img/no-image-main2.jpg'
         except:
             apptinfo[title]["Image"] = "https://collegestudentapartments.com/img/no-image-main2.jpg"
         #This is gonna be pretty difficult to follow
@@ -208,11 +208,9 @@ def writecsv(first, second):
         for appt in second.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                 'Price': '$'+combine(appts[appt['Title']]['Price']),
-                 'Size': combine(appts[appt['Title']]['Size'])+' Sqrt ft.',
-                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']), 'Furnished': '---', 'Pets': '---',
+                  'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
-                 'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
+
                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image': appt['Image']})
         writer.writerow({'Apartment Name': 'The Flats at West Village', 'Company': 'Asset Campus Housing',
                          'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$655–979', 'Size': '500-1532 Sqrt ft.',
