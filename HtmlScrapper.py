@@ -208,11 +208,9 @@ def writecsv(first, second):
         for appt in second.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                 'Price': '$'+combine(appts[appt['Title']]['Price']),
-                 'Size': combine(appts[appt['Title']]['Size'])+' Sqrt ft.',
-                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']), 'Furnished': '---', 'Pets': '---',
+                  'Furnished': '---', 'Pets': '---',
                  'Description': appt['Description'],
-                 'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
+
                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image': appt['Image']})
         writer.writerow({'Apartment Name': 'The Flats at West Village', 'Company': 'Asset Campus Housing',
                          'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$655–979', 'Size': '500-1532 Sqrt ft.',
