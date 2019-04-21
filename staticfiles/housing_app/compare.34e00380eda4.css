@@ -1,0 +1,15 @@
+
+.left {
+    float: left;
+    width: 20%;
+    background: #7EEBBC;
+    height: 100%;
+    overflow: scroll;
+}
+right {
+    float: right;
+    width: 40%;
+    background: #FFB0B8;
+    height: 100%;
+    overflow: scroll;
+}
