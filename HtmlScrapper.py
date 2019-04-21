@@ -72,6 +72,7 @@ def getinfo(webpage):
     for link in getwebsites(webpage):
         # take html from each link, which are the sites individual pages
         info = (ScrapHtmlCode(link))
+
         # get title
         pattern = re.compile('title>([^|]*) UVA')
         match = pattern.search(info)
@@ -111,9 +112,11 @@ def getinfo(webpage):
         try:
             pattern = re.compile('og:image" content="([^"]*)')
             match = pattern.search(info)
-            apptinfo[title]["Image"]=match.group(1)
+            apptinfo[title]["Image"]="https:"+match.group(1)
+            if match.group(1)[-1]=='/':
+                apptinfo[title]["Image"]='https://collegestudentapartments.com/img/no-image-main2.jpg'
         except:
-            apptinfo[title]["Image"] = "---"
+            apptinfo[title]["Image"] = "https://collegestudentapartments.com/img/no-image-main2.jpg"
         #This is gonna be pretty difficult to follow
         #gonna basically put another dict of dicts in the dict :(
         # Units{untit name{Title:X,beds:Y,:Size:Z, Prince:W}}
