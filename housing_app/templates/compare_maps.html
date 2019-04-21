@@ -82,138 +82,16 @@ div.table {
 				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Compare</h1>
 			</div>
 <div class="row justify-content-md-center" id="middle_row">
-	<div class="overall">
-				<div class="col-md-auto" id="main_col">
-	<div id="left">
-		<div class='apartmentname'align="center" style="padding-bottom: 20px">
-			<h4> {{ compare0.name|capfirst }} </h4>
-		</div>
-	<div class="apartment_detail_container">
-			<div class="row">
-				<div class="card">
-				{% load static %}
-				<h5 id="location_title"><strong>{{ compare0.location }}</strong> </h5>
-					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
-					<img style="width:50%; margin-left: auto; margin-right: auto; margin-top: 2px; margin-bottom: 2px;" src={{compare0.image}} id="apartment_thumbnail">
-				<p style="margin-top: 5px;"><strong>Description of Property:</strong></p>
-				<p>{{ compare0.description}}</p>
-				</div>
-				<div class="card" style="width=50%;">
+	<div class="overall" style="width:100%; height: 80%;overflow-y:hidden;">
+				<div class="col-md-auto" id="main_col" style="height: 100%">
 
-						<h4>Reviews</h4>
-
-						{% if not reviews0 %}
-							<p>There are no reviews at this time</p>
-						{% else %}
-						<div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
-
-								{% for review in reviews0 %}
-								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black">
-											<a href="{% url 'profile' review.user %}">
-												<img src="{{ review.user.userprofile.avatar }}" id="review_thumbnail" class="rounded-circle">
-											</a>
-											<a href="{% url 'profile' review.user %}" style="font-size: 20px; color: #666666"> {{ review.user.get_full_name}}</a>
-
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black; display: inline; padding-left: 100px;">
-											<p style="color: #666666">{{review.review}}</p>
-											<p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
-										</div>
-									</div>
-								</div>
-
-								{% endfor %}
-						</div>
-							{% endif %}
-					</div>
-				<div class="card">
-					<h4>Property Statistics</h4>
-					<p style="margin-bottom: 3px"> <strong>Bedrooms:</strong> {{ compare0.bedrooms }} <strong>Bathrooms:</strong> {{ compare0.bathrooms }}</p>
-					<p style="margin-bottom: 3px"> <strong>Price:</strong> {{ compare0.price }} <strong>Size:</strong> {{ compare0.size }}</p>
-					<p style="margin-bottom: 3px"> <strong>Distance to Grounds:</strong> {{ compare0.distance }} </p>
-					<p style="margin-bottom: 3px"> <strong>Number:</strong> {{ compare0.number }} </p>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-	<div id="right">
-		<div class='apartmentname'align="center" style="padding-bottom: 20px">
-			<h4> {{ compare1.name|capfirst }} </h4>
-		</div>
 
 	<div class = "apartment_detail_background"></div>
 	<div class="apartment_detail_container">
-
-			<div class="row">
-				<div class="card">
-				{% load static %}
-				<h5 id="location_title"><strong>{{ compare1.location }}</strong> </h5>
-					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
-					<img style="width:50%; margin-left: auto; margin-right: auto; margin-top: 2px; margin-bottom: 2px" src={{compare1.image}} id="apartment_thumbnail1">
-				<p style="margin-top: 5px;"><strong>Description of Property:</strong></p>
-				<p>{{ compare1.description}}</p>
-				</div>
-
-				<div class="card">
-						<h4>Reviews</h4>
-
-						{% if not reviews0 %}
-							<p style="margin-left: 40px;">There are no reviews at this time</p>
-						{% else %}
-						<div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
-
-								{% for review in reviews0 %}
-								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black">
-											<a href="{% url 'profile' review.user %}">
-												<img src="{{ review.user.userprofile.avatar }}" id="review_thumbnail" class="rounded-circle">
-											</a>
-											<a href="{% url 'profile' review.user %}" style="font-size: 20px; color: #666666"> {{ review.user.get_full_name}}</a>
-
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black; display: inline; padding-left: 100px;">
-											<p style="color: #666666">{{review.review}}</p>
-											<p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
-										</div>
-									</div>
-								</div>
-
-								{% endfor %}
-
-
-						</div>
-						{% endif %}
-					</div>
-				<div class="card">
-					<h4>Property Statistics</h4>
-					<p style="margin-bottom: 3px"> <strong>Bedrooms:</strong> {{ compare1.bedrooms }} <strong>Bathrooms:</strong> {{ compare1.bathrooms }}</p>
-					<p style="margin-bottom: 3px"> <strong>Price:</strong> {{ compare1.price }} <strong>Size:</strong> {{ compare1.size }}</p>
-					<p style="margin-bottom: 3px"> <strong>Distance to Grounds:</strong> {{ compare1.distance }} </p>
-					<p style="margin-bottom: 3px"> <strong>Number:</strong> {{ compare1.number }} </p>
-
-				</div>
-			</div>
 		</div>
 
-	</div>
-
-
-
-				<!--Maps-->
-		<div class="card">
-	 		<div id="map_detail">
+					<!--Maps-->
+	 		<div id="map_detail" style="height:100%; padding: 10px; margin: 10px;">
 	 		</div>
 	<script>
 	// Initialize and add the map
@@ -455,7 +333,6 @@ div.table {
 	    </script>
 
 		</div>
-				</div>
 	</div>
 <div class="container" id="main_col" style="-ms-transform: translateY(-20%); transform: translateY(-10%);">
 {% if user %}

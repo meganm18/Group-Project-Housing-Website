@@ -132,6 +132,16 @@ def compare(request):
 	return render(request, 'compare.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
 
 @login_required()
+def compare_maps(request):
+	user = request.user
+	user_for_page = request.user
+	user_profile = user.userprofile
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_maps.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
+
+
+@login_required()
 def loginsuccess(request):
 	return render(request, 'login-success.html')
 
