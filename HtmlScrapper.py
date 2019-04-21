@@ -111,12 +111,9 @@ def getinfo(webpage):
         try:
             pattern = re.compile('og:image" content="([^"]*)')
             match = pattern.search(info)
-            match=match.group(1)
-            if match[-1]=='/':
-                match="https://collegestudentapartments.com/img/no-image-main2.jpg"
-            apptinfo[title]["Image"]=match
+            apptinfo[title]["Image"]=match.group(1)
         except:
-            apptinfo[title]["Image"] = "https://collegestudentapartments.com/img/no-image-main2.jpg"
+            apptinfo[title]["Image"] = "---"
         #This is gonna be pretty difficult to follow
         #gonna basically put another dict of dicts in the dict :(
         # Units{untit name{Title:X,beds:Y,:Size:Z, Prince:W}}
