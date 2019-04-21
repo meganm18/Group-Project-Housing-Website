@@ -8,8 +8,8 @@ from .views import save_compare0, save_compare1, fav_save_compare0, fav_save_com
 
 class ApartmentTestCase(TestCase):
     def setUp(self):
-        Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000, bedrooms=1, furnished="yes", pets="yes")
-        Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000, bedrooms=2, furnished="no", pets="no")
+        Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000, bedrooms=1)
+        Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000, bedrooms=2)
 
     def test_apartments_created(self):
         apartment_1 = Apartment.objects.get(name="Apartment 1")
@@ -21,9 +21,9 @@ class ApartmentTestCase(TestCase):
 class SavedFavTestCase(TestCase):
     def setUp(self):
         Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
-                                 bedrooms=1, furnished="yes", pets="yes")
+                                 bedrooms=1)
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
-                                 bedrooms=2, furnished="no", pets="no")
+                                 bedrooms=2)
         User.objects.create_user(username="example user 1")
 
     def test_favorites(self):
@@ -46,9 +46,9 @@ class SavedFavTestCase(TestCase):
 class SaveCompareTestCase(TestCase):
     def setUp(self):
         Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
-                                 bedrooms=1, furnished="yes", pets="yes")
+                                 bedrooms=1)
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
-                                 bedrooms=2, furnished="no", pets="no")
+                                 bedrooms=2)
         User.objects.create_user(username="example user 1")
 
     def test_compare(self):
@@ -74,10 +74,10 @@ class StatusCodesTestCase(TestCase):
         User.objects.create_user(username="user1")
         self.user1 = User.objects.get(username="user1")
         Apartment.objects.create(name="Apartment 1", company="company 1", location="location 1", price=1000, size=1000,
-                                 bedrooms=1, furnished="yes", pets="yes")
+                                 bedrooms=1)
         self.apartment1 = Apartment.objects.get(name="Apartment 1")
         Apartment.objects.create(name="Apartment 2", company="company 2", location="location 2", price=2000, size=2000,
-                                 bedrooms=2, furnished="yes", pets="yes")
+                                 bedrooms=2)
         self.apartment2 = Apartment.objects.get(name="Apartment 2")
 
     def test_home(self):
