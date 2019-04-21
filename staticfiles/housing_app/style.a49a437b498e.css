@@ -1,0 +1,1094 @@
+
+body, html {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 28px;
+}
+
+.nav-link{
+	font-family: 'Nunito', sans-serif;
+
+}
+
+.dropdown-item{
+	font-family: 'Nunito', sans-serif;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #ffffff;
+    background-color: #67bb96;
+}
+
+/* CSS for Navbar */
+
+.navbar .navbar-expand-lg {    
+  background: #ffffff;
+  .navbar-nav li a {
+    color: #000000;
+    &:hover, &:focus, &:active {
+      color: #000000;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+}
+
+
+/* CSS For the Home.html Page*/
+
+#search_button{
+	color: #ffffff;
+	background-color: #ffb0b8;
+	outline-color: transparent;
+	border-color: #dc858e;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+}
+
+.search_bar {
+	/*display: inline;*/
+	flex-wrap: nowrap;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.search_bar .input-group{
+	flex-wrap: nowrap;
+}
+
+/*#search_bar_id{
+	max-width: 300px;
+	min-width: 200px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}*/
+
+.home_background_image {
+	margin-top: -100px; 
+	position: relative;
+	background-image: url("../images/front-page-background.c35f59285363.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 800px;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+
+
+.home_content_container {
+	position: absolute;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+
+}
+
+#home_text {
+	position: relative;
+	top: 40%;
+	min-width: 300px;
+	color: gray;
+	width: 30%;
+}
+
+
+.home_login_div {
+	margin-top: 20px;
+	position: absolute;
+	top: 50%;
+	width: 400px;
+	display: inline-block;
+	height: 100px;
+}
+
+.home_search_listings {
+	font-family: 'Nunito', sans-serif;
+	margin-bottom: 0px;
+}
+
+#home_login_button, .btn-link {
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	color: white;
+	background-color: transparent;
+}
+
+.welcome_text {
+	font-family: 'Nunito', sans-serif;
+	position: relative;
+	top: 25%;
+	color: white;
+	min-width: 300px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.greeting_div{
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	
+}
+
+.greeting_text{
+	font-family: 'Nunito', sans-serif;
+	margin-top: 35px;
+	margin-bottom: 20px;
+}
+
+#disconnect_form{
+	position: absolute;
+	top: 70%;
+	z-index: 2;
+	left: 46%;
+
+}
+
+/* CSS for Login.html Page */
+
+.login_background_image {
+	position: fixed;
+	background-image: url("../images/plain-background.de999e1cdf15.png");
+	background-size: cover;
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.login_background_image {
+	position: fixed;
+	background-image: url("../images/plain-background.de999e1cdf15.png");
+	background-size: cover;
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.login_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+}
+
+#google_login_button {
+	position: relative;
+	color: gray;
+	background-color: white;
+	top: 38%;
+	height: 35px;
+}
+
+.login_text_div{
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	min-width: 300px;
+	padding-bottom: 40px;
+}
+
+.login_text {
+	font-family: 'Nunito', sans-serif;
+	color: white;
+	max-height: 800px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+/* Beginning of CSS for Profile.html page */
+
+
+.profile_background_image {
+	position: fixed;
+	background-image: url("../images/plain-background.de999e1cdf15.png");
+	background-size: cover;
+	filter: brightness(90%);
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.profile_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+}
+
+
+
+#profile_image{
+	height: 100px;
+	width: 100px;
+	top: 0%;
+	position:relative;	
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border: 5px solid #ffffff;
+    z-index: 2;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.login_div {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: black;
+	text-align: center;
+}
+
+
+@media (min-width: 0px) {
+
+	@media (min-height: 0px){
+		.profile_div {
+			position: fixed;
+			top: 85%;
+			left: 50%;
+			width: 100%;
+			transform: translate(-50%, -50%);
+			color: black;
+			text-align: center;
+			margin: 0px;
+			padding: 0px;
+			background: transparent;
+		}
+	}
+
+		@media (min-height: 630px){
+
+		    .profile_div {
+				position: fixed;
+				top: 65%;
+				left: 50%;
+				width: 100%;
+				transform: translate(-50%, -50%);
+				color: black;
+				text-align: center;
+				margin: 0px;
+				padding: 0px;
+			}
+		}
+	
+
+
+
+
+
+	#main_col {
+		background-color: white;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+		font-family: 'Nunito', sans-serif;
+	}
+
+	#middle_row {
+		width: 100%;
+		height: 650px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.profile_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:8%;
+	}
+
+	#edit_profile{
+		position: relative;
+		top: -6%;
+		float: right;
+	}
+
+	#search_bar_id{
+		width: 200px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+	#search_bar_id_apartments{
+		width: 200px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	 .pagination_profile{
+ 	position: absolute;
+ 	top: 80%;
+ 	transform: translate(-50%, -50%);
+ 	left: 50%;
+ }
+}
+
+@media (min-width: 576px) {
+
+	.pagination_profile{
+	 	position: absolute;
+	 	top: auto;
+	 	bottom: 0px;
+	 	transform: translate(-50%, -50%);
+	 	left: 50%;
+	 }
+    .profile_div {
+		position: fixed;
+		top: 55%;
+		left: 50%;
+		width: 80%;
+		transform: translate(-50%, -50%);
+		color: black;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#main_col {
+		width: 100%;
+		border-radius: 5px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#middle_row {
+		width: 100%;
+		border-radius: 5px;
+		height: 550px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.profile_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:11%;
+	}
+
+	#edit_profile{
+		position: relative;
+		top: -9%;
+		float: right;
+	}
+
+	#search_bar_id{
+		width: 300px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+
+	#search_bar_id_apartments{
+		width: 300px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+
+}
+
+.inner_content_div{
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+
+}
+
+
+.profile_image_div{
+	display: flex;
+	justify-content: center;
+}
+
+
+#top_row {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#bottom_row {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+}
+
+
+#inner_row_top{
+	position: relative;
+	top: 50%;
+	height: 100px
+	margin: 0px;
+	padding: 0px;
+}
+
+#email_text{
+	padding-bottom: 15px;
+}
+
+#bio_text{
+	padding-bottom: 15px;
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+#inner_row_bottom{
+	height: 200px
+	margin: 0px;
+	padding: 0px;
+
+}
+
+
+/*#left_outer_col{
+	width: 0px;
+	padding: 0px;
+	margin: 0px;
+	height: 110%;
+	background-color: white;
+}
+
+#right_outer_col{
+	width: 0px;
+	padding: 0px;
+	margin: 0px;
+	height: 110%;
+	background-color: white;
+}
+*/
+.left-profile-col{
+	position: relative;
+	padding-right: 0px;
+}
+
+.right-profile-col{
+	padding-left: 0px;
+}
+
+
+
+.delete-button, .btn-default {
+	color: gray;
+}
+
+
+/*Beginning of CSS for Apartments Page*/
+
+
+.apartments_background_image {
+	position: fixed;
+	background-image: url("../images/plain-background.de999e1cdf15.png");
+	background-size: cover;
+	filter: brightness(90%);
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.apartments_content_container {
+	position: fixed;
+	text-align: center;
+	color: white;
+	max-width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	left: 0;
+	right: 0;
+	z-index: 3;
+	justify-content: center;
+	display: flex;
+}
+
+
+
+#apartments_image{
+	height: 100px;
+	width: 100px;
+	top: 0%;
+	position:relative;	
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    border: 5px solid #ffffff;
+    z-index: 2;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+@media (min-width: 0px) {
+    .apartments_div {
+		position: fixed;
+		top: 65%;
+		left: 50%;
+		width: 100%;
+		transform: translate(-50%, -50%);
+		color: black;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#main_col_left_apartments {
+		visibility: hidden;
+		width: 0%;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#main_col_right_apartments {
+		overflow: auto;
+		background-color: white;
+		width: 100%;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+		font-family: 'Nunito', sans-serif;
+	}
+
+	#middle_row_apartments {
+		width: 100%;
+		height: 650px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.apartments_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:8%;
+	}
+
+	#apartment_thumbnail{
+		object-fit: cover;
+		width:100px;
+		height:100px;
+		float: left;
+	}
+
+	.apartmentname{
+		padding: 10px;
+		border-bottom: 1px solid gray;
+	}
+
+}
+
+@media (min-width: 576px) {
+
+    .apartments_div {
+		position: fixed;
+		top: 55%;
+		left: 50%;
+		width: 80%;
+		transform: translate(-50%, -50%);
+		color: black;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#main_col_left_apartments {
+		visibility: visible;
+		overflow: visible;
+		width: 45%;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#main_col_right_apartments {
+		overflow: hidden;
+		overflow-x: hidden;
+		width: 55%;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+		color: gray;
+	}
+
+	#middle_row_apartments {
+		width: 100%;
+		height: 500px;
+		background-color: white;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.apartments_name{
+		padding: 0px;
+		margin: 0px;
+		position: relative;
+		top:11%;
+	}
+
+	.apartmentname{
+		max-width: 100%;
+		min-height: 10px;
+		padding: 0px;
+		margin-left: 10px;
+		margin-right: 10px;
+		border-bottom: 1px solid gray;
+	}
+
+	#left_display{
+		width: 30%;
+		padding: 10px;
+		padding-left: 0px;
+		margin: 0px;
+		min-width: 130px;	
+	}
+
+	#right_display{
+		align-content: center;
+		width: 70%;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	#apartment_thumbnail{
+		position: center;
+/*		height: 90%;*/
+		margin: 10px;
+		width: auto;
+		object-fit: cover;
+		width:130px;
+		height:130px;
+	}
+
+}
+
+.inner_content_div_apartments{
+	position: relative;
+	top: 15%;
+	float: left;
+	padding-left: 20px;
+	text-align: left;
+
+}
+
+
+.apartments_image_div{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-wrap: nowrap;
+}
+
+
+#top_row_apartments {
+	width: 100%;
+	height: 70px;
+	margin: 0px;
+	padding: 0px;
+	flex-wrap: nowrap;
+/*	background-color: white;*/
+/*	border-bottom: 1px solid gray;*/
+}
+
+
+#bottom_row_apartments {
+	width: 100%;
+	height: 50px;
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+}
+
+
+#inner_row_top_apartments{
+	position: relative;
+	top: 50%;
+	height: 100px
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#inner_row_bottom_apartments{
+	height: 200px
+	margin: 0px;
+	padding: 0px;
+
+}
+
+
+.left-apartments-col{
+	position: relative;
+	padding-right: 0px;
+}
+
+.right-apartments-col{
+	padding-left: 0px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+ }
+
+ #right_display a {
+ 	text-decoration: none;
+}
+
+ #apartment_link{
+ 	margin-top: 10px;
+ 	color: #666666;
+ 	text-decoration: none;
+ }
+
+ #apartment_link:hover{
+ 	color: #333333;
+ 	text-decoration: none;
+ }
+
+
+#search_button_apartments{
+	color: #ffffff;
+	background-color: #ffb0b8;
+	outline-color: transparent;
+	border-color: #dc858e;
+	margin-top: 5px;
+	margin-bottom: 5px;
+
+}
+
+#search_bar_apartments {
+	/*display: inline;*/
+/*	align-content: center;*/
+	width: 400px;
+	top: 0%;
+	position:relative;	
+    z-index: 2;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+}
+
+.search_bar_apartments .input-group{
+	flex-wrap: nowrap;
+	margin: 0px;
+}
+
+
+#search_bar_div{
+	align-self: center;
+	display: block;
+	text-align: center;
+	align-content: center;
+
+
+}
+
+
+/* CSS for apartment_detail.html page*/
+
+.apartment_detail_background {
+	top: 0px;
+	position: fixed;
+	background-image: url("../images/plain-background.de999e1cdf15.png");
+	background-size: cover;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	z-index: -1;
+}
+
+
+#apartment_detail_image{
+	border-style: solid;
+	border-color: white;
+	border-radius: 25px;
+	border-width: 2px;
+	max-width: 100%;
+    max-height: 100%;
+
+}
+
+#location_title{
+	padding: 15px;
+}
+
+/*	* {
+	box-sizing: border-box;
+	}*/
+
+	/* Add a gray background color with some padding */
+
+	/* Header/Blog Title */
+	.header {
+	color: white;
+	font-family: 'Nunito', sans-serif;
+	padding: 30px;
+	padding-bottom: 0px;
+	padding-top: 40px;
+	font-size: 40px;
+	text-align: center;
+	background: transparent;
+	/*font-weight: bolder;*/
+/*	border-bottom-style: solid;
+	border-bottom-width: 5px;
+*/
+	}
+
+
+	/* Create two unequal columns that floats next to each other */
+	/* Left column */
+	.leftcolumn {  
+	font-family: 'Nunito', sans-serif; 
+	float: left;
+	width: 60%;
+
+	}
+
+	/* Right column */
+	.rightcolumn {
+	font-family: 'Nunito', sans-serif;
+	float: left;
+	width: 40%;
+	padding-left: 20px;
+	}
+
+	/* Fake image */
+	.fakeimg {
+	background-color: #aaa;
+	width: 100%;
+	padding: 20px;
+	}
+
+	/* Add a card effect for articles */
+	.card {
+	background: rgba(255, 255, 255, 1);
+	color: #666666;
+	box-shadow: 0 0 10px #959595;
+	padding: 20px;
+	margin-top: 20px;
+	border-color: ;
+	border-radius: 25px;
+	width: 100%
+	}
+
+	.card2 {
+	background: rgba(255, 255, 255, 1);
+	color: #666666;
+	box-shadow: 0 0 10px #959595;
+	border-radius: 25px;
+	padding: 20px;
+	font-size: 200%;
+	display:inline-block;
+	width: 100%;
+	margin-top: 20px;
+	}
+	/* Clear floats after the columns */
+	.row:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+
+
+
+	.checked {
+		color: goldenrod
+	}
+
+	.unchecked {
+		color : black
+	}
+	
+/*	img {
+    max-width: 100%;
+    max-height: 100%;
+	}*/
+	/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+	@media screen and (max-width: 800px) {
+	.leftcolumn, .rightcolumn {   
+		width: 100%;
+		padding: 0;
+	}
+}
+
+	/* Footer */
+	#footer {
+	font-family: 'Nunito', sans-serif;
+	background-color: white;
+	padding: 0px;
+
+	text-align: center;
+	background: #ffffff;
+	margin: 0px;
+
+
+	}
+
+#map_detail {
+  height: 500px;
+  width: auto;
+  padding: 10px;
+ }
+
+#map_detail1 {
+  height: 500px;
+  width: auto;
+  padding: 10px;
+ }
+
+ .apartment_detail_container{
+
+ 	margin-left: 2rem;
+ 	margin-right: 2rem;
+
+ }
+
+ #review_thumbnail{
+ 	width: 50px;
+ 	height: 50px;
+	top: 0%;
+	position:relative;	
+    border-radius: 20px;
+    /*box-sizing: border-box;*/
+    /*background-color: white;*/
+    /*border: 5px solid #ffffff;*/
+    z-index: 2;
+    margin: 10px;
+    padding: 0px;
+ }	
+
+ .fieldWrapper textarea{
+ 	margin-left: 30px;
+ 	width: 90%;
+ 	height: 80px;
+ 	border-radius: 10px;
+ 	color: #666666;
+ }
+
+ .fieldWrapper textarea:focus{
+ 	outline: none !important;
+    border:1.5px solid #67bb96;
+    box-shadow: 0 0 10px #719ECE;
+ }
+
+ 
+
+
+ ::selection {
+    background-color: rgb(220, 133, 142, 0.5);
+    color: #fff;
+}
+
+.inner_content_div_reviews{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 80%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+
+}
+
+.inner_content_div_favorites{
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	width: 80%;
+	transform: translate(-50%, -50%);
+	text-align: left;
+
+}
+
+
+.selector_advanced{
+	width: 40%;
+	align-content: center;
+	margin-left: 30%;
+}
+
+.fieldWrapper2 {
+ 	position: absolute;
+ 	left: 50%;
+ 	top: 50%;
+ 	transform: translate(-50%, -50%);
+ 	width: 80%;
+ 	height: 40%;
+ }
+
+ .fieldWrapper2 label {
+ 	align-self: flex-start;
+ }
+
+.fieldWrapper2 textarea{
+ 	margin-left: 30px;
+ 	width: 90%;
+ 	height: 100%;
+ 	border-radius: 10px;
+ 	color: #666666;
+ }
+
+ .fieldWrapper2 textarea:focus{
+ 	outline: none !important;
+    border:1.5px solid #67bb96;
+    box-shadow: 0 0 10px #719ECE;
+ }
+

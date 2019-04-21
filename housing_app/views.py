@@ -132,6 +132,16 @@ def compare(request):
 	return render(request, 'compare.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
 
 @login_required()
+def compare_maps(request):
+	user = request.user
+	user_for_page = request.user
+	user_profile = user.userprofile
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_maps.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
+
+
+@login_required()
 def loginsuccess(request):
 	return render(request, 'login-success.html')
 
@@ -165,7 +175,6 @@ def get_user_reviews(request, username):
 		reviews = Review.objects.all().filter(user=user_for_page)	
 	except:
 		raise Http404
-
 	return render(request, 'reviews.html', {"user_for_page":user_for_page,"reviews":reviews})
 
 # The following code saves the user profile data in combination with the receivers in models.py
@@ -279,3 +288,73 @@ def fav_save_compare1(request, apartment_id):
 		user_profile.save()
 		user.save()
 	return redirect('favorites')
+@login_required
+def delete_compare0(request):
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare0 = None;
+		user_profile.save()
+		user.save()
+	return redirect('compare')
+@login_required
+def delete_compare1(request):
+	user = request.user
+	user_profile = user.userprofile
+	if request.method == "POST":
+		user_profile.compare1 = None;
+		user_profile.save()
+		user.save()
+	return redirect('compare')
+@login_required
+def search_compare0(request):
+	search_term = ''
+	apartments_list = Apartment.objects.all()
+	user = request.user
+	user_profile = user.userprofile
+	if 'search' in request.GET:
+		search_term= request.GET['search']
+		apartments_list= apartments_list.filter(name__icontains=search_term)
+	paginator = Paginator(apartments_list, 15)  # Show 25 apartments per page
+	page = request.GET.get('page')
+	apartments = paginator.get_page(page)
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_search0.html', {'apartments': apartments,'search_term': search_term, 'compare0': user_profile.compare0, 'compare1': user_profile.compare1, 'reviews0': reviews0, 'reviews1': reviews1,})
+
+
+@login_required
+def save_compare0_search(request, apartment_id):
+		apartment = Apartment.objects.get(pk=apartment_id)
+		user = request.user
+		user_profile = user.userprofile
+		user_profile.compare0 = apartment;
+		user_profile.save()
+		user.save()
+		return redirect('compare')
+@login_required
+def search_compare1(request):
+	search_term = ''
+	apartments_list = Apartment.objects.all()
+	user = request.user
+	user_profile = user.userprofile
+	if 'search' in request.GET:
+		search_term= request.GET['search']
+		apartments_list= apartments_list.filter(name__icontains=search_term)
+	paginator = Paginator(apartments_list, 15)  # Show 25 apartments per page
+	page = request.GET.get('page')
+	apartments = paginator.get_page(page)
+	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
+	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
+	return render(request, 'compare_search1.html', {'apartments': apartments,'search_term': search_term, 'compare0': user_profile.compare0, 'compare1': user_profile.compare1, 'reviews0': reviews0,'reviews1': reviews1})
+
+
+@login_required
+def save_compare1_search(request, apartment_id):
+		apartment = Apartment.objects.get(pk=apartment_id)
+		user = request.user
+		user_profile = user.userprofile
+		user_profile.compare1 = apartment;
+		user_profile.save()
+		user.save()
+		return redirect('compare')
