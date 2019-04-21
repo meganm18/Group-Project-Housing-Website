@@ -171,7 +171,7 @@ class StatusCodesTestCase(TestCase):
     def test_save_compare0_search_page(self):
         request15 = self.factory.get(r'^save_compare0_search/(\d+)/')
         request15.user = self.user1
-        response15 = save_compare0_search(request15, self.compare1.id)
+        response15 = save_compare0_search(request15, self.apartment1.id)
         self.assertEqual(response15.status_code, 302)
     def test_save_compare1_search_page(self):
         request16 = self.factory.get(r'^save_compare1_search/(\d+)/')
