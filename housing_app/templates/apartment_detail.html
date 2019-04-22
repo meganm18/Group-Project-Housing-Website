@@ -13,7 +13,24 @@
 	p3 {
   text-decoration: underline;
 }
-
+.page-link{
+  color: #dc858e;
+}
+.page-link:hover{
+  color: #dc858e;
+}
+.page-link:active{
+  color: #dc858e;
+  border-color: #dc858e;
+}
+.page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+.page-item.active .page-link{
+  background-color: #dc858e;
+  border-color: #dc858e;
+}
 
 
 	</style>
@@ -94,25 +111,17 @@
 			<div class="rightcolumn">
                 <div class="card">
                             {% if user and not user.is_anonymous %}
+                        <table><tr>
+                            <card>
+						    <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%;"><a class="page-link" href="{% url 'save_favorite' apartment.id %}">Save as a Favorite Apartment </a></button>
+                            <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%; "><a class="page-link" href="{% url 'save_compare0' apartment.id %}">First Compare Apartment</a></button>
+						    <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%; "><a class="page-link" href="{% url 'save_compare1' apartment.id %}">Second Compare Apartment</a></button>
+                            </card>
+                        </tr>
+                        </table>
+                            {% endif %}
 
-				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
-					             {% csrf_token %}
-					             <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
-				              </form>
-                      <form action="{% url 'save_compare0' apartment.id %}" method="post" style="position: relative;">
-                        {% csrf_token %}
-					              <button type="submit" class="btn btn-default" name="compare_apartment0" style="position: absolute; left: 52%; top: 50%; transform: translate(-30%, -120%); width: 70%;"> Set as First Compare Apartment</button>
-				              </form>
-				              <form action="{% url 'save_compare1' apartment.id %}" method="post" style="position: relative;">
-					               {% csrf_token %}
-					               <button type="submit" class="btn btn-default" name="compare_apartment1" style="position: absolute; left: 51%; top: 50%; transform: translate(-30%, -50%); width: 70%;"> Set as Second Compare Apartment</button>
-				              </form>
-                    {% else %}
-
-				            {% endif %}
-                </div>
-				<div class="card">
-				<h2>Property Statistics</h2>
+				<h2 style="padding:2%">Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ apartment.price }} </p>
 				<p> <strong>Distance to Grounds:</strong> {{ apartment.number }} </p>
 				<p> <strong>Size:</strong> {{ apartment.size }}</p>
