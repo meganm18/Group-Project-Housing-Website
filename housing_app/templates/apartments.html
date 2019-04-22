@@ -620,43 +620,39 @@ function closeForm() {
 
           <div class="container, apartments_div_detail">
             <div class="table">
-            {% for apartment in apartments %}
+ {% for apartment in apartments %}
               <tr>
                 <td>
                   <div>
      	              <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
      				        <div class='apartmentname'align="center" style="padding-bottom:30px">
-				            <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
-					            <h3> {{ apartment.name|capfirst }} </h3>
+				            <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link" >
+					            <h4> {{ apartment.name|capfirst }} </h4>
 				            </a>
                     <h5 id="apartment_price">{{ apartment.price }} </h5>
-				            {% if user and not user.is_anonymous %}
-
-				              <form action="{% url 'save_favorite' apartment.id %}" method="post">
-					             {% csrf_token %}
-					             <button type="submit" class="btn btn-default" name="fav_apartment" id="fav_apartment{{ forloop.counter }}"> Save to Favorites </button>
-				              </form>
-                      <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+                                <h5 id="apartment_bedbath">Bedrooms: {{ apartment.bedrooms }} </h5>
+                                <h5 id="apartment_bath"> Bathrooms: {{apartment.bathrooms }}</h5>
+				              <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
                       <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-                      <div id="apartment_stars">
+                      <div id="apartment_stars" style="">
                         <div class="star-ratings" >
                           {% ratings apartment read_only=True %}
                         </div>
                       </div>
+                                {% if user and not user.is_anonymous %}
+                          <div>
+				              <a class="page-link" href="{% url 'save_favorite' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">Save to Favorites List </a></button>
+                                <a class="page-link" href="{% url 'save_compare0' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">1st Compare Apartment</a></button>
+						       <a class="page-link" href="{% url 'save_compare1' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a></button>
 
-                      <form action="{% url 'save_compare0' apartment.id %}" method="post" style="position: relative;">
-                        {% csrf_token %}
-					              <button type="submit" class="btn btn-default" name="compare_apartment0" style="position: absolute; left: 52%; top: 50%; transform: translate(-30%, -120%); width: 70%;"> Set as First Compare Apartment</button>
-				              </form>
-				              <form action="{% url 'save_compare1' apartment.id %}" method="post" style="position: relative;">
-					               {% csrf_token %}
-					               <button type="submit" class="btn btn-default" name="compare_apartment1" style="position: absolute; left: 51%; top: 50%; transform: translate(-30%, -50%); width: 70%;"> Set as Second Compare Apartment</button>
-				              </form>
-                    {% else %}
+                                {% endif %}
 
-				            {% endif %}
-			             </div>
                 </div>
+
+
+
+                  </div>
+                  </div>
               </td>
             </tr>
        {% endfor %}

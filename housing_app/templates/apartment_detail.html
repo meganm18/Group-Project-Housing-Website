@@ -13,7 +13,24 @@
 	p3 {
   text-decoration: underline;
 }
-
+.page-link{
+  color: #dc858e;
+}
+.page-link:hover{
+  color: #dc858e;
+}
+.page-link:active{
+  color: #dc858e;
+  border-color: #dc858e;
+}
+.page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+.page-item.active .page-link{
+  background-color: #dc858e;
+  border-color: #dc858e;
+}
 
 
 	</style>
@@ -28,6 +45,7 @@
 			
 			<div class="row">
 			<div class="leftcolumn">
+
 				<div class="card">
 				{% load static %}
 				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
@@ -91,14 +109,25 @@
 					</div>
 			</div>
 			<div class="rightcolumn">
-				<div class="card">
-				<h2>Property Statistics</h2>
+                <div class="card">
+                            {% if user and not user.is_anonymous %}
+                        <table><tr>
+                            <card>
+						    <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%;"><a class="page-link" href="{% url 'save_favorite' apartment.id %}">Save as a Favorite Apartment </a></button>
+                            <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%; "><a class="page-link" href="{% url 'save_compare0' apartment.id %}">Set First Compare Apartment</a></button>
+						    <button class="open-advanced btn btn-default" style="padding: 0%; width: 30%; "><a class="page-link" href="{% url 'save_compare1' apartment.id %}">Set Second Compare Apartment</a></button>
+                            </card>
+                        </tr>
+                        </table>
+                            {% endif %}
+
+				<h2 style="padding:2%">Property Statistics</h2>
 				<p> <strong>Price:</strong> {{ apartment.price }} </p>
-				<p> <strong>Distance to Grounds:</strong> {{ apartment.distance }} </p>
-				<p> <strong>Size:</strong> {{ apartment.size }}</p>
+				<p> <strong>Distance to Grounds:</strong> {{ apartment.number }} </p>
+				<p> <strong>Size:</strong> {{ apartment.size }} Sq Ft</p>
 <!-- 				<p> <strong>Furnished:</strong> {{ apartment.furnished }} </p>
 				<p> <strong>Pets Allowed:</strong> {{ apartment.pets }} </p> -->
-				<p> <strong>Number:</strong> {{ apartment.number }} </p>
+				<p> <strong>Number:</strong> {{ apartment.distance }} </p>
 				</div>
 <!-- 				<div class="card">
 					<h2>Units</h2>
