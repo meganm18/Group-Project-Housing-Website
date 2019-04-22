@@ -641,9 +641,9 @@ function closeForm() {
                       </div>
                                 {% if user and not user.is_anonymous %}
                           <div>
-				              <a class="page-link" href="{% url 'save_favorite' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">Save to Favorites List </a></button>
-                                <a class="page-link" href="{% url 'save_compare0' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">1st Compare Apartment</a></button>
-						       <a class="page-link" href="{% url 'save_compare1' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a></button>
+				             <a class="page-link" href="{% url 'save_favorite' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">Save to Favorites List </a>
+                             <a class="page-link" href="{% url 'save_compare0' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">1st Compare Apartment</a>
+						     <a class="page-link" href="{% url 'save_compare1' apartment.id %}" style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a>
 
                                 {% endif %}
 
