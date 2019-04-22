@@ -31,7 +31,10 @@
   background-color: #dc858e;
   border-color: #dc858e;
 }
-
+.apartment_detail_image{
+width="96"
+height="65"
+}
 
 	</style>
 
@@ -48,7 +51,7 @@
 
 				<div class="card">
 				{% load static %}
-				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview">
+				<img src="{{ apartment.image }}" id="apartment_detail_image" alt = "Apartment Preview" width="700" height="500">
 				<h2 id="location_title"><strong>{{ apartment.location }}</strong> </h2>
 				<h5><strong>Company:</strong> {{ apartment.company }}</h5>
 				<p><strong>Description of Property:</strong></p>
