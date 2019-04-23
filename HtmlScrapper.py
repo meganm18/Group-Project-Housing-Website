@@ -31,9 +31,16 @@ def Min_Max_Dict(apptdict,appts,attribute,data):
 def combine(data):
     try:
         if data[0]!=data[1]:
-            return ((locale.format_string("%d", data[0], grouping=True)+"-"+locale.format_string("%d", data[1], grouping=True)))
+            return ((locale.format_string("%d", data[0], grouping=True)+" - "+locale.format_string("%d", data[1], grouping=True)))
         return (locale.format_string("%d", data[0], grouping=True))
     except: return ('---')
+
+def modifiedinex(data,index):
+    try:
+        try:return int(data[index])
+        except:return int(data)
+    except:
+        return None
 
 #creates raw html data code string
 def ScrapHtmlCode(website):
@@ -72,13 +79,14 @@ def getinfo(webpage):
     for link in getwebsites(webpage):
         # take html from each link, which are the sites individual pages
         info = (ScrapHtmlCode(link))
-
+        # print(info)
         # get title
         pattern = re.compile('title>([^|]*) UVA')
         match = pattern.search(info)
         title=match.group(1)
+        if title == 'N/A':
+            continue
         apptinfo[match.group(1)]={"Title":match.group(1)}
-
         # group 1 adress, group 2 city, group 3 postal code
         pattern = re.compile('streetAddress">(.*)<\/span>, <span itemprop="addressLocality">([^<]*)<\/.*postalCode">([\d]+)')
         match = pattern.search(info)
@@ -110,13 +118,15 @@ def getinfo(webpage):
             apptinfo[title]["Description"] = "---"
         #     Get image of appt
         try:
-            pattern = re.compile('og:image" content="([^"]*)')
+            pattern = re.compile('itemprop="image" content="(.*?)"')
             match = pattern.search(info)
-            apptinfo[title]["Image"]="https:"+match.group(1)
+            image=match.group(1)\
+                # .replace("158x158xcrop_middle","1200x1200xheight")
             if match.group(1)[-1]=='/':
-                apptinfo[title]["Image"]='https://collegestudentapartments.com/img/no-image-main2.jpg'
+                image='https://collegestudentapartments.com/img/no-image-main2.jpg'
         except:
-            apptinfo[title]["Image"] = "https://collegestudentapartments.com/img/no-image-main2.jpg"
+            image = "https://collegestudentapartments.com/img/no-image-main2.jpg"
+        apptinfo[title]["Image"] = image
         #This is gonna be pretty difficult to follow
         #gonna basically put another dict of dicts in the dict :(
         # Units{untit name{Title:X,beds:Y,:Size:Z, Prince:W}}
@@ -189,8 +199,10 @@ def writecsv(first, second):
 
     with open('apartment_data.csv', 'w') as csvfile:
         # Titles of the the csv
-        fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'Size', 'Bedrooms', 'Furnished', 'Pets', 'Description',
-                      'Bathrooms', 'Number', 'Distance to Grounds','Image']
+
+        fieldnames = ['Apartment Name', 'Company', 'Location', 'Price', 'MinPrice', 'MaxPrice', 'Size', 'Bedrooms',
+                      'MinBR', 'MaxBR', 'Description',
+                      'Bathrooms', 'Number', 'Distance to Grounds', 'Image']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         # Accomadations need to made later to take in account for the units. For now I just took the first unit size, price, beds and baths
@@ -198,37 +210,62 @@ def writecsv(first, second):
         for appt in first.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                 'Price': '$'+combine(appts[appt['Title']]['Price']),
-                 'Size': combine(appts[appt['Title']]['Size'])+' Sqrt ft.',
-                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']), 'Furnished': '---', 'Pets': '---',
+                 'Price': '$' + combine(appts[appt['Title']]['Price']),
+                 'MinPrice': modifiedinex(appts[appt['Title']]['Price'], 0),
+                 'MaxPrice': modifiedinex(appts[appt['Title']]['Price'], 1),
+                 'Size': combine(appts[appt['Title']]['Size']) + ' Sqrt ft.',
+                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']),
+                 'MinBR': modifiedinex(appts[appt['Title']]['Bedrooms'], 0),
+                 'MaxBR': modifiedinex(appts[appt['Title']]['Bedrooms'], 1),
                  'Description': appt['Description'],
                  'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
-                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image':appt['Image']})
+                 'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image': appt['Image']})
         # second is the second dict of info on the page
         for appt in second.values():
             writer.writerow(
                 {'Apartment Name': appt['Title'], 'Company': '---', 'Location': appt['Address'],
-                  'Furnished': '---', 'Pets': '---',
+                 'Price': '$' + combine(appts[appt['Title']]['Price']),
+                 'MinPrice': modifiedinex(appts[appt['Title']]['Price'], 0),
+                 'MaxPrice': modifiedinex(appts[appt['Title']]['Price'], 1),
+                 'Size': combine(appts[appt['Title']]['Size']) + ' Sqrt ft.',
+                 'Bedrooms': combine(appts[appt['Title']]['Bedrooms']),
+                 'MinBR': modifiedinex(appts[appt['Title']]['Bedrooms'], 0),
+                 'MaxBR': modifiedinex(appts[appt['Title']]['Bedrooms'], 1),
                  'Description': appt['Description'],
-
+                 'Bathrooms': combine(appts[appt['Title']]['Bathrooms']),
                  'Number': appt['Number'], 'Distance to Grounds': appt['Distance'], 'Image': appt['Image']})
+
         writer.writerow({'Apartment Name': 'The Flats at West Village', 'Company': 'Asset Campus Housing',
-                         'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$655–979', 'Size': '500-1532 Sqrt ft.',
-                         'Bedrooms': '1-4', 'Furnished': 'Yes',
-                         'Pets':'Yes', 'Description':'The Flats at West Village is moments from UV, & UVA Medical Center offering the most convenient student living in the area! The Downtown Mall is also right outside your door, perfect for anyone looking for convenience to work, school, and play. At The Flats at West Village, our luxury Charlottesville apartments feature modern furniture packages (at no additional cost), washers and dryers, private bedrooms, and complimentary water, cable, and internet. Unique to our community, our 1, 2, 3, & 4 bedroom floor plans have been enhanced to include queen beds and stackable dressers, providing our residents with ample space! Entertain your entourage in the social backdrop of our resort-style swimming pool, fire pits, fitness center & activity rooms. Walk to local shops and restaurants, while experiencing all that West Main has to offer.',
+                         'Location': '853 W Main St, Charlottesville, VA 22903', 'Price': '$655–979',
+                         'MinPrice': 655,
+                         'MaxPrice': 979,
+                         'Size': '500-1532 Sqrt ft.',
+                         'Bedrooms': '1-4',
+                         'MinBR': 1,
+                         'MaxBR': 4,
+                          'Description':'The Flats at West Village is moments from UV, & UVA Medical Center offering the most convenient student living in the area! The Downtown Mall is also right outside your door, perfect for anyone looking for convenience to work, school, and play. At The Flats at West Village, our luxury Charlottesville apartments feature modern furniture packages (at no additional cost), washers and dryers, private bedrooms, and complimentary water, cable, and internet. Unique to our community, our 1, 2, 3, & 4 bedroom floor plans have been enhanced to include queen beds and stackable dressers, providing our residents with ample space! Entertain your entourage in the social backdrop of our resort-style swimming pool, fire pits, fitness center & activity rooms. Walk to local shops and restaurants, while experiencing all that West Main has to offer.',
                           'Bathrooms': '1-4', 'Number': '(434) 509-4430',
                          'Distance to Grounds': '0.9 miles from Grounds',
                          'Image': 'http://www.flatsatwestvillage.com/sites/flatsatwestvillage.com/files/styles/width_1024/public/1_1.jpg?itok=97yRmZ8J'})
         writer.writerow({'Apartment Name': 'Grandmarc', 'Company': 'GreyStar',
-                         'Location': '301 15th St NW, Charlotteville, VA 22903', 'Price': '$694-1405', 'Size': '596-1466 Sqrt ft.',
-                         'Bedrooms': '1-4', 'Furnished': 'No',
-                         'Pets': '---','Description': 'GrandMarc at the Corner offers 1, 2, and 4-bedroom apartments near the University of Virginia. We’re right in the the middle of all the great things that make the Charlottesville community unique and lovable. You’re never far away from fun or your classes- we are at the center of it all! GrandMarc at the Corner wants you to have the best experience possible.',
+                         'Location': '301 15th St NW, Charlotteville, VA 22903', 'Price': '$694-1405',
+                        'MinPrice': 694,
+                         'MaxPrice': 1405,
+                         'Size': '596-1466 Sqrt ft.',
+                         'Bedrooms': '1-4',
+                         'MinBR': 1,
+                         'MaxBR': 4,
+                         'Description': 'GrandMarc at the Corner offers 1, 2, and 4-bedroom apartments near the University of Virginia. We’re right in the the middle of all the great things that make the Charlottesville community unique and lovable. You’re never far away from fun or your classes- we are at the center of it all! GrandMarc at the Corner wants you to have the best experience possible.',
                          'Bathrooms': '1-4', 'Number': '(434) 293-5787','Distance to Grounds': '0.8 miles from Grounds',
                          'Image': 'https://cimg5.ibsrv.net/ibimg/www.apartmentratings.com/650x350_85-1/s/v/1/sv1jqv0X7QZ.jpg'})
         writer.writerow({'Apartment Name': '1800 Jefferson Park Avenue', 'Company': 'Nest Realty',
                          'Location': '1800 Jefferson Park Avenue, Charlottesville, VA 22903', 'Price': '$1275-1375',
-                         'Size': '771 Sqrt ft.', 'Bedrooms': '2', 'Furnished': 'No',
-                         'Pets': "---",'Description': "1800 JPA stands as one of the tallest buildings in Charlottesville and one of the most popular places to live for someone looking for an affordable place to live within walking distance of UVA's Grounds or Medical Center. If you are considering UVA real estate, 1800 JPA should be on your radar. The community is comprised of a main 10-story 'Tower' and 4 'Garden' buildings. All condominiums are a stone's throw from UVA and units on the higher floors of the Tower offer either mountain views or views of Scott Stadium. Amenities include laundry facilities, reserved parking, and a community pool.",
+                         'MinPrice': 1275,
+                         'MaxPrice': 1375,
+                         'Size': '771 Sqrt ft.', 'Bedrooms': '2',
+                         'MinBR': 2,
+                         'MaxBR': 2,
+                         'Description': "1800 JPA stands as one of the tallest buildings in Charlottesville and one of the most popular places to live for someone looking for an affordable place to live within walking distance of UVA's Grounds or Medical Center. If you are considering UVA real estate, 1800 JPA should be on your radar. The community is comprised of a main 10-story 'Tower' and 4 'Garden' buildings. All condominiums are a stone's throw from UVA and units on the higher floors of the Tower offer either mountain views or views of Scott Stadium. Amenities include laundry facilities, reserved parking, and a community pool.",
                          'Bathrooms': '1-2', 'Number': '(434) 466-5645',
                          'Distance to Grounds': '0.6 miles from Grounds',
                          'Image': 'https://ap.rdcpix.com/1748032062/410a8c9d8b96f39afe644116471fd811l-m0xd-w1020_h770_q80.jpg'})
@@ -244,6 +281,7 @@ def writeunits(first, second):
         writer.writeheader()
         # Accomadations need to made later to take in account for the units. For now I just took the first unit size, price, beds and baths
         # First is the first dict of the info on the page
+
         for appt in first.values():
             # for unit in appt:
             for unit in appt["Units"]:
