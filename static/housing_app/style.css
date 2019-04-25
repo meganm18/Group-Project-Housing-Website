@@ -1,4 +1,3 @@
-
 body, html {
 	height: 100%;
 	margin: 0px;
@@ -70,13 +69,23 @@ body, html {
 }*/
 
 .home_background_image {
-	margin-top: -100px; 
-	position: relative;
+/*	position: fixed;
+	background-image: url('../images/plain-background.png');
+	background-size: cover;
+	height: 100%;
+	left: 0;
+	right: 0;
+	z-index: 1;*/
+	/*margin-top: -100px; */
+	position: fixed;
 	background-image: url('../images/front-page-background.png');
 	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	height: 800px;
+	background-position: top;
+	/*background-repeat: no-repeat;*/
+	min-width: 100%;
+ 	min-height: 100%;
+	top: 0;
+	bottom: 0;
 	left: 0;
 	right: 0;
 	z-index: 1;
