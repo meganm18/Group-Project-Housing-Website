@@ -10,6 +10,7 @@
 <!-- and had help here: https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
 <!-- drop down filtering: https://www.w3schools.com/html/html_form_elements.asp-->
 <!-- help with drop downs: https://getbootstrap.com/docs/4.0/components/dropdowns/ -->
+<!-- help with divider in drop down https://stackoverflow.com/questions/899148/html-select-option-separator -->
   <style>
 
 .open-advanced{
@@ -228,7 +229,7 @@ div.table {
             </form>
 
 
-          </div>
+         </div>
                   <div id="filtering">
               <button class="open-advanced btn btn-default" onclick="openForm()" style="">Advanced Search</button>
               <div class="form-advanced form-group" id="myForm" >
@@ -238,16 +239,27 @@ div.table {
 
                  <div class="slidecontainer" style="float: left;">
                      <label for="price-filtering"><b>Max Price</b></label>
-                        <input type="range" name="max_price_input" id="max_price_inputId" value="3500" min="0" max="3500"
-                            oninput="max_price_outputId.value = max_price_inputId.value">
+                        <input type="range" name="max_price_input" id="max_price_inputId" value="maxPriceInput" min="0" max="3500"
+                            oninput="max_price_outputId.value = max_price_inputId.value" step="100">
+                   <!-- {% if maxPriceInput %}-->
+                        <output name="max_price_output" id="max_price_outputId">{{ maxPriceInput }}</output>
+                   <!--  {% else %}
                         <output name="max_price_output" id="max_price_outputId">3500</output>
+                     {% endif %}-->
                  </div>
                     <div class="input-group mb-3 selector_advanced">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="bedrooms-filtering">Bedrooms</label>
                       </div>
                       <select name="bedroomInput" class="custom-select">
-                        <option value="No Filter">No Filter</option>
+                          {% if bedroomInput %}
+                            {% if bedroomInput != "No Filter" %}
+                          <option value={{ bedroomInput }} select="selected"> {{bedroomInput }} </option>
+                           <option style="font-size: 1pt; background-color: #67BB96;" disabled>&nbsp;</option>
+
+                          {% endif %}
+                          {% endif %}
+                          <option value="No Filter">No Filter</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -263,9 +275,17 @@ div.table {
                         <label class="input-group-text" for="sorting">Price: </label>
                       </div>
                     <select name="sortInput" class="custom-select">
-                      <option value="No Sort">No Sort</option>
-                      <option value="Sort by Price (low to high)"> Low to High </option>
-                      <option value="Sort by Price (high to low)"> High to Low</option>
+                        {% if priceSort == "Low to High" %}
+                        <option value="Low to High" select="selected">Low to High</option>
+                        <option style="font-size: 1pt; background-color: #67BB96;" disabled>&nbsp;</option>
+                          {% endif %}
+                        {% if priceSort == "High to Low" %}
+                        <option value="High to Low" select="selected">High to Low</option>
+                        <option style="font-size: 1pt; background-color: #67BB96;" disabled>&nbsp;</option>
+                          {% endif %}
+                          <option value="No Sort">No Sort</option>
+                      <option value="Low to High"> Low to High </option>
+                      <option value="High to Low"> High to Low</option>
                     </select>
                   </div>
                   <div class="input-group mb-3 selector_advanced">
@@ -273,9 +293,17 @@ div.table {
                       <label class="input-group-text" for="sorting">Rating: </label>
                     </div>
                   <select name="ratingInput" class="custom-select">
-                    <option value="No Sort">No Sort</option>
-                    <option value="Sort by Average Rating (high to low)"> High to Low</option>
-                    <option value="Sort by Average Rating (low to high)"> Low to High</option>
+                      {% if ratingInput == "Low to High" %}
+                      <option value="Low to High" select="selected">Low to High</option>
+                      <option style="font-size: 1pt; background-color: #67BB96;" disabled>&nbsp;</option>
+                      {% endif %}
+                      {% if ratingInput == "High to Low" %}
+                      <option value="High to Low" select="selected">High to Low</option>
+                      <option style="font-size: 1pt; background-color: #67BB96;" disabled>&nbsp;</option>
+                      {% endif %}
+                      <option value="No Sort">No Sort</option>
+                    <option value="Low to High"> Low to High</option>
+                    <option value="High to Low"> High to Low</option>
                   </select>
                 </div>
                   <input type="submit" name="filtering" class="btn btn-primary" style="background-color: #7eebbc; border-color: #67bb96;">   
@@ -297,15 +325,9 @@ function closeForm() {
 
         </div>
       <div class="row justify-content-md-center" id="middle_row_apartments">
-
-
-
         <div class="col-md-auto" id="main_col_left_apartments">
-
           <!--Adding Maps-->
-
              <div id="map"></div>
-
              <script>
 
               function initMap() {
@@ -670,11 +692,12 @@ function closeForm() {
                   <tr>
                       <td>
                           <div>
+                                <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                               <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
+                                </a>
                               <div class='apartmentname' align="center" style="padding-bottom:30px">
                                   <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                                       <h4> {{ apartment.name|capfirst }} </h4>
-                                  </a>
                                   <h5 id="apartment_price">{{ apartment.price }} </h5>
                                   <h5 id="apartment_bedbath">Bedrooms: {{ apartment.bedrooms }} </h5>
                                   <h5 id="apartment_bath"> Bathrooms: {{apartment.bathrooms }}</h5>
@@ -696,10 +719,8 @@ function closeForm() {
                                          style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a>
                                   </div>
                                       {% endif %}
-
+                                  </a>
                                   </div>
-
-
                               </div>
                       </td>
                   </tr>
@@ -726,7 +747,7 @@ function closeForm() {
 
                             {% if apartments.has_next %}
                             <li class="page-item"><a class="page-link"
-                                                     href="?page={{ apartments.next_page_number }}">Next</a></li>
+                                                     href="?page={{ apartments.next_page_number }}&sortInput={{ priceSort }}&max_price_input={{ maxPriceInput }}&bedroomInput={{ bedroomInput }}&ratingInput={{ ratingInput }}">Next</a></li>
                             <li class="page-item"><a class="page-link" href="?page={{ apartments.paginator.num_pages }}">Last
                                 &raquo;</a></li>
                             {% else %}
