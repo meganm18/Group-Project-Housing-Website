@@ -1,50 +1,36 @@
 {% extends 'base.html' %}
-{% load static %}
-<html>
-{% block content %}
-<head>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<style type="text/css">
+
+  {% load static %}
+
+  {% block content %}
+
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+<style>
 #overall {
-	height: 80%;
-	overflow-y: hidden;
-}
-#content, html, body {
-    height: 80%;
-    width: 99%;
-    margin: .1%;
-    background-color: #FDFDFD;
-    overflow-y: hidden;
+  height: 80%;
+  overflow-y: hidden;
 }
 #left {
     float: left;
     width: 50%;
-    height: 450px;
+    height: 60vh;
     overflow-y: scroll;
-	overflow-x: hidden;
-	padding: 2%;
-	/*	body {
-		font-family: 'Nunito', sans-serif;
-		padding: 30px;
-		background: #f1f1f1;
-	}*/
+  overflow-x: hidden;
+  padding: 2%;
+
 }
 #right {
     float: left;
     width: 50%;
-    height: 450px;
+    height: 60vh;
     overflow-y: scroll;
-	overflow-x: hidden;
-	padding: 2%;
-	/*	body {
-		font-family: 'Nunito', sans-serif;
-		padding: 30px;
-		background: #f1f1f1;
-	}*/
+  overflow-x: hidden;
+  padding: 2%;
+
 }
 div.table {
   background-color: #FDFDFD;
@@ -52,10 +38,7 @@ div.table {
   height: 80%;
   overflow-y: scroll;
 }
-.overall{
-	height: 80%;
-	overflow-y: hidden;
-}
+
 .page-link{
   color: #dc858e;
 }
@@ -75,216 +58,203 @@ div.table {
   border-color: #dc858e;
 }
 </style>
-	<div class="profile_content_container" id="outer_container">
+  <div class="profile_background_image"></div>
+  <div class="profile_content_container" id="outer_container">
+    <div class="container, profile_div">
+      <div class="row" id="top_row">
+        <h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Compare</h1>
+      </div>
+      <div class="row justify-content-md-center" id="middle_row">
 
-		<div class="container">
-			<div class="row" id="top_row">
-				<h1 style="font-family: 'Nunito', sans-serif; color: white; position: absolute;">Compare</h1>
-			</div>
-<div class="row justify-content-md-center" id="middle_row">
-	<div class="overall" style="width:100%; height: 80%;overflow-y:hidden;">
-				<div class="col-md-auto" id="main_col" style="height: 100%">
+        <!-- <div class="overall"> -->
 
+          <div class="col-md-auto" id="main_col_2">
+                <div id="left">
 
-	<div class = "apartment_detail_background"></div>
-	<div class="apartment_detail_container">
-		</div>
+                                <div class="compare_background_image"></div>
+                      <div id="search_bar_div">
 
-	<div id="left">
-        <div id="search_bar_div">
+                      <form action="/compare0_search" id="search_bar_apartments" method="get">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                            <div class="input-group-append">
+                                <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                            </div>
+                          </div>
+                      </form>
+                  </div>
 
-            <form action="/compare0_search" id="search_bar_apartments" method="get">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
-                <div class="input-group-append">
-                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
-                </div>
+              {% if compare0 %}
+              <div class='apartmentname'align="center" style="padding-bottom: 20px">
+                <a href="{% url 'apartment_detail' compare0.id %}" id="apartment_link">
+                  <h4> {{ compare0.name|capfirst }} </h4>
+                </a>
               </div>
-            </form>
-          </div>
 
-          {% if compare0 %}
-		<div class='apartmentname'align="center" style="padding-bottom: 20px">
-			<a href="{% url 'apartment_detail' compare1.id %}" id="apartment_link">
-				<h4> {{ compare0.name|capfirst }} </h4>
-			</a>
-		</div>
+              <!-- <div class = "apartment_detail_background"></div> -->
+              <div class="apartment_detail_container">
 
-			<div class="row">
-				<div class="card">
-				{% load static %}
-				<h5 id="location_title"><strong>{{ compare0.location }}</strong> </h5>
-					<!-- had help from https://www.w3schools.com/css/css_align.asp -->
-					<img style="width:50%; margin-left: auto; margin-right: auto; margin-top: 2px; margin-bottom: 2px" src={{compare1.image}} id="apartment_thumbnail1">
-				<p style="margin-top: 5px;"><strong>Description of Property:</strong></p>
-				<p>{{ compare0.description}}</p>
-				</div>
+                <div class="row">
+                  <div class="card">
+      
+                    <h5 id="location_title"><strong>{{ compare0.location }}</strong> </h5>
+                    <!-- had help from https://www.w3schools.com/css/css_align.asp -->
+                    <img style="width:50%; margin-left: auto; margin-right: auto; margin-top: 2px; margin-bottom: 2px" src={{compare0.image}} id="apartment_thumbnail1">
+                    <p style="margin-top: 5px;"><strong>Description of Property:</strong></p>
+                    <p>{{ compare0.description}}</p>
+                  </div>
 
-				<div class="card">
-						<h4>Reviews</h4>
+                  <div class="card inner_content_div_compare">
+                    <h4>Reviews</h4>
 
-						{% if not reviews0 %}
-							<p style="margin-left: 40px;">There are no reviews at this time</p>
-						{% else %}
-						<div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
-
-								{% for review in reviews0 %}
-								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black">
-											<a href="{% url 'profile' review.user %}">
-												<img src="{{ review.user.userprofile.avatar }}" id="review_thumbnail" class="rounded-circle">
-											</a>
-											<a href="{% url 'profile' review.user %}" style="font-size: 20px; color: #666666"> {{ review.user.get_full_name}}</a>
-
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col" style="background-color: transparent; color: black; display: inline; padding-left: 100px;">
-											<p style="color: #666666">{{review.review}}</p>
-											<p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
-										</div>
-									</div>
-								</div>
-
-								{% endfor %}
-
-
-						</div>
-						{% endif %}
-                </div>
-				<div class="card">
-					<h4>Property Statistics</h4>
-					<p style="margin-bottom: 3px"> <strong>Bedrooms:</strong> {{ compare0.bedrooms }} <strong>Bathrooms:</strong> {{ compare0.bathrooms }}</p>
-					<p style="margin-bottom: 3px"> <strong>Price:</strong> {{ compare0.price }} <strong>Size:</strong> {{ compare0.size }}</p>
-					<p style="margin-bottom: 3px"> <strong>Distance to Grounds:</strong> {{ compare0.number }} </p>
-					<p style="margin-bottom: 3px"> <strong>Number:</strong> {{ compare0.distance }} </p>
-
-				</div>
+                    {% if not reviews0 %}
+                      <p style="margin-left: 40px;">There are no reviews at this time</p>
                     {% else %}
-                    <h5> Please select an apartment to compare. </h5>
+                      <div style="width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
+
+                      {% for review in reviews0 %}
+                        <div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
+                          <div class="row">
+                            <div class="col" style="background-color: transparent; color: black">
+                              <a href="{% url 'profile' review.user %}">
+                                <img src="{{ review.user.userprofile.avatar }}" id="review_thumbnail" class="rounded-circle">
+                              </a>
+                              <a href="{% url 'profile' review.user %}" style="font-size: 20px; color: #666666"> {{ review.user.get_full_name}}</a>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col" style="background-color: transparent; color: black; display: inline; padding-left: 100px;">
+                              <p style="color: #666666">{{review.review}}</p>
+                              <p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                      
+                      </div>
                     {% endif %}
-			</div>
-
-    </div>
-
-	<div id="right">
-        <div id="search_bar_div">
-
-            <form action="/compare1_search" id="search_bar_apartments" method="get">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
-                <div class="input-group-append">
-                  <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                  </div>
+                  <div class="card" style="width: 100%">
+                    <h4>Property Statistics</h4>
+                    <p style="margin-bottom: 3px"> <strong>Bedrooms:</strong> {{ compare0.bedrooms }} <strong>Bathrooms:</strong> {{ compare0.bathrooms }}</p>
+                    <p style="margin-bottom: 3px"> <strong>Price:</strong> {{ compare0.price }} <strong>Size:</strong> {{ compare0.size }}</p>
+                    <p style="margin-bottom: 3px"> <strong>Distance to Grounds:</strong> {{ compare0.number }} </p>
+                    <p style="margin-bottom: 3px"> <strong>Number:</strong> {{ compare0.distance }} </p>
+                  </div>
                 </div>
               </div>
-            </form>
-          </div>
-       <div class="apartment_detail_container" style="overflow-y: hidden; width: 100%; padding: 0%; margin-left: 1%;">
-			<div class="row">
+                   
+                  </div>
 
+            <div id="right">
+              <div id="search_bar_div">
 
-         <div class="row justify-content-md-center" id="middle_row_apartments">
-        <div class="col-md-auto" id="main_col_left_apartments" style="width: 100%;">
- <div class="col-md-auto" id="main_col_right_apartments" style="width: 100%">
+                          <form action="/compare1_search" id="search_bar_apartments" method="get">
+                            <div class="input-group mb-3">
+                              <input type="text" class="form-control" name="search" placeholder="Search" id="search_bar_id_apartments">
+                              <div class="input-group-append">
+                                <input type="submit" class="btn btn-primary" id="search_button_apartments" value="Search">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
 
-          <div class="container, apartments_div_detail">
-            <div class="table">
-            {% for apartment in apartments %}
-              <tr>
-                <td>
-                  <div>
-     	              <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
-     				        <div class='apartmentname'align="center" style="padding-bottom:30px">
-				            <a href="{% url 'save_compare1_search' apartment.id %}" id="apartment_link">
-					            <h3> {{ apartment.name|capfirst }} </h3>
-				            </a>
-                    <h5 id="apartment_price">{{ apartment.price }} </h5>
-                                <h5 id="apartment_bedrooms"> Bedrooms:{{ apartment.bedrooms }} </h5>
-                                <h5 id="apartment_bathrooms"> Bathrooms:{{ apartment.bathrooms }} </h5>
-                      <div id="apartment_stars">
-                        <div class="star-ratings" >
+                    <div class="">
+                      <div class="row">
+                        <div class="row justify-content-md-center" id="middle_row_apartments">
+                          <div class="col-md-auto" id="main_col_apartments" style="width: 100%;">
+                            <div class="col-md-auto" id="main_col_right_apartments" style="width: 100%">
+                              <div class="container, apartments_div_detail">
+                                <div class="table" style="overflow: hidden;">
+                                  {% for apartment in apartments %}
+                                    <tr>
+                                      <td>
+                                        <div>
+                                          <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
+                                         <div class='apartmentname'align="center" style="padding-bottom:30px">
+                                            <a href="{% url 'save_compare1_search' apartment.id %}" id="apartment_link">
+                                               <h3> {{ apartment.name|capfirst }} </h3>
+                                            </a>
+                                            <h5 id="apartment_price">{{ apartment.price }} </h5>
+                                            <h5 id="apartment_bedrooms"> Bedrooms:{{ apartment.bedrooms }} </h5>
+                                            <h5 id="apartment_bathrooms"> Bathrooms:{{ apartment.bathrooms }} </h5>
+                                            <div id="apartment_stars">
+                                              <div class="star-ratings" >
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  {% endfor %}
+
+                                  <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center" style="margin-top: 1rem;">
+                                      {% if apartments.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                                        <li class="page-item"><a class="page-link" href="?page={{ contacts.previous_page_number }}">Previous</a></li>
+                                      {% else %}
+                                        <li class="page-item disabled">
+                                          <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                        </li>
+                                      {% endif %}
+                                      <li class="page-item active">
+                                        <span class="page-link">
+                                          Page {{ apartments.number }} of {{ apartments.paginator.num_pages }}
+                                          <!-- <span class="sr-only">(current)</span> -->
+                                        </span>
+                                      </li>
+
+                                        {% if apartments.has_next %}
+                                          <li class="page-item"><a class="page-link" href="?page={{ apartments.next_page_number }}">Next</a></li>
+                                          <li class="page-item"><a class="page-link" href="?page={{ apartments.paginator.num_pages }}">Last &raquo;</a></li>
+                                        {% else %}
+                                          <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1">Last</a>
+                                          </li>
+                                        {% endif %}
+                                    </ul>
+                                  </nav>
+
+                                  {% if not apartments %}
+                                    <div>
+                                       <center>No Results.</center>
+                                    </div>
+                                  {% endif %}
+                                    <div class="inner_content_div_apartments"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-			             </div>
-                </div>
-              </td>
-            </tr>
-       {% endfor %}
+                    </div>
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center" style="margin-top: 1rem;">
-    {% if apartments.has_previous %}
-      <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-      <li class="page-item"><a class="page-link" href="?page={{ contacts.previous_page_number }}">Previous</a></li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-    {% endif %}
-
-    <li class="page-item active">
-      <span class="page-link">
-        Page {{ apartments.number }} of {{ apartments.paginator.num_pages }}
-        <!-- <span class="sr-only">(current)</span> -->
-      </span>
-    </li>
-
-    {% if apartments.has_next %}
-      <li class="page-item"><a class="page-link" href="?page={{ apartments.next_page_number }}">Next</a></li>
-      <li class="page-item"><a class="page-link" href="?page={{ apartments.paginator.num_pages }}">Last &raquo;</a></li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Last</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
-
-      {% if not apartments %}
-            <div>
-              <center>No Results.</center>
             </div>
-          {% endif %}
-          <div class="inner_content_div_apartments">
+            {% endif %}
 
           </div>
 
-            </div>
-          </div>
-        </div>
-        </div>
-         </div>
-    </div>
-
-            </div>
-
-	</div>
-
-
-</div>
-	</div>
-<div class="container" id="main_col" style="-ms-transform: translateY(-20%); transform: translateY(-10%);">
-{% if user %}
-						<nav aria-label="Page navigation example" class="pagination_profile">
-						  <ul class="pagination justify-content-center">
-						    <li class="page-item"  ><a class="page-link" href="{% url 'profile' user %}">Info</a></li>
-						    <li class="page-item"><a class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
-						    <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
-						    <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li>
-						  </ul>
-						</nav>
-						<ul class="pagination justify-content-end" style="margin-right:2%">
+          <nav aria-label="Page navigation example" class="pagination_profile" style="z-index: 10;">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" ><a class="page-link" href="{% url 'profile' user %}">Info</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'reviews' user %}">Reviews</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+                <li class="page-item active"><a class="page-link" href="#">Compare</a></li>
+            </ul>
+          </nav>
+        <!-- </div> -->
+        <div class="col-md-auto" id="main_col" style="-ms-transform: translateY(-20%); transform: translateY(-10%);">
+          <!-- {% if user %} -->
+  
+            <ul class="pagination justify-content-end" style="margin-right:2%">
                             <li class="page-item"><a class="page-link" href="{% url 'compare_maps' %}"> Compare Map</a></li>
                         </ul>
 
-		{% endif %}
-</div>
-				</div>
-	</div>
-
-	</div>
+          <!-- {% endif %} -->
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock content %}
-</html>
