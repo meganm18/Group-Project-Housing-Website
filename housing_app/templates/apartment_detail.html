@@ -152,6 +152,11 @@ height="65"
 					<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 					{% ratings apartment %}
 					</form>
+					{% if user.is_anonymous %}
+					<a href="{% url 'login' %}">
+						<h6 style="color:black">Click here to login</h6>
+					</a>
+					{% endif %}
 				</div>
 
 				<!--Maps-->
