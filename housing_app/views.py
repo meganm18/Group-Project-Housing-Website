@@ -26,10 +26,13 @@ def apartments(request):
 	search_term=''
 	apartments_list = Apartment.objects.all()
 	if 'sortInput' in request.GET:
+		priceFilter = request.GET['sortInput']
 		if "Sort by Price (low to high)"==request.GET['sortInput']:
 			apartments_list = Apartment.objects.order_by('price')
 		elif "Sort by Price (high to low)"==request.GET['sortInput']:
 			apartments_list = Apartment.objects.order_by('-price')
+	else:
+		priceFilter = "No Sort"
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments_list= apartments_list.filter(name__icontains=search_term)
@@ -63,7 +66,7 @@ def apartments(request):
 		elif "Sort by Average Rating (low to high)"==ratingInput:
 			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('ratings__average') 
 	else:
-		ratingInput = "No Filter"
+		ratingInput = "No Sort"
 	compare0 = None
 	compare1 = None
 	if not request.user.is_anonymous:
@@ -75,9 +78,9 @@ def apartments(request):
 	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
 	page = request.GET.get('page')
 	apartments = paginator.get_page(page)
-	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
+	return render(request, 'apartments.html', {'apartments': apartments, 'priceFilter': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
 
-
+7
 def apartment_detail(request, id):
 	try:
 		apartment = Apartment.objects.get(id=id)

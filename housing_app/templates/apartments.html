@@ -228,7 +228,7 @@ div.table {
             </form>
 
 
-          </div>
+         </div>
                   <div id="filtering">
               <button class="open-advanced btn btn-default" onclick="openForm()" style="">Advanced Search</button>
               <div class="form-advanced form-group" id="myForm" >
@@ -238,15 +238,22 @@ div.table {
 
                  <div class="slidecontainer" style="float: left;">
                      <label for="price-filtering"><b>Max Price</b></label>
-                        <input type="range" name="max_price_input" id="max_price_inputId" value="3500" min="0" max="3500"
-                            oninput="max_price_outputId.value = max_price_inputId.value">
+                        <input type="range" name="max_price_input" id="max_price_inputId" value="maxPriceInput" min="0" max="3500"
+                            oninput="max_price_outputId.value = max_price_inputId.value" step="50">
+                    {% if maxPriceInput %}
+                        <output name="max_price_output" id="max_price_outputId">{{ maxPriceInput }}</output>
+                     {% else %}
                         <output name="max_price_output" id="max_price_outputId">3500</output>
+                     {% endif %}
                  </div>
                     <div class="input-group mb-3 selector_advanced">
                       <div class="input-group-prepend">
                         <label class="input-group-text" for="bedrooms-filtering">Bedrooms</label>
                       </div>
                       <select name="bedroomInput" class="custom-select">
+                          {% if bedroomInput %}
+                          <option value=bedroomInput> {{ bedroomInput }}</option>
+                          {% endif %}
                         <option value="No Filter">No Filter</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -263,6 +270,7 @@ div.table {
                         <label class="input-group-text" for="sorting">Price: </label>
                       </div>
                     <select name="sortInput" class="custom-select">
+                        <option value=priceFilter>{{priceFilter}}</option>
                       <option value="No Sort">No Sort</option>
                       <option value="Sort by Price (low to high)"> Low to High </option>
                       <option value="Sort by Price (high to low)"> High to Low</option>
@@ -273,6 +281,7 @@ div.table {
                       <label class="input-group-text" for="sorting">Rating: </label>
                     </div>
                   <select name="ratingInput" class="custom-select">
+                      <option value=ratingInput>{{ratingInput}}</option>
                     <option value="No Sort">No Sort</option>
                     <option value="Sort by Average Rating (high to low)"> High to Low</option>
                     <option value="Sort by Average Rating (low to high)"> Low to High</option>
