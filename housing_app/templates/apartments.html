@@ -665,7 +665,7 @@ function closeForm() {
         <div class="col-md-auto" id="main_col_right_apartments">
 
           <div class="container, apartments_div_detail">
-              <div class="table">
+              <div class="table" style="height: 100%;">
                   {% for apartment in apartments %}
                   <tr>
                       <td>
@@ -704,7 +704,9 @@ function closeForm() {
                       </td>
                   </tr>
                   {% endfor %}
+
               <nav aria-label="Page navigation example">
+                  <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center" style="margin-top: 1rem;">
                       {% if apartments.has_previous %}
                         <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
@@ -714,12 +716,14 @@ function closeForm() {
                           <a class="page-link" href="#" tabindex="-1">Previous</a>
                         </li>
                       {% endif %}
+                                                                     
                       <li class="page-item active">
                         <span class="page-link">
                           Page {{ apartments.number }} of {{ apartments.paginator.num_pages }}
                             <!-- <span class="sr-only">(current)</span> -->
                         </span>
                             </li>
+
                             {% if apartments.has_next %}
                             <li class="page-item"><a class="page-link"
                                                      href="?page={{ apartments.next_page_number }}">Next</a></li>
