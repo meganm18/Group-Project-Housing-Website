@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block rating_detail %}
-{% block rating_average %}
+<!-- {% block rating_average %}
 <font size="3"><div class="star-ratings-rating-average">{% trans 'Average: ' %} <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}</span></div></font>
-{% endblock rating_average %}
+{% endblock rating_average %} -->
 {% block rating_count %}
-<font size="3"><div class="star-ratings-rating-count">{% trans 'Rating Count: ' %} <span class='star-ratings-rating-value'>{{ rating.count }}</span></div></font>
+<font size="3"><div class="star-ratings-rating-count">{% trans '(' %} <span class='star-ratings-rating-value'>{{ rating.count }} {% trans ')' %} </span></div></font>
 {% endblock rating_count %}
 {% block rating_user %}
 <font size="3"><div class="star-ratings-rating-user">{% trans 'You Rated: ' %} <span class='star-ratings-rating-value'>{% if user_rating %}{{ user_rating.score }}{% else %}{% trans 'Not rated' %}{% endif %}</span></div></font>
 {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
-    <p><font size="3" color="Red">{% trans 'Please log in to rate.' %}</font></p>
+    <p><font size="5" color="Red">{% trans 'Must Be Logged-In to Rate' %}</font></p>
 {% endif %}
 {% endblock rating_user %}
 <div class="star-ratings-errors"></div>
