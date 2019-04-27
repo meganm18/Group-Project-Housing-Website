@@ -9,6 +9,7 @@
 <!-- found how to make the price sliding bar here: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_rangeslider-->
 <!-- and had help here: https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
 <!-- drop down filtering: https://www.w3schools.com/html/html_form_elements.asp-->
+<!-- help with drop downs: https://getbootstrap.com/docs/4.0/components/dropdowns/ -->
   <style>
 
 .open-advanced{
@@ -151,23 +152,71 @@ div.table {
 
   <div class="apartments_background_image"></div>
 
+
   <div class="apartments_content_container" id="outer_container_apartments">
 
 
     <div class="container, apartments_div">
 
-      <div class="row" id="top_row_apartments">
-
-
+   <!-- <div>
+            {% if compare0 %}
+        <p class="text-left"> 1st Compare: {{compare0}}</p>
+            {% else %}
+                <button class="btn btn-flat btn" style="float: left;color:white"> 1st Compare: None Selected</button>
+            {% endif %}
+            {% if compare1 %}
+                <p class="text-left">2nd Compare: {{compare1}}</p>
+            {% else %}
+                <button class="btn btn-flat btn" style="float: left"> 2nd Compare: None Selected</button>
+            {% endif %}
+            </div>-->
         <!-- <div class="col"> -->
           
         <!-- </div> -->
+
         <div class="col" id="apartments_image_div">
+             {% if user and not user.is_anonymous %}
+              <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: left; margin-top: 0.5%; background: none; border: none;">
+    Selected Compare
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% if compare0 %}
+      <h6 class="dropdown-header">First Compare: </h6>
+    <a class="dropdown-item" href="{% url 'apartment_detail' compare0.id %}">{{ compare0 }}</a>
+      {% else %}
+    <a class="dropdown-item" href="#">None Selected</a>
+      {% endif %}
+      {% if compare1 %}
+      <h6 class="dropdown-header">Second Compare: </h6>
+    <a class="dropdown-item" href="{% url 'apartment_detail' compare1.id %}">{{ compare1 }}</a>
+      {% else %}
+    <a class="dropdown-item" href="#">None Selected</a>
+      {% endif %}
+      <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'compare' %}">Go to Compare Page</a>
+  </div>
+</div>
+            {% endif %}
+
+        <!--  <div class="btn-group-vertical" style="float: left;">
+              {% if compare0 %}
+        <button class="btn btn-flat btn" style="float: left;color:white"> 1st Compare: {{compare0}}</button>
+            {% else %}
+                <button class="btn btn-flat btn" style="float: left;color:white"> 1st Compare: None Selected</button>
+            {% endif %}
+            {% if compare1 %}
+                <button class="btn btn-flat btn" style="float: left;color:white">2nd Compare: {{compare1}}</button>
+            {% else %}
+                <button class="btn btn-flat btn" style="float: left"> 2nd Compare: None Selected</button>
+            {% endif %}
+          </div>-->
+
           <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
 
 
+          <div id="search_bar_div" style="float: left; margin-left: 5%;">
 
-          <div id="search_bar_div">
 
             <form action="/apartments" id="search_bar_apartments" method="get">
               <div class="input-group mb-3">
@@ -177,11 +226,12 @@ div.table {
                 </div>
               </div>
             </form>
-          </div>
 
+
+          </div>
                   <div id="filtering">
-              <button class="open-advanced btn btn-default" onclick="openForm()">Advanced Search</button>
-              <div class="form-advanced form-group" id="myForm">
+              <button class="open-advanced btn btn-default" onclick="openForm()" style="">Advanced Search</button>
+              <div class="form-advanced form-group" id="myForm" >
                 <button class="btn btn-default" onclick="closeForm()" style="float: left;"> Cancel</button>
                   <h1 >Filter</h1>
                  <form action="/filter" name=filtering">
@@ -233,6 +283,7 @@ div.table {
 
 </div>
 
+
 <script>
 function openForm() {
   document.getElementById("myForm").style.display = "block";
@@ -242,14 +293,9 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 </script>
-
-          </div>
-
-
+                  </div>
 
         </div>
-
-      </div>
       <div class="row justify-content-md-center" id="middle_row_apartments">
 
 
@@ -259,9 +305,9 @@ function closeForm() {
           <!--Adding Maps-->
 
              <div id="map"></div>
-             
+
              <script>
-               
+
               function initMap() {
 
               var custom_icon_path_1 = "{% static "images/pin_pink.png" %}"
@@ -546,7 +592,7 @@ function closeForm() {
                 google.maps.event.addListener(marker2, 'mouseout', function() {
                     marker2.setIcon(custom_icon_path_1);
                 });
-              
+
                google.maps.event.addListener(marker4, 'mouseover', function() {
                     marker4.setIcon(custom_icon_path_2);
                 });
@@ -599,14 +645,14 @@ function closeForm() {
                 });
                 google.maps.event.addListener(marker12, 'mouseout', function() {
                     marker12.setIcon(custom_icon_path_1);
-                });   
+                });
 
                google.maps.event.addListener(marker13, 'mouseover', function() {
                     marker13.setIcon(custom_icon_path_2);
                 });
                 google.maps.event.addListener(marker13, 'mouseout', function() {
                     marker13.setIcon(custom_icon_path_1);
-                });             
+                });
             }
 
              </script>
@@ -658,65 +704,39 @@ function closeForm() {
                       </td>
                   </tr>
                   {% endfor %}
-              </div>
-              <div class="table">
-                  <nav aria-label="Page navigation example">
-                      <ul class="pagination justify-content-center" style="margin-top: 1rem;">
-                          {% if apartments.has_previous %}
-                          <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                          <li class="page-item"><a class="page-link" href="?page={{ contacts.previous_page_number }}">Previous</a>
-                          </li>
-                          {% else %}
-                          <li class="page-item disabled">
-                              <a class="page-link" href="#" tabindex="-1">Previous</a>
-                          </li>
-                          {% endif %}
-
-                      </ul>
+              <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" style="margin-top: 1rem;">
+                      {% if apartments.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ contacts.previous_page_number }}">Previous</a></li>
+                      {% else %}
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                      {% endif %}
+                      <li class="page-item active">
+                        <span class="page-link">
+                          Page {{ apartments.number }} of {{ apartments.paginator.num_pages }}
+                            <!-- <span class="sr-only">(current)</span> -->
+                        </span>
+                            </li>
+                            {% if apartments.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ apartments.next_page_number }}">Next</a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ apartments.paginator.num_pages }}">Last
+                                &raquo;</a></li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Last</a>
+                            </li>
+                            {% endif %}
+                        </ul>
                   </nav>
-
                   </div>
-                  </div>
-              </td>
-            </tr>
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center" style="margin-top: 1rem;">
-    {% if apartments.has_previous %}
-      <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-      <li class="page-item"><a class="page-link" href="?page={{ contacts.previous_page_number }}">Previous</a></li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
-      </li>
-    {% endif %}
-
-    <li class="page-item active">
-      <span class="page-link">
-        Page {{ apartments.number }} of {{ apartments.paginator.num_pages }}
-          <!-- <span class="sr-only">(current)</span> -->
-      </span>
-                          </li>
-
-                          {% if apartments.has_next %}
-                          <li class="page-item"><a class="page-link"
-                                                   href="?page={{ apartments.next_page_number }}">Next</a></li>
-                          <li class="page-item"><a class="page-link" href="?page={{ apartments.paginator.num_pages }}">Last
-                              &raquo;</a></li>
-                          {% else %}
-                          <li class="page-item disabled">
-                              <a class="page-link" href="#" tabindex="-1">Last</a>
-                          </li>
-                          {% endif %}
-                      </ul>
-                  </nav>
-
-
                   {% if not apartments %}
                   <div>
                       <center>No Results.</center>
                   </div>
-
                   {% endif %}
 
 
@@ -726,7 +746,7 @@ function closeForm() {
 
               </div>
 <!--        <div class="col" id="right_outer_col">
-    
+
         </div> -->
       </div>
 

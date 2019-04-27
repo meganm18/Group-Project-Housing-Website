@@ -834,7 +834,7 @@ body, html {
 
 
 #search_bar_div{
-	align-self: center;
+	self-algin: center
 	display: block;
 	text-align: center;
 	align-content: center;

@@ -64,10 +64,18 @@ def apartments(request):
 			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('ratings__average') 
 	else:
 		ratingInput = "No Filter"
+	compare0 = None
+	compare1 = None
+	if not request.user.is_anonymous:
+		user_profile = UserProfile.objects.get(user = request.user)
+		if user_profile.compare0:
+			compare0 = user_profile.compare0
+		if user_profile.compare1:
+			compare1 = user_profile.compare1
 	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
 	page = request.GET.get('page')
-	apartments = paginator.get_page(page)	
-	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput, 'ratingInput':ratingInput})
+	apartments = paginator.get_page(page)
+	return render(request, 'apartments.html', {'apartments': apartments, 'search_term': search_term, 'maxPriceInput': maxPriceInput, 'bedroom_filter': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
 
 
 def apartment_detail(request, id):
