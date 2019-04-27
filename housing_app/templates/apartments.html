@@ -692,11 +692,12 @@ function closeForm() {
                   <tr>
                       <td>
                           <div>
+                                <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                               <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
+                                </a>
                               <div class='apartmentname' align="center" style="padding-bottom:30px">
                                   <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                                       <h4> {{ apartment.name|capfirst }} </h4>
-                                  </a>
                                   <h5 id="apartment_price">{{ apartment.price }} </h5>
                                   <h5 id="apartment_bedbath">Bedrooms: {{ apartment.bedrooms }} </h5>
                                   <h5 id="apartment_bath"> Bathrooms: {{apartment.bathrooms }}</h5>
@@ -718,6 +719,7 @@ function closeForm() {
                                          style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a>
                                   </div>
                                       {% endif %}
+                                  </a>
                                   </div>
                               </div>
                       </td>
