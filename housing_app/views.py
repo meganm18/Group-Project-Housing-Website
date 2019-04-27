@@ -18,28 +18,28 @@ from django.shortcuts import render
 
 # found how to sort here: https://stackoverflowfrom django.shortcuts import get_object_or_404.com/questions/10488158/django-how-to-sort-objects-based-on-attribute-of-a-related-model
 # found info for filtering here: https://stackoverflow.com/questions/51905712/how-to-get-the-value-of-a-django-model-field-object
-
+# found info on url vars here: https://stackoverflow.com/questions/150505/capturing-url-parameters-in-request-get
 def home(request):
 	return render(request, 'home.html')
 
 def apartments(request):
 	search_term=''
 	apartments_list = Apartment.objects.all()
+	priceFilter = request.GET.get('sortInput','No Sort')
 	if 'sortInput' in request.GET:
 		priceFilter = request.GET['sortInput']
-		if "Sort by Price (low to high)"==request.GET['sortInput']:
-			apartments_list = Apartment.objects.order_by('price')
-		elif "Sort by Price (high to low)"==request.GET['sortInput']:
-			apartments_list = Apartment.objects.order_by('-price')
-	else:
-		priceFilter = "No Sort"
+	if "Low to High"==priceFilter:
+		apartments_list = Apartment.objects.order_by('price')
+	elif "High to Low"==priceFilter:
+		apartments_list = Apartment.objects.order_by('-price')
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments_list= apartments_list.filter(name__icontains=search_term)
+	maxPriceInput = request.GET.get('max_price_input', '3500')
 	if 'max_price_input' in request.GET:
 		maxPriceInput = request.GET['max_price_input']
-		apartments_list = apartments_list.filter(price__lt=maxPriceInput)
-		"""
+	apartments_list = apartments_list.filter(price__lt=maxPriceInput)
+	"""
 		for apt in apartments:
 			aptprice = getattr(apt, "price")
 			if "-" in aptprice:
@@ -50,23 +50,19 @@ def apartments(request):
 			if int(aptprice) > int(maxPriceInput):
 				aptname = getattr(apt, "name")
 				apartments = apartments.filter(name__icontains=aptname)
-		"""
-	else:
-		maxPriceInput = 3000;
+	"""
+	bedroomInput = request.GET.get('bedroomInput','No Filter')
 	if 'bedroomInput' in request.GET:
 		bedroomInput = request.GET['bedroomInput']
-		if bedroomInput != "No Filter":
-			apartments_list = apartments_list.filter(bedrooms__icontains=bedroomInput)
-	else:
-		bedroomInput = "No Filter"
+	if bedroomInput != "None" and bedroomInput != "No Filter" and bedroomInput != "No":
+		apartments_list = apartments_list.filter(bedrooms__icontains=bedroomInput)
+	ratingInput = request.GET.get('ratingInput','No Sort')
 	if 'ratingInput' in request.GET:
 		ratingInput = request.GET['ratingInput']
-		if "Sort by Average Rating (high to low)"==ratingInput:
-			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('-ratings__average')
-		elif "Sort by Average Rating (low to high)"==ratingInput:
-			apartments_list = apartments_list.filter(ratings__isnull=False).order_by('ratings__average') 
-	else:
-		ratingInput = "No Sort"
+	if "High to Low"==ratingInput:
+		apartments_list = apartments_list.filter(ratings__isnull=False).order_by('-ratings__average')
+	elif "Low to High"==ratingInput:
+		apartments_list = apartments_list.filter(ratings__isnull=False).order_by('ratings__average')
 	compare0 = None
 	compare1 = None
 	if not request.user.is_anonymous:
@@ -78,7 +74,7 @@ def apartments(request):
 	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
 	page = request.GET.get('page')
 	apartments = paginator.get_page(page)
-	return render(request, 'apartments.html', {'apartments': apartments, 'priceFilter': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
+	return render(request, 'apartments.html', {'apartments': apartments, 'priceSort': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
 
 7
 def apartment_detail(request, id):
