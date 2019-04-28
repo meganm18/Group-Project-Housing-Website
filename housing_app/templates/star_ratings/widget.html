@@ -74,9 +74,14 @@
     {% endblock rating_count %}
     {% block rating_user %}
     {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
-    <font size="5" color = "FFB0B8" ><span style="display:inline">{% trans 'Must Login to Rate!' %}</span></font>
+    <font size="3" color = "FFB0B8" ><span style="display:inline">{% trans 'Must Login to Rate!' %}</span></font>
+    {% if user.is_anonymous %}
+    <a href="{% url 'login' %}">
+        <h6 style="color:black; display:inline-flex" style>Click here to login</h6>
+    </a>
+    {% endif %}
     {% else %}
-    <font size="3" ><div class="star-ratings-rating-user"><span>{% if user_rating %}{% else %}{% trans 'You Have Not Rated' %}{% endif %}</span></div></font>
+    <font size="3" ><div class="star-ratings-rating-user" style="display:inline-flex"><span>{% if user_rating %}{% else %}{% trans 'You Have Not Rated' %}{% endif %}</span></div></font>
     {% endif %}
     {% endblock rating_user %}
     <div class="star-ratings-errors"></div>
