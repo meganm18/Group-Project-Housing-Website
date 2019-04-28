@@ -59,7 +59,12 @@ height="65"
 				</div>
 
 				<div class="card">
-						<h2>Reviews</h2>
+						<h2>Review and Rate:
+								<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+								<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+								{% ratings apartment %}
+								</form>
+						</h2>
 
 						{% if not reviews %}
 							<p style="margin-left: 40px;">There are no reviews at this time</p>
@@ -146,18 +151,11 @@ height="65"
 				</div> -->
 				<!-- </div> -->
 
-				<div class="card2">
-					<h2>Apartment Rating</h2>
-					<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-					<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-					{% ratings apartment %}
-					</form>
-				</div>
-
 				<!--Maps-->
 		<div class="card">
 	 		<div id="map_detail">
-	 		</div>
+			 </div>
+
 
 
 	<script>
