@@ -80,7 +80,7 @@
         <h6 style="color:black; display:inline-flex" style>Click here to login</h6>
     </a>
     {% endif %}
-    {% else %}
+    {% elif not read_only %}
     <font size="3" ><div class="star-ratings-rating-user" style="display:inline-flex"><span>{% if user_rating %}{% else %}{% trans 'You Have Not Rated' %}{% endif %}</span></div></font>
     {% endif %}
     {% endblock rating_user %}
