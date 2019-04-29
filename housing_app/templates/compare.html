@@ -222,7 +222,12 @@ div.table {
 							</div>
 
 						</div>
+						{% else %}
+						<div class='apartmentname'align="center" style="padding-bottom: 20px">
+								<h2> Please select an apartment to compare. </h2>
+							</div>
 						{% endif %}
+
 
 					</div>
 
@@ -237,11 +242,13 @@ div.table {
 				<!-- </div> -->
 				<div class="col-md-auto" id="main_col" style="-ms-transform: translateY(-20%); transform: translateY(-10%);">
 					<!-- {% if user %} -->
-	
+						{% if compare0 and compare1 %}
 						<ul class="pagination justify-content-end" style="margin-right:2%">
-                            <li class="page-item"><a class="page-link" href="{% url 'compare_maps' %}"> Compare Map</a></li>
-                        </ul>
 
+                            <li class="page-item"><a class="page-link" href="{% url 'compare_maps' %}"> Compare Map</a></li>
+
+                        </ul>
+						{% endif %}
 					<!-- {% endif %} -->
 				</div>
 			</div>
