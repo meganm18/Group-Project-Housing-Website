@@ -185,7 +185,9 @@ div.table {
 					<!-- Checks to see if user accessing profile is the user logged in -->
 					{% if user_for_page == user %}
 						<h1 class="profile_name" style="z-index: 100;">{{user_for_page.get_full_name}}</h1>
-						<button class="btn btn-default" onclick="openForm()" id="edit_profile" name="edit_profile"> Edit Profile </button>
+						<button class="btn btn-default" onclick="openForm()" id="edit_profile" name="edit_profile" style="    position: absolute;
+    top: 0px;
+    right: 0px;"> Edit Profile </button>
 
 						<nav aria-label="Page navigation example" class="pagination_profile"style="z-index: 100;">
 						  <ul class="pagination justify-content-center">
@@ -212,7 +214,7 @@ div.table {
 							
 								
 								<div class="fieldWrapper2">
-									{{ form.bio.errors }}
+									  {{ form.bio.errors }}
 	    							{{ form.bio.label_tag }}
 	    							{{ form.bio }}
 	    						</div>
@@ -237,12 +239,16 @@ div.table {
 
 					<div class="inner_content_div">
 
+            <div class="container" style="word-wrap: break-word;">
+              <h3>Email: </h3>
+              <p id="email_text">{{user_for_page.email}}</p>
 
-						<h4 id="email_text">Email: {{user_for_page.email}}</h4>
+            <!-- {{user_for_page.userprofile.avatar.url}} -->
+              <h3>Bio: </h3>
+             <p id="bio_text">{{user_for_page.userprofile.bio}}</p>
 
-						<!-- {{user_for_page.userprofile.avatar.url}} -->
-							
-						<h4 id="bio_text">Bio: {{user_for_page.userprofile.bio}}</h4>
+            </div>
+
 
 
 
