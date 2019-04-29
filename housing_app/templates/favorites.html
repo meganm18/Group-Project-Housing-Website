@@ -68,21 +68,21 @@ div.table {
 				</div> -->
 				<div class="col-md-auto" id="main_col">
 					<!-- Checks to see if user accessing profile is the user logged in -->
-					{% if user_for_page == user %}
+				<!-- 	{% if user_for_page == user %} -->
 <!-- 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
 						<button class="btn btn-default" id="edit_profile" name="edit_profile"> Edit Profile </button> -->
 
-						<nav aria-label="Page navigation example" class="pagination_profile">
+<!-- 						<nav aria-label="Page navigation example" class="pagination_profile">
 						  <ul class="pagination justify-content-center">
 						    <li class="page-item"  ><a class="page-link" href="{% url 'profile' user_for_page %}">Info</a></li>
 						    <li class="page-item"><a class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
 						    <li class="page-item active"><a class="page-link" href="#">Favorites</a></li>
 						    <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li>
 						  </ul>
-						</nav>
-					{% else %}
+						</nav> -->
+					<!-- {% else %} -->
 <!-- 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1> -->
-					{% endif %}
+					<!-- {% endif %} -->
 
 					<div class="inner_content_div_favorites">
 
