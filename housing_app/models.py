@@ -19,6 +19,10 @@ class Apartment(models.Model):
 	bathrooms = models.CharField(max_length=100,default="--")
 	number = models.CharField(max_length=100,default="--")
 	distance = models.CharField(max_length=100,default="--")
+	minBR = models.IntegerField(default=0)
+	maxBR = models.IntegerField(default=0)
+	minPrice = models.IntegerField(default=0)
+	maxPrice = models.IntegerField(default=0)
 	image = models.ImageField(default="static/images/blank_profile.png", max_length=255)
 	ratings = GenericRelation(Rating, related_query_name = 'apartments')
 	def __str__(self):
