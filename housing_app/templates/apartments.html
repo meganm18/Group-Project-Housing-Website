@@ -117,12 +117,12 @@ div.table {
   display: none;
  }
 
-#apartment_stars{
+/*#apartment_stars{
     position: relative;
     left: 40%;
     top: 100%;
     transform: translate(-91%, 100%);
-}
+}*/
 
 .page-link{
   color: #dc858e;
@@ -197,7 +197,29 @@ div.table {
       <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="{% url 'compare' %}">Go to Compare Page</a>
   </div>
-</div>
+</div>  
+{% else %}
+  <div class="dropdown" style="float: left; margin-top: 0.5%; visibility: hidden;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: left; margin-top: 0.5%; background: none; border: none; visibility: hidden;">
+    Selected Compare
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {% if compare0 %}
+      <h6 class="dropdown-header">First Compare: </h6>
+    <a class="dropdown-item" href="{% url 'apartment_detail' compare0.id %}">{{ compare0 }}</a>
+      {% else %}
+    <a class="dropdown-item" href="#">None Selected</a>
+      {% endif %}
+      {% if compare1 %}
+      <h6 class="dropdown-header">Second Compare: </h6>
+    <a class="dropdown-item" href="{% url 'apartment_detail' compare1.id %}">{{ compare1 }}</a>
+      {% else %}
+    <a class="dropdown-item" href="#">None Selected</a>
+      {% endif %}
+      <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="{% url 'compare' %}">Go to Compare Page</a>
+  </div>
+</div>  
             {% endif %}
 
         <!--  <div class="btn-group-vertical" style="float: left;">
@@ -990,38 +1012,58 @@ function closeForm() {
                   {% for apartment in apartments %}
                   <tr>
                       <td>
-                          <div>
-                                <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
-                              <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
-                                </a>
-                              <div class='apartmentname' align="center" style="padding-bottom:30px">
+                        <div class="container">
+                        <div class="row" style="    border-bottom: solid;
+    border-bottom-color: gray;
+    border-bottom-width: 1px;">
+                          
+                          
+                            <div id="left_table_div" class="col-md-auto" style="padding: 0px; width: 40%;">
+                              <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
+                                <img style="vertical-align:middle" src={{apartment.image}} id="apartment_thumbnail">
+                              </a>
+                              <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+                                  <script type="text/javascript"
+                                          src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+                                  <div id="apartment_stars" style="    width: 20vh;
+    padding-left: 10px;">
+                                      <div class="star-ratings" style="">
+                                          {% ratings apartment read_only=True %}
+                                      </div>
+                                  </div>
+                            </div>
+                            <div id="right_table_div" class="col-md-auto" style="padding: 0px; width: 60%;">
+                              <div class='apartmentname' align="center" style="padding-bottom: 0px;
+    padding-top: 10px;">
                                   <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                                       <h4> {{ apartment.name|capfirst }} </h4>
                                   </a>
                                   <h5 id="apartment_price">{{ apartment.price }} </h5>
                                   <h5 id="apartment_bedbath">Bedrooms: {{ apartment.bedrooms }} </h5>
                                   <h5 id="apartment_bath"> Bathrooms: {{apartment.bathrooms }}</h5>
-                                  <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-                                  <script type="text/javascript"
-                                          src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-                                  <div id="apartment_stars" style="">
-                                      <div class="star-ratings" style="margin-left: 10px">
-                                          {% ratings apartment read_only=True %}
-                                      </div>
-                                  </div>
+
                                   {% if user and not user.is_anonymous %}
-                                  <div>
+                                  <div style="display: inline-flex;
+    justify-content: center;">
                                       <a class="page-link" href="{% url 'save_favorite' apartment.id %}"
-                                         style="width: 50%; margin-left: 30%; padding: 1%">Save to Favorites List </a>
+                                         style="width: 8vw; font-size: 70%; border: none; background-color: transparent;">Save to Favorites List </a>
                                       <a class="page-link" href="{% url 'save_compare0' apartment.id %}"
-                                         style="width: 50%; margin-left: 30%; padding: 1%">1st Compare Apartment</a>
+                                         style="width: 8vw; font-size: 70%; border: none; background-color: transparent;">1st Compare Apartment</a>
                                       <a class="page-link" href="{% url 'save_compare1' apartment.id %}"
-                                         style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a>
+                                         style="width: 8vw; font-size: 70%; border: none; background-color: transparent;">2nd Compare Apartment</a>
                                   </div>
+
                                       {% endif %}
                                   
                                   </div>
                               </div>
+
+                            </div>
+
+
+                        </div>
+
+
                       </td>
                   </tr>
                   {% endfor %}

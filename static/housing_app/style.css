@@ -638,7 +638,7 @@ body, html {
 
 	.apartmentname{
 		padding: 10px;
-		border-bottom: 1px solid gray;
+		border-bottom: none;
 	}
 
 }
@@ -698,7 +698,7 @@ body, html {
 		padding: 0px;
 		margin-left: 10px;
 		margin-right: 10px;
-		border-bottom: 1px solid gray;
+		border-bottom: none;
 	}
 
 	#left_display{
@@ -722,8 +722,8 @@ body, html {
 		margin: 10px;
 		width: auto;
 		object-fit: cover;
-		width:130px;
-		height:130px;
+		width:20vh;
+		height:20vh;
 	}
 
 }
