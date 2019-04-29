@@ -13,6 +13,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.core import serializers
+import json
+from django.urls import reverse
+from geopy.geocoders import Nominatim
 # import json
 # from django.core.serializers.json import DjangoJSONEncoder
 
@@ -71,10 +75,38 @@ def apartments(request):
 			compare0 = user_profile.compare0
 		if user_profile.compare1:
 			compare1 = user_profile.compare1
-	paginator = Paginator(apartments_list, 15) # Show 25 apartments per page
+	paginator = Paginator(apartments_list, 10) # Show 25 apartments per page
 	page = request.GET.get('page')
 	apartments = paginator.get_page(page)
-	return render(request, 'apartments.html', {'apartments': apartments, 'priceSort': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
+	data = serializers.serialize("json", apartments)
+	data_json = json.loads(data)
+	geolocator = Nominatim()
+	apartments_urls = []
+	apartments_pks = []
+	apartments_locations = []
+	apartments_names = []
+	apartments_images = []
+	lats = []
+	lons = []
+	apartments_prices = []
+	for i in range(0, len(apartments)):
+		apartments_urls.append(reverse('apartment_detail', args=[data_json[i]['pk']]))
+		apartments_pks.append(data_json[i]['pk'])
+		apartments_locations.append(data_json[i]['fields']['location'])
+		apartments_names.append(data_json[i]['fields']['name'])
+		apartments_images.append(data_json[i]['fields']['image'])
+		apartments_prices.append(data_json[i]['fields']['price'])
+		try:
+			location = geolocator.geocode(data_json[i]['fields']['location'])
+			lats.append(location.latitude)
+			lons.append(location.longitude)
+		except:
+			lons.append(0.00)
+			lats.append(0.00)
+	len_apartments = len(apartments)
+	# apartment_pk = data_json[14]['pk']
+	# apartment_location = data_json[14]['fields']['location']
+	return render(request, 'apartments.html', {'apartments': apartments, 'priceSort': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1, 'apartments_pks': apartments_pks, 'apartments_locations': apartments_locations, 'lats': lats, 'lons': lons, 'len_apartments': len_apartments, 'apartments_names': apartments_names, 'apartments_images': apartments_images, 'apartments_prices': apartments_prices})
 
 # 7
 def apartment_detail(request, id):
@@ -278,12 +310,7 @@ def delete_review(request, review_id):
 	review = Review.objects.get(pk=review_id)
 	apartment_id = review.apartment.id
 	Review.delete(review)
-	# user_profile = user.userprofile
-	# if user_profile.favorites.objects.filter(id = apartment_id).size() > 0:
-	# 	user_profile.favorites.delete(id = apartment_id)
-	# 	user_profile.save()
-	# 	user.save()
-	return redirect('apartment_detail', apartment_id)
+	return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 @login_required
 def fav_save_compare0(request, apartment_id):
