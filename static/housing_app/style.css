@@ -354,9 +354,9 @@ body, html {
 	}
 
 	#edit_profile{
-		position: relative;
-		top: -6%;
-		float: right;
+    	position: absolute;
+    	top: 0px;
+    	right: 0px;
 	}
 
 	#search_bar_id{
