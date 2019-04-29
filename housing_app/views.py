@@ -33,16 +33,16 @@ def apartments(request):
 	if 'sortInput' in request.GET:
 		priceFilter = request.GET['sortInput']
 	if "Low to High"==priceFilter:
-		apartments_list = Apartment.objects.order_by('price')
+		apartments_list = Apartment.objects.order_by('minPrice')
 	elif "High to Low"==priceFilter:
-		apartments_list = Apartment.objects.order_by('-price')
+		apartments_list = Apartment.objects.order_by('-maxPrice')
 	if 'search' in request.GET:
 		search_term= request.GET['search']
 		apartments_list= apartments_list.filter(name__icontains=search_term)
 	maxPriceInput = request.GET.get('max_price_input', '3500')
 	if 'max_price_input' in request.GET:
 		maxPriceInput = request.GET['max_price_input']
-	apartments_list = apartments_list.filter(price__lt=maxPriceInput)
+		apartments_list = apartments_list.filter(minPrice__lte=maxPriceInput)
 	"""
 		for apt in apartments:
 			aptprice = getattr(apt, "price")
@@ -59,7 +59,7 @@ def apartments(request):
 	if 'bedroomInput' in request.GET:
 		bedroomInput = request.GET['bedroomInput']
 	if bedroomInput != "None" and bedroomInput != "No Filter" and bedroomInput != "No":
-		apartments_list = apartments_list.filter(bedrooms__icontains=bedroomInput)
+		apartments_list = apartments_list.filter(maxBR__gte=bedroomInput)
 	ratingInput = request.GET.get('ratingInput','No Sort')
 	if 'ratingInput' in request.GET:
 		ratingInput = request.GET['ratingInput']
