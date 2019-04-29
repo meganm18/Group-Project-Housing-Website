@@ -206,8 +206,9 @@ height="65"
 	// Initialize and add the map
 	function initMap() {
 
-	  var apt_coordinates = {lat:38.0316282, lng: -78.4842689};
+	  var apt_coordinates = {lat: parseFloat("{{lat}}"), lng: parseFloat("{{lon}}")};
 
+	  var custom_icon_path_1 = "{% static "images/pin_pink_outline.png" %}";
 	  
 
 	             var map = new google.maps.Map(document.getElementById('map_detail'), { center: apt_coordinates,
@@ -440,7 +441,20 @@ height="65"
 	      }
 	    });
 
-	  */var marker = new google.maps.Marker({position: apt_coordinates, map: map});
+		
+
+	  */
+
+	    var image = {
+		    url: "{% static "images/pin_pink_outline.png" %}",
+		    // This marker is 20 pixels wide by 32 pixels high.
+		    // scaledSize: new google.maps.Size(30, 48),
+		    // // The origin for this image is (0, 0).
+		    // origin: new google.maps.Point(0, 0),
+		    // // // The anchor for this image is the base of the flagpole at (0, 32).
+		    // anchor: new google.maps.Point(0, 32)
+		  };
+	  var marker = new google.maps.Marker({position: apt_coordinates, map: map, icon: image});
 	}
 	    </script>
 

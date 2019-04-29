@@ -80,8 +80,13 @@ div.table {
 						<script>
 							// Initialize and add the map
 							function initMap() {
-							  var apt_coordinates = {lat:38.0316282, lng: -78.4842689};
-							             var map = new google.maps.Map(document.getElementById('map_detail'), { center: apt_coordinates,
+
+							  var custom_icon_path_1 = "{% static "images/pin_pink_outline.png" %}";
+              				  var custom_icon_path_2 = "{% static "images/pin_green_outline.png" %}";
+
+							  var apt_coordinate1 = {lat: parseFloat("{{lats.0}}"), lng: parseFloat("{{lons.0}}")};
+							  var apt_coordinate2 = {lat: parseFloat("{{lats.1}}"), lng: parseFloat("{{lons.1}}")};
+							  var map = new google.maps.Map(document.getElementById('map_detail'), { center: apt_coordinate1,
 							              zoom: 15,
 							              styles: [
 							  {
@@ -295,6 +300,7 @@ div.table {
 							  }
 							]
 							              });
+							  var bounds = new google.maps.LatLngBounds();
 							 /* geocoder = new google.maps.Geocoder();
 							  var address= apartment.location; //not sure how to do this
 							  geocoder.geocode( { 'address': address}, function(results, status) {
@@ -308,7 +314,36 @@ div.table {
 							        alert('Geocode was not successful for the following reason: ' + status);
 							      }
 							    });
-							  */var marker = new google.maps.Marker({position: apt_coordinates, map: map});
+							  */var marker = new google.maps.Marker({position: apt_coordinate1, map: map, icon: custom_icon_path_1});
+								  bounds.extend(marker.position);
+								  map.fitBounds(bounds);
+				                  infowindow = new google.maps.InfoWindow({
+				                      content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.0%} style='color:gray;'><img src='{{apartments_images.0}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.0}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.0}}</div><br/></div>"
+				                  });
+				                  google.maps.event.addListener(marker, 'click', function() {
+				                    infowindow.open(map, marker);  
+				                  });
+				                  google.maps.event.addListener(marker, 'mouseover', function() {
+				                     marker.setIcon(custom_icon_path_2);    
+				                  });
+				                  google.maps.event.addListener(marker, 'mouseout', function() {
+				                      marker.setIcon(custom_icon_path_1);
+				                  });
+							  	var marker2 = new google.maps.Marker({position: apt_coordinate2, map: map, icon: custom_icon_path_1});
+							  	  bounds.extend(marker2.position);
+								  map.fitBounds(bounds);
+				                  infowindow1 = new google.maps.InfoWindow({
+				                      content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.1%} style='color:gray;'><img src='{{apartments_images.1}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.1}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.1}}</div><br/></div>"
+				                  });
+				                  google.maps.event.addListener(marker2, 'click', function() {
+				                    infowindow1.open(map, marker2);  
+				                  });
+				                  google.maps.event.addListener(marker2, 'mouseover', function() {
+				                     marker2.setIcon(custom_icon_path_2);    
+				                  });
+				                  google.maps.event.addListener(marker2, 'mouseout', function() {
+				                      marker2.setIcon(custom_icon_path_1);
+				                  });
 							}
 	    				</script>
 
