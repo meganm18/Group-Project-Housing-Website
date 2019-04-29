@@ -332,8 +332,19 @@ function closeForm() {
 
               function initMap() {
 
-              var custom_icon_path_1 = "{% static "images/pin_pink.png" %}"
-              var custom_icon_path_2 = "{% static "images/pin_green.png" %}"
+
+              var custom_icon_path_1 = "{% static "images/pin_pink_outline.png" %}";
+              var custom_icon_path_2 = "{% static "images/pin_green_outline.png" %}";
+
+
+              var len_apartments = "{{len_apartments}}";
+
+              len_apartments = parseInt(len_apartments)
+
+              var features = [];
+
+              var center = {lat: 38.0325982, lng: -78.4955055};
+
 
               var apartments = "{{apartments}}";
 

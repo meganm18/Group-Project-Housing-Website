@@ -17,6 +17,7 @@ from django.core import serializers
 import json
 from django.urls import reverse
 from geopy.geocoders import Nominatim
+from geopy.geocoders import GoogleV3
 # import json
 # from django.core.serializers.json import DjangoJSONEncoder
 
@@ -80,7 +81,7 @@ def apartments(request):
 	apartments = paginator.get_page(page)
 	data = serializers.serialize("json", apartments)
 	data_json = json.loads(data)
-	geolocator = Nominatim()
+	geolocator = GoogleV3(api_key="AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk")
 	apartments_urls = []
 	apartments_pks = []
 	apartments_locations = []
@@ -116,7 +117,24 @@ def apartment_detail(request, id):
 		apartment = Apartment.objects.get(id=id)
 
 		units = Unit.objects.all()
-		units = units.filter(apartment_name__icontains=apartment.name)
+		units = units.filter(apartment_name__icontains=apartment.name)	
+
+		data = serializers.serialize("json", [apartment,])
+		data_json = json.loads(data)
+		# data_json = data_json[0]['fields']['location']
+		geolocator = GoogleV3(api_key="AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk")
+		lat = 0.0
+		lon = 0.0
+
+		loc = data_json[0]['fields']['location']
+
+		location = geolocator.geocode(data_json[0]['fields']['location'])
+		try: 
+			lat = location.latitude
+			lon = location.longitude
+		except:
+			lat = 0.0
+			lon = 0.0
 		if request.method == "POST":
 			form = ReviewForm(request.POST)
 			if form.is_valid():
@@ -127,14 +145,14 @@ def apartment_detail(request, id):
 
 				form = ReviewForm()
 				return HttpResponseRedirect(request.path_info)
-			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units ,'form': form,})
+			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units ,'form': form, 'lat': lat, 'lon': lon,})
 		else:
 			form = ReviewForm()
 			reviews = Review.objects.all().filter(apartment=apartment)	
 			for review in reviews:
 				if	review.user == user:
 					num_user_reviews = num_user_reviews + 1
-			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units , 'form': form, 'reviews':reviews, 'num_user_reviews': num_user_reviews})
+			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units , 'form': form, 'reviews':reviews, 'num_user_reviews': num_user_reviews, 'lat': lat, 'lon': lon})
 	except Apartment.DoesNotExist:
 		raise Http404("Apartment not found")
 
@@ -182,7 +200,33 @@ def compare_maps(request):
 	user_profile = user.userprofile
 	reviews0 = Review.objects.all().filter(apartment=user_profile.compare0)
 	reviews1 = Review.objects.all().filter(apartment=user_profile.compare1)
-	return render(request, 'compare_maps.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page})
+	data = serializers.serialize("json", [user_profile.compare0, user_profile.compare1])
+	data_json = json.loads(data)
+	# data_json = data_json[0]['fields']['location']
+	geolocator = GoogleV3(api_key="AIzaSyBnnca1doBE-nE14750VNFA4VtqlLrcJZk")
+	apartments_urls = []
+	apartments_pks = []
+	apartments_locations = []
+	apartments_names = []
+	apartments_images = []
+	lats = []
+	lons = []
+	apartments_prices = []
+	for i in range(0, 2):
+		apartments_urls.append(reverse('apartment_detail', args=[data_json[i]['pk']]))
+		apartments_pks.append(data_json[i]['pk'])
+		apartments_locations.append(data_json[i]['fields']['location'])
+		apartments_names.append(data_json[i]['fields']['name'])
+		apartments_images.append(data_json[i]['fields']['image'])
+		apartments_prices.append(data_json[i]['fields']['price'])
+		try:
+			location = geolocator.geocode(data_json[i]['fields']['location'])
+			lats.append(location.latitude)
+			lons.append(location.longitude)
+		except:
+			lons.append(0.00)
+			lats.append(0.00)
+	return render(request, 'compare_maps.html', {'compare0':user_profile.compare0, 'compare1':user_profile.compare1,'reviews0':reviews0, 'reviews1':reviews1, 'user_for_page': user_for_page, 'apartments_pks': apartments_pks, 'apartments_locations': apartments_locations, 'lats': lats, 'lons': lons, 'apartments_names': apartments_names, 'apartments_images': apartments_images, 'apartments_prices': apartments_prices})
 
 
 @login_required()
