@@ -73,6 +73,31 @@ height="65"
 
 								{% for review in reviews %}
 								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
+									
+								{% if review.user == request.user %}
+									<div class="row">
+										<div class="col" style="background-color: transparent; color: black">
+											<a href="{% url 'profile' review.user %}">
+												<img src="{{ review.user.userprofile.avatar }}" id="review_thumbnail" class="rounded-circle">
+											</a>
+											<a href="{% url 'profile' review.user %}" style="font-size: 20px; color: #666666"> {{ review.user.get_full_name}} (You)</a>
+											<form action="{% url 'delete_review' review.id %}" method="post">
+												{% csrf_token %}
+												<button class="btn btn-default" type="submit" style="position: absolute; right: 0px; top: 10px;">Delete</button>
+											</form>
+											<!-- <button class="btn btn-default" href="{% url 'delete_review' review.id %}" style="float: right; padding-top: 15px;">Delete</button> -->
+											<!-- <button class="btn btn-default" style="float: right; padding-top: 15px;"> Edit</button> -->	
+											
+										</div>
+									</div>
+									<div class="row">
+										<div class="col" style="background-color: transparent; color: black; display: inline; padding-left: 100px;">
+											<p style="color: #666666">{{review.review}}</p>
+											<p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
+										</div>
+									</div>
+								
+								{% else %}
 									<div class="row">
 										<div class="col" style="background-color: transparent; color: black">
 											<a href="{% url 'profile' review.user %}">
@@ -88,8 +113,11 @@ height="65"
 											<p style="color: #666666">{{review.review}}</p>
 											<p style="float: right; padding-right: 10px; padding-bottom: 10px; margin-bottom: 0px; color: #959595;">{{review.date}}</p>
 										</div>
+									
 									</div>
+								{% endif %}
 								</div>
+								
 
 								{% endfor %}
 
@@ -98,21 +126,37 @@ height="65"
 						{% endif %}
 
 						{% if user and not user.is_anonymous %}
+							{% if num_user_reviews == 0 %}
+								<h3> Write a New Review</h3>
+								<form method="POST">
+									{% csrf_token %}
 
-						<h3> Write a New Review</h3>
-						<form method="POST">
-							{% csrf_token %}
+									{% for field in form %}
+								        <div class="fieldWrapper">
+								            {{ field.errors }}
+								            {{ field.label_tag }} {{ field }}
+								             
+								        </div>
+								    {% endfor %}
+					
+									<button type="submit" class="btn btn-default" style="float: right; color: #666666;">Submit</button>
+								</form>
+							{% else %}
+							<h5> You have already reviewed this apartment</h5>
+								<form method="POST">
+									{% csrf_token %}
 
-							{% for field in form %}
-						        <div class="fieldWrapper">
-						            {{ field.errors }}
-						            {{ field.label_tag }} {{ field }}
-						             
-						        </div>
-						    {% endfor %}
-			
-							<button type="submit" class="btn btn-default" style="float: right; color: #666666;">Submit</button>
-						</form>
+									{% for field in form %}
+								        <div class="fieldWrapper">
+								            {{ field.errors }}
+								            {{ field.label_tag }} {{ field }}
+								             
+								        </div>
+								    {% endfor %}
+					
+									<button type="submit" class="btn btn-default" disabled style="float: right; color: #666666;">Submit</button>
+								</form>
+							{% endif %}
 						{% endif %}
 					</div>
 			</div>

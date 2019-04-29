@@ -76,9 +76,11 @@ def apartments(request):
 	apartments = paginator.get_page(page)
 	return render(request, 'apartments.html', {'apartments': apartments, 'priceSort': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1})
 
-7
+# 7
 def apartment_detail(request, id):
 	try:
+		num_user_reviews = 0
+		user = request.user
 		apartment = Apartment.objects.get(id=id)
 
 		units = Unit.objects.all()
@@ -96,8 +98,11 @@ def apartment_detail(request, id):
 			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units ,'form': form,})
 		else:
 			form = ReviewForm()
-			reviews = Review.objects.all().filter(apartment=apartment)		
-			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units , 'form': form, 'reviews':reviews})
+			reviews = Review.objects.all().filter(apartment=apartment)	
+			for review in reviews:
+				if	review.user == user:
+					num_user_reviews = num_user_reviews + 1
+			return render(request, 'apartment_detail.html', {'apartment': apartment,'units':units , 'form': form, 'reviews':reviews, 'num_user_reviews': num_user_reviews})
 	except Apartment.DoesNotExist:
 		raise Http404("Apartment not found")
 
@@ -262,12 +267,23 @@ def delete_favorite(request, apartment_id):
 	apartment = Apartment.objects.get(pk=apartment_id)
 	user = request.user
 	user_profile = user.userprofile
-	if user_profile.favorites.objects.filter(id = apartment_id).size() > 0:
-		user_profile.favorites.delete(id = apartment_id)
-		user_profile.save()
-		user.save()
+	# if user_profile.favorites.objects.filter(id = apartment_id).size() > 0:
+	user_profile.favorites.remove(apartment)
+	# user_profile.save()
+	user.save()
 	return redirect('favorites')
 
+@login_required
+def delete_review(request, review_id):
+	review = Review.objects.get(pk=review_id)
+	apartment_id = review.apartment.id
+	Review.delete(review)
+	# user_profile = user.userprofile
+	# if user_profile.favorites.objects.filter(id = apartment_id).size() > 0:
+	# 	user_profile.favorites.delete(id = apartment_id)
+	# 	user_profile.save()
+	# 	user.save()
+	return redirect('apartment_detail', apartment_id)
 
 @login_required
 def fav_save_compare0(request, apartment_id):
