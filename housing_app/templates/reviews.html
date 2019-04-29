@@ -72,16 +72,23 @@
 						</nav>
 					{% endif %}
 
-					<div class="inner_content_div_reviews">
+					<div class="inner_content_div_reviews" style="width: 100%;">
 
-						
+
+
 
 						{% if not reviews %}
+						
+							
+						
 							<p style="margin-left: 40px;">There are no reviews at this time</p>
 						{% else %}
-						<div style="height: 300px; width: 100%; overflow: auto; margin-bottom: 20px; justify-content: center;">
-
+						<div style="height: 40vh; width: 100%; overflow: auto; justify-content: center;">
+						<div class="container" >
+							<div class="row no-gutters" style="justify-content: center;">
 								{% for review in reviews %}
+
+								<div class="col col-lg-6 col-md-8 col-sm-9">
 								<div class="container" style="margin-bottom:5px; background-color: white; border-radius: 10px; box-shadow: 0 0 10px #959595; width: 90%; margin-top: 10px;">
 									<div class="row">
 										<div class="col" style="background-color: transparent; color: black">
@@ -105,9 +112,11 @@
 										</div>
 									</div>
 								</div>
+							</div>
 
 								{% endfor %}
-
+							</div>
+						</div>
 								
 						</div>
 						{% endif %}
