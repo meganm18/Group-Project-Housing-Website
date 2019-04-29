@@ -70,7 +70,7 @@ body, html {
 
 .home_background_image {
 /*	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	height: 100%;
 	left: 0;
@@ -78,7 +78,7 @@ body, html {
 	z-index: 1;*/
 	/*margin-top: -100px; */
 	position: fixed;
-	background-image: url('../images/front-page-background2.png');
+	background-image: url("../images/front-page-background2.3a1927df0ada.png");
 	background-size: cover;
 	/*background-position: top;*/
 	/*background-repeat: no-repeat;*/
@@ -176,7 +176,7 @@ body, html {
 
 .login_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	height: 100%;
 	left: 0;
@@ -186,7 +186,7 @@ body, html {
 
 .login_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	height: 100%;
 	left: 0;
@@ -241,7 +241,7 @@ body, html {
 
 .profile_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	filter: brightness(90%);
 	height: 100%;
@@ -541,7 +541,7 @@ body, html {
 
 .apartments_background_image {
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	filter: brightness(90%);
 	height: 100%;
@@ -857,7 +857,7 @@ body, html {
 .apartment_detail_background {
 	top: 0px;
 	position: fixed;
-	background-image: url('../images/plain-background.png');
+	background-image: url("../images/plain-background.de999e1cdf15.png");
 	background-size: cover;
 	height: 100%;
 	left: 0px;
@@ -1109,7 +1109,7 @@ body, html {
 
  .compare_background_image{
 	position: fixed;
-	/*background-image: url('../images/plain-background.png');*/
+	/*background-image: url("../images/plain-background.de999e1cdf15.png");*/
 	background-color: gray;
 	background-size: cover;
 	filter: brightness(90%);
