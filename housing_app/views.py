@@ -105,8 +105,6 @@ def apartments(request):
 			lons.append(0.00)
 			lats.append(0.00)
 	len_apartments = len(apartments)
-	# apartment_pk = data_json[14]['pk']
-	# apartment_location = data_json[14]['fields']['location']
 	return render(request, 'apartments.html', {'apartments': apartments, 'priceSort': priceFilter, 'maxPriceInput': maxPriceInput, 'bedroomInput': bedroomInput, 'ratingInput':ratingInput, 'compare0':compare0, 'compare1':compare1, 'apartments_pks': apartments_pks, 'apartments_locations': apartments_locations, 'lats': lats, 'lons': lons, 'len_apartments': len_apartments, 'apartments_names': apartments_names, 'apartments_images': apartments_images, 'apartments_prices': apartments_prices})
 
 # 7
