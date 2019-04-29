@@ -335,7 +335,8 @@ function closeForm() {
               var custom_icon_path_1 = "{% static "images/pin_pink_outline.png" %}"
               var custom_icon_path_2 = "{% static "images/pin_green_outline.png" %}"
               var len_apartments = "{{len_apartments}}";
-              len_apartments = parseInt(len_apartments)
+              len_apartments = parseInt(len_apartments);
+              console.log(len_apartments);
               var features = [];
               var center = {lat: 38.0325982, lng: -78.4955055};
               // console.log(apartment_coordinates);
@@ -584,7 +585,7 @@ function closeForm() {
   }
 ]
               });
-               var bounds = new google.maps.LatLngBounds();
+              var bounds = new google.maps.LatLngBounds();
               if(len_apartments > 0){
                 if(parseFloat("{{lats.0}}") != 0 && parseFloat("{{lons.0}}") != 0){
                   // center = {lat: parseFloat("{{lats.0}}"), lng: parseFloat("{{lons.0}}")};
@@ -595,12 +596,14 @@ function closeForm() {
                   });
                   bounds.extend(marker.position);
                   map.fitBounds(bounds);
+                  {% if apartments_pks.0 %}
                   infowindow = new google.maps.InfoWindow({
-                      content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.0%} style='color:gray;'><img src='{{apartments_images.0}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.0}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.0}}</div><br/></div>"
+                      content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.0 %}\" style='color:gray;'><img src='{{apartments_images.0}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.0}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.0}}</div><br/></div>"
                   });
                   google.maps.event.addListener(marker, 'click', function() {
                     infowindow.open(map, marker);  
                   });
+                  {% endif %}
                   google.maps.event.addListener(marker, 'mouseover', function() {
                      marker.setIcon(custom_icon_path_2);    
                   });
@@ -617,13 +620,15 @@ function closeForm() {
 
                       });
                       bounds.extend(marker1.position);
-                      map.fitBounds(bounds);                    
+                      map.fitBounds(bounds);    
+                      {% if apartments_pks.1 %}                
                       infowindow1 = new google.maps.InfoWindow({
-                          content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.1%} style='color:gray;'><img src='{{apartments_images.1}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.1}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.1}}</div><br/></div>"
+                          content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.1 %}\" style='color:gray;'><img src='{{apartments_images.1}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.1}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.1}}</div><br/></div>"
                       });
                       google.maps.event.addListener(marker1, 'click', function() {
                         infowindow1.open(map, marker1);  
                       });
+                      {% endif %}
                       google.maps.event.addListener(marker1, 'mouseover', function() {
                           marker1.setIcon(custom_icon_path_2);
                       });
@@ -641,12 +646,14 @@ function closeForm() {
                         });
                         bounds.extend(marker2.position);
                         map.fitBounds(bounds);
+                        {% if apartments_pks.2 %}
                         infowindow2 = new google.maps.InfoWindow({
-                            content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.2%} style='color:gray;'><img src='{{apartments_images.2}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.2}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.2}}</div><br/></div>"
+                            content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.2 %}\" style='color:gray;'><img src='{{apartments_images.2}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.2}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.2}}</div><br/></div>"
                         });
                         google.maps.event.addListener(marker2, 'click', function() {
                           infowindow2.open(map, marker2);  
-                        });                      
+                        });      
+                        {% endif %}                
                         google.maps.event.addListener(marker2, 'mouseover', function() {
                             marker2.setIcon(custom_icon_path_2);
                         });
@@ -664,12 +671,14 @@ function closeForm() {
                           });
                                           bounds.extend(marker3.position);
                   map.fitBounds(bounds);
+                          {% if apartments_pks.3 %}
                           infowindow3 = new google.maps.InfoWindow({
-                              content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.3%} style='color:gray;'><img src='{{apartments_images.3}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.3}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.3}}</div><br/></div>"
+                              content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.3 %}\" style='color:gray;'><img src='{{apartments_images.3}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.3}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.3}}</div><br/></div>"
                           });
                           google.maps.event.addListener(marker3, 'click', function() {
                             infowindow3.open(map, marker3);  
-                          });                         
+                          });    
+                          {% endif %}                     
                           google.maps.event.addListener(marker3, 'mouseover', function() {
                               marker3.setIcon(custom_icon_path_2);
                           });
@@ -685,14 +694,16 @@ function closeForm() {
                               map: map,
 
                             });
-                                            bounds.extend(marker4.position);
-                  map.fitBounds(bounds);
+                            bounds.extend(marker4.position);
+                            map.fitBounds(bounds);
+                            {% if apartments_pks.4 %}
                             infowindow4 = new google.maps.InfoWindow({
-                                content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.4%} style='color:gray;'><img src='{{apartments_images.4}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.4}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.4}}</div><br/></div>"
+                                content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.4 %}\" style='color:gray;'><img src='{{apartments_images.4}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.4}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.4}}</div><br/></div>"
                             });
                             google.maps.event.addListener(marker4, 'click', function() {
                               infowindow4.open(map, marker4);  
-                            });                         
+                            });    
+                            {% endif %}                     
                             google.maps.event.addListener(marker4, 'mouseover', function() {
                                 marker4.setIcon(custom_icon_path_2);
                             });
@@ -708,14 +719,16 @@ function closeForm() {
                                 map: map,
 
                               });
-                                              bounds.extend(marker5.position);
-                  map.fitBounds(bounds);
+                              bounds.extend(marker5.position);
+                              map.fitBounds(bounds);
+                              {% if apartments_pks.5 %}
                               infowindow5 = new google.maps.InfoWindow({
-                                  content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.5%} style='color:gray;'><img src='{{apartments_images.5}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.5}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.5}}</div><br/></div>"
+                                  content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.5 %}\" style='color:gray;'><img src='{{apartments_images.5}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.5}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.5}}</div><br/></div>"
                               });
                               google.maps.event.addListener(marker5, 'click', function() {
                                 infowindow5.open(map, marker5);  
                               }); 
+                              {% endif %}
                               google.maps.event.addListener(marker5, 'mouseover', function() {
                                   marker5.setIcon(custom_icon_path_2);
                               });
@@ -731,14 +744,16 @@ function closeForm() {
                                   map: map,
 
                                 });
-                                                bounds.extend(marker6.position);
-                  map.fitBounds(bounds);
+                                bounds.extend(marker6.position);
+                                map.fitBounds(bounds);
+                                {% if apartments_pks.6 %}
                                 infowindow6 = new google.maps.InfoWindow({
-                                    content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.6%} style='color:gray;'><img src='{{apartments_images.6}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.6}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.6}}</div><br/></div>"
+                                    content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.6 %}\" style='color:gray;'><img src='{{apartments_images.6}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.6}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.6}}</div><br/></div>"
                                 });
                                 google.maps.event.addListener(marker6, 'click', function() {
                                   infowindow6.open(map, marker6);  
                                 }); 
+                                {% endif %}
                                 google.maps.event.addListener(marker6, 'mouseover', function() {
                                     marker6.setIcon(custom_icon_path_2);
                                 });
@@ -754,14 +769,16 @@ function closeForm() {
                                     map: map,
 
                                   });
-                                                  bounds.extend(marker7.position);
-                  map.fitBounds(bounds);
+                                  bounds.extend(marker7.position);
+                                  map.fitBounds(bounds);
+                                  {% if apartments_pks.7 %}
                                   infowindow7 = new google.maps.InfoWindow({
-                                      content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.7%} style='color:gray;'><img src='{{apartments_images.7}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.7}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.7}}</div><br/></div>"
+                                      content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.7 %}\" style='color:gray;'><img src='{{apartments_images.7}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.7}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.7}}</div><br/></div>"
                                   });
                                   google.maps.event.addListener(marker7, 'click', function() {
                                     infowindow7.open(map, marker7);  
-                                  });                                 
+                                  });        
+                                  {% endif %}                         
                                   google.maps.event.addListener(marker7, 'mouseover', function() {
                                       marker7.setIcon(custom_icon_path_2);
                                   });
@@ -777,11 +794,13 @@ function closeForm() {
                                       map: map,
 
                                     });
-                                                    bounds.extend(marker8.position);
-                  map.fitBounds(bounds);
+                                    bounds.extend(marker8.position);
+                                    map.fitBounds(bounds);
+                                    {% if apartments_pks.8 %}
                                     infowindow8 = new google.maps.InfoWindow({
-                                        content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.8%} style='color:gray;'><img src='{{apartments_images.8}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.8}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.8}}</div><br/></div>"
+                                        content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.8 %}\" style='color:gray;'><img src='{{apartments_images.8}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.8}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.8}}</div><br/></div>"
                                     });
+                                    {% endif %}
                                     google.maps.event.addListener(marker8, 'click', function() {
                                       infowindow8.open(map, marker8);  
                                     });                                   
@@ -802,12 +821,14 @@ function closeForm() {
                                       });
                                                       bounds.extend(marker9.position);
                   map.fitBounds(bounds);
+                  {% if apartments_pks.9 %}
                                       infowindow9 = new google.maps.InfoWindow({
-                                          content: "<div style='float:left'><a href={% url 'apartment_detail' apartments_pks.9%} style='color:gray;'><img src='{{apartments_images.9}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.9}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.9}}</div><br/></div>"
+                                          content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.9%}\" style='color:gray;'><img src='{{apartments_images.9}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.9}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.9}}</div><br/></div>"
                                       });
                                       google.maps.event.addListener(marker9, 'click', function() {
                                         infowindow9.open(map, marker9);  
-                                      });                                      
+                                      });      
+                                      {% endif %}                                
                                       google.maps.event.addListener(marker9, 'mouseover', function() {
                                           marker9.setIcon(custom_icon_path_2);
                                       });
@@ -815,16 +836,50 @@ function closeForm() {
                                           marker9.setIcon(custom_icon_path_1);
                                       });
                                   }
+                                  if(len_apartments > 10){
+                                    console.log(len_apartments);
+
+                                  }
+                                }
+                                else{
+                                  console.log(len_apartments);
                                 }
                               }
+                                                              else{
+                                  console.log(len_apartments);
+                                }
                             }
+                                                            else{
+                                  console.log(len_apartments);
+                                }
                           }
+                                                          else{
+                                  console.log(len_apartments);
+                                }
                         }
+                                                        else{
+                                  console.log(len_apartments);
+                                }
                       }
+                                                      else{
+                                  console.log(len_apartments);
+                                }
                     }
+                                                    else{
+                                  console.log(len_apartments);
+                                }
                   }
+                                                  else{
+                                  console.log(len_apartments);
+                                }
                 }
+                                                else{
+                                  console.log(len_apartments);
+                                }
               }
+                                              else{
+                                  console.log(len_apartments);
+                                }
 
              //  var marker = new google.maps.Marker({position: apt_coordinates, map: map, label: 'The Flats', icon: custom_icon_path_1});
              //  var marker2 = new google.maps.Marker({position: apt_coor_2, map: map, label: 'Venable', icon: custom_icon_path_1}); 
