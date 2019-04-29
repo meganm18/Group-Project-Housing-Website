@@ -1100,7 +1100,10 @@ function closeForm() {
 
                                   {% if user and not user.is_anonymous %}
                                   <div style="display: inline-flex;
-    justify-content: center;">
+        bottom: 0px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -20%);">
                                       <a class="page-link" href="{% url 'save_favorite' apartment.id %}"
                                          style="width: 8vw; font-size: 70%; border: none; background-color: transparent;">Save to Favorites List </a>
                                       <a class="page-link" href="{% url 'save_compare0' apartment.id %}"
