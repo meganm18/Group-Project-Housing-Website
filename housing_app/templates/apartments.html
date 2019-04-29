@@ -528,9 +528,11 @@ function closeForm() {
         "color": "#9e9e9e"
       }
     ]
-  }
+  }           
 ]
+
               });
+              var last_used = []
               var bounds = new google.maps.LatLngBounds();
               if(len_apartments > 0){
                 if(parseFloat("{{lats.0}}") != 0 && parseFloat("{{lons.0}}") != 0){
@@ -548,6 +550,11 @@ function closeForm() {
                   });
                   google.maps.event.addListener(marker, 'click', function() {
                     infowindow.open(map, marker);  
+                    if(last_used.length != 0){
+                      last_used[0][0].close();
+                      last_used.pop()
+                    }
+                    last_used.push([infowindow, marker]);
                   });
                   {% endif %}
                   google.maps.event.addListener(marker, 'mouseover', function() {
@@ -572,7 +579,12 @@ function closeForm() {
                           content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.1 %}\" style='color:gray;'><img src='{{apartments_images.1}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.1}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.1}}</div><br/></div>"
                       });
                       google.maps.event.addListener(marker1, 'click', function() {
-                        infowindow1.open(map, marker1);  
+                        infowindow1.open(map, marker1);
+                        if(last_used.length != 0){
+                          last_used[0][0].close();
+                          last_used.pop()
+                        }
+                        last_used.push([infowindow1, marker1]);                          
                       });
                       {% endif %}
                       google.maps.event.addListener(marker1, 'mouseover', function() {
@@ -598,6 +610,11 @@ function closeForm() {
                         });
                         google.maps.event.addListener(marker2, 'click', function() {
                           infowindow2.open(map, marker2);  
+                            if(last_used.length != 0){
+                              last_used[0][0].close();
+                              last_used.pop()
+                            }
+                            last_used.push([infowindow2, marker2]); 
                         });      
                         {% endif %}                
                         google.maps.event.addListener(marker2, 'mouseover', function() {
@@ -623,6 +640,11 @@ function closeForm() {
                           });
                           google.maps.event.addListener(marker3, 'click', function() {
                             infowindow3.open(map, marker3);  
+                            if(last_used.length != 0){
+                              last_used[0][0].close();
+                              last_used.pop()
+                            }
+                            last_used.push([infowindow3, marker3]);                             
                           });    
                           {% endif %}                     
                           google.maps.event.addListener(marker3, 'mouseover', function() {
@@ -647,7 +669,12 @@ function closeForm() {
                                 content: "<div style='float:left'><a href=\"{% url 'apartment_detail' apartments_pks.4 %}\" style='color:gray;'><img src='{{apartments_images.4}}' onError=\"this.src='https://collegestudentapartments.com/img/no-image-main2.jpg';\" style='object-fit: cover; width:65px; height:65px; float: left;'></div><div style='float:right; padding: 10px;'><b>{{apartments_names.4}}</a></b><br/><div style='padding-top: 5px;'>{{apartments_prices.4}}</div><br/></div>"
                             });
                             google.maps.event.addListener(marker4, 'click', function() {
-                              infowindow4.open(map, marker4);  
+                              infowindow4.open(map, marker4); 
+                                if(last_used.length != 0){
+                                  last_used[0][0].close();
+                                  last_used.pop()
+                                }
+                                last_used.push([infowindow4, marker4]);                                
                             });    
                             {% endif %}                     
                             google.maps.event.addListener(marker4, 'mouseover', function() {
@@ -673,6 +700,11 @@ function closeForm() {
                               });
                               google.maps.event.addListener(marker5, 'click', function() {
                                 infowindow5.open(map, marker5);  
+                                  if(last_used.length != 0){
+                                    last_used[0][0].close();
+                                    last_used.pop()
+                                  }
+                                  last_used.push([infowindow5, marker5]);                                
                               }); 
                               {% endif %}
                               google.maps.event.addListener(marker5, 'mouseover', function() {
@@ -698,6 +730,11 @@ function closeForm() {
                                 });
                                 google.maps.event.addListener(marker6, 'click', function() {
                                   infowindow6.open(map, marker6);  
+                                    if(last_used.length != 0){
+                                      last_used[0][0].close();
+                                      last_used.pop()
+                                    }
+                                    last_used.push([infowindow6, marker6]);                                    
                                 }); 
                                 {% endif %}
                                 google.maps.event.addListener(marker6, 'mouseover', function() {
@@ -723,6 +760,11 @@ function closeForm() {
                                   });
                                   google.maps.event.addListener(marker7, 'click', function() {
                                     infowindow7.open(map, marker7);  
+                                    if(last_used.length != 0){
+                                      last_used[0][0].close();
+                                      last_used.pop()
+                                    }
+                                    last_used.push([infowindow7, marker7]);                                    
                                   });        
                                   {% endif %}                         
                                   google.maps.event.addListener(marker7, 'mouseover', function() {
@@ -749,6 +791,11 @@ function closeForm() {
                                     {% endif %}
                                     google.maps.event.addListener(marker8, 'click', function() {
                                       infowindow8.open(map, marker8);  
+                                      if(last_used.length != 0){
+                                        last_used[0][0].close();
+                                        last_used.pop()
+                                      }
+                                      last_used.push([infowindow8, marker8]);                                      
                                     });                                   
                                     google.maps.event.addListener(marker8, 'mouseover', function() {
                                         marker8.setIcon(custom_icon_path_2);
@@ -773,6 +820,11 @@ function closeForm() {
                                       });
                                       google.maps.event.addListener(marker9, 'click', function() {
                                         infowindow9.open(map, marker9);  
+                                        if(last_used.length != 0){
+                                          last_used[0][0].close();
+                                          last_used.pop()
+                                        }
+                                        last_used.push([infowindow9, marker9]);                                        
                                       });      
                                       {% endif %}                                
                                       google.maps.event.addListener(marker9, 'mouseover', function() {
