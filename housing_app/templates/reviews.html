@@ -62,6 +62,14 @@
 						</nav>
 					{% else %}
 						<h1 class="profile_name">{{user_for_page.get_full_name}}'s Reviews</h1>
+							<nav aria-label="Page navigation example" class="pagination_profile">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item"  ><a class="page-link" href="{% url 'profile' user_for_page %}">Info</a></li>
+						    <li class="page-item active"><a class="page-link" href="#">Reviews</a></li>
+<!-- 						    <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+						    <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li> -->
+						  </ul>
+						</nav>
 					{% endif %}
 
 					<div class="inner_content_div_reviews">
@@ -80,12 +88,14 @@
 											<a href="{% url 'apartment_detail' review.apartment.id %}">
 												<img src="{{ review.apartment.image }}" id="review_thumbnail" class="rounded-circle">
 											</a>
+											
 											<a href="{% url 'apartment_detail' review.apartment.id %}" style="font-size: 20px; color: #666666"> {{ review.apartment}}</a>
+											{% if user_for_page == user %}
 											<form action="{% url 'delete_review' review.id %}" method="post">
 												{% csrf_token %}
 												<button class="btn btn-default" type="submit" style="position: absolute; right: 0px; top: 10px;">Delete</button>
 											</form>
-											
+											{% endif %}
 										</div>
 									</div>
 									<div class="row">

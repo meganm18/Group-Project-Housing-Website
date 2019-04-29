@@ -235,9 +235,17 @@ div.table {
 						</script>
 					{% else %}
 						<h1 class="profile_name">{{user_for_page.get_full_name}}</h1>
+              <nav aria-label="Page navigation example" class="pagination_profile"style="z-index: 100;">
+              <ul class="pagination justify-content-center">
+                <li class="page-item active"  ><a class="page-link" href="#">Info</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'reviews' user_for_page %}">Reviews</a></li>
+<!--                <li class="page-item"><a class="page-link" href="{% url 'favorites' %}">Favorites</a></li>
+                <li class="page-item"><a class="page-link" href="{% url 'compare' %}">Compare</a></li> -->
+              </ul>
+            </nav>
 					{% endif %}
 
-					<div class="inner_content_div">
+					<div class="inner_content_div" style="padding-top: 30px;">
 
             <div class="container" style="word-wrap: break-word;">
               <h3>Email: </h3>
