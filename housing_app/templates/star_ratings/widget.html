@@ -23,7 +23,7 @@
 <div id="{{ id }}" class="star-ratings" data-max-rating="{{ star_count }}" data-avg-rating="{{ rating.average }}">
     {% block rating_stars %}
         <div class="star-ratings-rating-stars-container">
-            <ul class="star-ratings-rating-background" style="display:inline">
+            <ul class="star-ratings-rating-background">
                 {% for star in stars %}
                     <li>
                         {% if editable %}
