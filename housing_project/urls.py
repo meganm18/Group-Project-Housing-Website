@@ -50,6 +50,7 @@ urlpatterns = [
     url(r'^save_compare0_search/(\d+)/', views.save_compare0_search, name='save_compare0_search'),
     url(r'^compare1_search', views.search_compare1, name='compare1_search'),
     url(r'^save_compare1_search/(\d+)/', views.save_compare1_search, name='save_compare1_search'),
+    url(r'^delete_review/(\d+)/', views.delete_review, name='delete_review'),
     # url(r'^edit_profile/', views.save_profile, name='save_profile'),
 ]
 
