@@ -177,7 +177,7 @@ div.table {
 
         <div class="col" id="apartments_image_div">
              {% if user and not user.is_anonymous %}
-              <div class="dropdown">
+              <div class="dropdown" style="float: left; margin-top: 0.5%;">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="float: left; margin-top: 0.5%; background: none; border: none;">
     Selected Compare
   </button>
@@ -216,7 +216,7 @@ div.table {
           <!-- <input type="link" class="btn btn-default" id="advanced_search" value="Advanced Search"> -->
 
 
-          <div id="search_bar_div" style="float: left; margin-left: 5%;">
+          <div id="search_bar_div" style="    position: absolute; left: 50%; transform: translate(-50%, -40%)">
 
 
             <form action="/apartments" id="search_bar_apartments" method="get">
@@ -231,7 +231,8 @@ div.table {
 
          </div>
                   <!-- <div id="filtering"> -->
-              <button class="open-advanced btn btn-default" onclick="openForm()" style="">Advanced Search</button>
+              <button class="open-advanced btn btn-default" onclick="openForm()" style="    right: 0px;
+    transform: translate(-50%, -50%);">Advanced Search</button>
               
 
 
@@ -904,7 +905,7 @@ function closeForm() {
 
         </div>
         <div class="col-md-auto" id="main_col_right_apartments">
-          <div class="form-advanced form-group" id="myForm" style="height: 70vh; display: block; position: absolute; top: 0px; left: 0px; width: 100%;">
+          <div class="form-advanced form-group" id="myForm" style="height: 70vh; display: none; position: absolute; top: 0px; left: 0px; width: 100%;">
             <div>
                 <button class="btn btn-default" onclick="closeForm()" style="position: absolute; left: 0px;"> Cancel</button>
                   <h1 >Filter</h1>
@@ -996,6 +997,7 @@ function closeForm() {
                               <div class='apartmentname' align="center" style="padding-bottom:30px">
                                   <a href="{% url 'apartment_detail' apartment.id %}" id="apartment_link">
                                       <h4> {{ apartment.name|capfirst }} </h4>
+                                  </a>
                                   <h5 id="apartment_price">{{ apartment.price }} </h5>
                                   <h5 id="apartment_bedbath">Bedrooms: {{ apartment.bedrooms }} </h5>
                                   <h5 id="apartment_bath"> Bathrooms: {{apartment.bathrooms }}</h5>
@@ -1017,7 +1019,7 @@ function closeForm() {
                                          style="width: 50%; margin-left: 30%; padding: 1%">2nd Compare Apartment</a>
                                   </div>
                                       {% endif %}
-                                  </a>
+                                  
                                   </div>
                               </div>
                       </td>
