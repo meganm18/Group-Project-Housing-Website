@@ -722,8 +722,8 @@ body, html {
 		margin: 10px;
 		width: auto;
 		object-fit: cover;
-		width:130px;
-		height:130px;
+		width:20vh;
+		height:20vh;
 	}
 
 }
