@@ -32,10 +32,23 @@ class Command(BaseCommand):
             apartment.company = row['Company']
             apartment.location = row['Location']
             apartment.price = row['Price']
+            try:
+                apartment.maxPrice=int(row['MinPrice'])
+            except:
+                apartment.maxPrice = 0
+            try:apartment.minPrice=int(row['MinPrice'])
+            except:
+                apartment.minPrice = 0
+            try:
+                apartment.minBR=int(row['MinBR'])
+            except:
+                apartment.minBR = 0
+            try:
+                apartment.maxBR=int(row['MaxBR'])
+            except:
+                apartment.maxBR = 0
             apartment.size = row['Size']
             apartment.bedrooms = row['Bedrooms']
-            apartment.furnished = row['Furnished']
-            apartment.pets = row['Pets']
             apartment.description = row['Description']
             apartment.distance = row['Distance to Grounds']
             apartment.number = row['Number']

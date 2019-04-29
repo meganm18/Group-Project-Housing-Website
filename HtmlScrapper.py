@@ -12,13 +12,13 @@ def Min_Max_Dict(apptdict,appts,attribute,data):
         data[apptindex]=data[apptindex].replace("$","").replace(",","")
         if appts[apptindex] not in apptdict.keys():
             apptdict.update({appts[apptindex]:{}})
-        pattern = re.compile('\d+')
+        pattern = re.compile('\d+.\d+|\d+')
 
         if attribute not in apptdict[appts[apptindex]].keys():
             apptdict[appts[apptindex]].update({attribute: []})
         matches = pattern.findall(data[apptindex])
         for match in matches:
-            match=int(match)
+            match=float(match)
             if not apptdict[appts[apptindex]][attribute]:
                 apptdict[appts[apptindex]][attribute].append(match)
                 apptdict[appts[apptindex]][attribute].append(match)
@@ -31,8 +31,8 @@ def Min_Max_Dict(apptdict,appts,attribute,data):
 def combine(data):
     try:
         if data[0]!=data[1]:
-            return ((locale.format_string("%d", data[0], grouping=True)+" - "+locale.format_string("%d", data[1], grouping=True)))
-        return (locale.format_string("%d", data[0], grouping=True))
+            return (dec_tostr(data[0])+" - "+dec_tostr(data[1]))
+        return (dec_tostr(data[0]))
     except: return ('---')
 
 def modifiedinex(data,index):
@@ -41,6 +41,28 @@ def modifiedinex(data,index):
         except:return int(data)
     except:
         return None
+#     My own personalized decimal/ integer to a string so it looks pretty
+def dec_tostr(f):
+    if float(f)==int(f):
+        returnval=list(str(int(f)))
+        length=len(returnval)
+        count=0
+        for i in range((length)):
+            if (i)%3==0 and i!=0:
+                returnval.insert(-i-count,",")
+                count+=1
+        return (('').join(returnval))
+    else:
+        f=str(f)
+        fdec=f[:f.find(".")]
+        returnval = list(str(int(fdec)))
+        length = len(returnval)
+        count = 0
+        for i in range((length)):
+            if (i) % 3 == 0 and i!=0:
+                returnval.insert(-i - count, ",")
+                count += 1
+        return ((('').join(returnval))+f[f.find("."):])
 
 #creates raw html data code string
 def ScrapHtmlCode(website):
@@ -75,11 +97,11 @@ def getinfo(webpage):
     # A dict of dicts
     # {Appt Title{Title:X, Adress:Y, Number:(ZZZ) YYY-XXXX , Distance:Z, Description:W, Units{}},{Appt Title2{ Title:X, Adress:Y...}}
     apptinfo={}
+    import requests
     # take link out of all links
     for link in getwebsites(webpage):
         # take html from each link, which are the sites individual pages
         info = (ScrapHtmlCode(link))
-        # print(info)
         # get title
         pattern = re.compile('title>([^|]*) UVA')
         match = pattern.search(info)
@@ -120,7 +142,7 @@ def getinfo(webpage):
         try:
             pattern = re.compile('itemprop="image" content="(.*?)"')
             match = pattern.search(info)
-            image=match.group(1)\
+            image=match.group(1)
                 # .replace("158x158xcrop_middle","1200x1200xheight")
             if match.group(1)[-1]=='/':
                 image='https://collegestudentapartments.com/img/no-image-main2.jpg'
